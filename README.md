@@ -9,7 +9,7 @@
 
 ## About
 
-Atividade relacionada sobre a matéria de MAT85
+Atividade relacionada sobre a matéria de MATC84
 ## Versions
 
 ### v1.x.x
