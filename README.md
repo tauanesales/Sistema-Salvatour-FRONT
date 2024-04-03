@@ -1,28 +1,8 @@
-# MATC84-FRONT-LABORATORIO-DE-PROGRAMACAO-WEB
- 
-## Table of Contents
+# React + Vite
 
-- [About](#about)
-- [Versions](#versions)
-- [Authors](#authors)
-- [Languages](#languages)
+This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
-## About
+Currently, two official plugins are available:
 
-Atividade relacionada sobre a matéria de MATC84
-## Versions
-
-### v1.x.x
-
-Static React/TS website.
-
-## Authors
-
-
-## Languages
-
-TypeScript
-
-## 
-Gestâo de Projeto
--- a Denifir 
+- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
+- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh

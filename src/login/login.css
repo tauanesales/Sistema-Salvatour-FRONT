@@ -1,0 +1,115 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
+@import url('https://fonts.cdnfonts.com/css/poetsen-one');
+
+*{
+    margin: 0;
+    padding: 0;
+}
+
+html{
+    font-size: 62.5%; 
+    
+    
+}
+
+.container{
+    display: flex;
+    flex-direction: row;
+    /* background-color: aqua; */
+    height: 100vh;
+    width: 100vw;
+    background-color: #FFF;
+    
+}
+
+.loginContainer{
+    display: flex;
+    flex-direction: column;
+    margin: auto;
+    
+    
+}
+
+.formContainer{
+    display: flex;
+    flex-direction: column;
+    
+}
+
+.title{
+    font-family: 'Inter', sans-serif;
+    font-weight: 400;
+    color: #000;
+    text-align: center;
+    margin-bottom: 80px;
+    font-size: 31.5px;
+}
+input{
+    width: 340.2px;
+    height: 45px;
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+    border-radius: 13.5px;
+    border: 2px solid var(--Chambray-300, #A0C6F0);
+    background: var(--Star-Dust-50, #F6F6F6);
+    font-family: 'Poetsen One', sans-serif;
+}
+
+input::placeholder{
+    text-indent: 13.5px;
+}
+
+input:focus {
+    outline: none; 
+}
+
+.svg-input{
+    position: absolute;
+    background-size: cover;
+    width: 20px;
+    height: 20px;
+    top: 57%;
+    right: 38%;
+    background-image: url(../assets/invisible-2.svg);
+    background-repeat: no-repeat;
+    
+}
+
+.esqueci{
+    text-align: right;
+    color: #6D6D6D;
+    text-decoration: none;
+    margin-bottom: 15px;
+    margin-top: 4px;
+    font-family: 'Poetsen One', sans-serif;
+    font-size: 14.4px;
+
+}
+.esqueci:hover{
+    color: #6D6D6D;
+}
+
+.entrar{
+    width: 300.6px;
+    height: 48.6px;
+    align-self: center;
+    border-radius: 13.5px;
+    border: none;
+    background: var(--Chambray-500, #5387DE);
+    box-shadow: 0px 3.6px 3.6px 0px rgba(255, 255, 255, 0.50) inset, 0px -3.6px 3.6px 0px rgba(0, 0, 0, 0.50) inset, 0px 0px 0px 0.9px rgba(0, 0, 0, 0.25);
+    color: #FFF;
+    font-size: 14.4px;
+    font-family: 'Poetsen One', sans-serif;
+   
+}
+
+.entrar:hover{
+    background-color: var(--Chambray-500, #6593e0);
+}
+
+
+.entrar:focus{
+    outline: none;
+}
+
+
+
