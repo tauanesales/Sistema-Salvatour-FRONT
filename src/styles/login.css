@@ -31,23 +31,23 @@
     font-size: 31.5px;
 }
 
-.svg-input{
+/* .svg-input{
     position: absolute;
     background-size: cover;
     width: 20px;
     height: 20px;
-    top: 57%;
-    right: 38%;
+    top: 54%;
+    right: 44%;
     background-image: url(../assets/invisible-2.svg);
     background-repeat: no-repeat;
     
-}
+} */
 
-.esqueci{
-    text-align: right;
+.links{
+    text-align: center;
     color: #6D6D6D;
     text-decoration: none;
-    margin-bottom: 20px;
+    margin-top: 20px;
     font-family: 'Poetsen One', sans-serif;
     font-size: 14.4px;
 

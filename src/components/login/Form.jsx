@@ -1,32 +1,24 @@
-import React from "react";
+import React, { useContext } from "react";
+import { LoginContext } from "../../utils/loginContext";
+
 
 
 function Form(){
 
-    const [email, setEmail] = useState("")
-    const [password, setPassowrd] = useState("")
+    const [form, setForm] = useContext(LoginContext)
 
-    function getEmail(event){
-
-        setEmail(event.target.value)
-
-    }
-
-    function getPassword(event){
-
-        setPassowrd(event.target.value)
-
+    function handleChange(event){
+  
+        setForm({...form, [event.target.name]:event.target.value})
     }
 
     return(
         <form className="formContainer" action="">
 
-                    <input onChange={getEmail} type="text" placeholder="email"/>
+                    <input name="email" onChange={handleChange} type="text" placeholder="email"/>
 
-                    <input onChange={getPassword} type="text" placeholder="senha"/>
+                    <input name="password" onChange={handleChange} type="password" placeholder="senha"/>
                     <div className="svg-input"></div>
-
-                    <a className="esqueci" href="">Esqueci minha senha</a>
 
                 </form>
     )
