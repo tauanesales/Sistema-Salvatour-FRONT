@@ -10,20 +10,17 @@ function Button(){
 
         event.preventDefault()
 
-        if (form.email && form.password){
+        if(inputValidator(form.email, form.password)){
+
+            localStorage.setItem('email', JSON.stringify(form.email))
+            localStorage.setItem('password', JSON.stringify(form.password))
+
             alert('Login')
+            console.log(form.email, form.password)
+        }else{
+
+            alert('Preencha todos os campos corretamente')
         }
-
-        // if(inputValidator(form.email, form.password)){
-
-        //     localStorage.setItem('email', JSON.stringify(form.email))
-        //     localStorage.setItem('password', JSON.stringify(form.password))
-
-        //     alert('Login')
-        // }else{
-
-        //     alert('Preencha todos os campos corretamente')
-        // }
     }
 
     return(

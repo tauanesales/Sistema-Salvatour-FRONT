@@ -3,7 +3,9 @@ function validateEmail (email){
 }
 
 function validatePassword (password) {
-    return password?.toString().length > 6
+
+    return password?.toString().length >= 8
+
 }
 
 function inputValidator (email, password){
@@ -12,7 +14,5 @@ function inputValidator (email, password){
 }
 
 export {
-    // validateEmail,
-    // validatePassword,
     inputValidator
 }
