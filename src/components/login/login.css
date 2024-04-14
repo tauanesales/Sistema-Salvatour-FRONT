@@ -24,10 +24,12 @@ html{
 
 .loginContainer{
     display: flex;
+    justify-content: center;
+    align-items: center;
     flex-direction: column;
-    margin: auto;
-    
-    
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 25rem;
 }
 
 .formContainer{
@@ -41,7 +43,7 @@ html{
     font-weight: 400;
     color: #000;
     text-align: center;
-    margin-bottom: 80px;
+    margin-bottom: 60px;
     font-size: 31.5px;
 }
 input{
@@ -52,6 +54,7 @@ input{
     border: 2px solid var(--Chambray-300, #A0C6F0);
     background: var(--Star-Dust-50, #F6F6F6);
     font-family: 'Poetsen One', sans-serif;
+    margin: 10px;
 }
 
 input::placeholder{
@@ -61,7 +64,7 @@ input::placeholder{
 input:focus {
     outline: none; 
 }
-
+/* 
 .svg-input{
     position: absolute;
     background-size: cover;
@@ -72,10 +75,10 @@ input:focus {
     background-image: url(../assets/invisible-2.svg);
     background-repeat: no-repeat;
     
-}
+} */
 
 .esqueci{
-    text-align: right;
+    text-align: center;
     color: #6D6D6D;
     text-decoration: none;
     margin-bottom: 15px;
@@ -110,6 +113,22 @@ input:focus {
 .entrar:focus{
     outline: none;
 }
+
+.senha {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.svg-input {
+    background-image: url(../../assets/invisible-2.svg);
+    background-repeat: no-repeat;
+    width: 20px;
+    height: 20px;
+    margin-left: 10px;
+}
+
+
 
 
 
