@@ -1,11 +1,19 @@
 function validateEmail (email){
-    return email?.toString().includes('@') && email?.toString().includes('.')
-}
 
+    const regexEmail = /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
+
+    if (regexEmail.test(email)){
+        return true;
+    }
+}
 function validatePassword (password) {
 
-    return password?.toString().length >= 8
+    const regexPassword = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()\-_=+[{\]};:'",/?]).{8,}$/;
 
+    if (regexPassword.test(password)){
+        return true;
+    }
+    
 }
 
 function inputValidator (email, password){
