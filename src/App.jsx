@@ -3,6 +3,7 @@ import Login from "./components/login/Login";
 import Cadastro from "./components/cadastro/Cadastro";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Recovery from "./components/recovery/Recovery";
+import 'bootstrap/dist/js/bootstrap.bundle.min.js'
 
 function App(){
 

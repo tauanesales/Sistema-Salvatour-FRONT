@@ -1,10 +1,16 @@
-import React, {useContext} from "react";
+import React, {useContext, useState} from "react";
 import { LoginContext } from "../../utils/loginContext";
+import { AlertContext } from "../../utils/alertContext";
 import { inputValidator } from "../../utils/validators";
 
 function Button(){
 
     const [form, setForm] = useContext(LoginContext)
+    const [showAlert, setShowAlert] = useContext(AlertContext)
+
+    const handleAlert = (state) => {
+        setShowAlert(state)
+    }
 
     function handleLogin(event){
 
@@ -17,15 +23,21 @@ function Button(){
 
             alert('Login')
             console.log(form.email, form.password)
-        }else{
 
-            alert('Preencha todos os campos corretamente')
+        }else{
+            
+            handleAlert(true)
+            
+            setTimeout(() => {
+                handleAlert(false);
+              }, 2000)
+            
         }
     }
 
     return(
 
-        <button onClick={handleLogin} type="submit" className="btn">Entrar</button>
+        <button onClick={handleLogin} type="submit" className="button">Entrar</button>
 
     )
 }
