@@ -1,23 +1,20 @@
 import React from "react";
+import { BrowserRouter, Route, Routes, Navigate } from "react-router-dom";
 import Login from "./components/login/Login";
 import Cadastro from "./components/cadastro/Cadastro";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Recovery from "./components/recovery/Recovery";
 
-function App(){
-
-    return(
+function App() {
+    return (
         <BrowserRouter>
             <Routes>
-            <Route path="/login" element={<Login />} />
-            <Route path="/cadastro" element={<Cadastro />} />
-            <Route path="/recovery" element={<Recovery />} />
+                <Route path="/" element={<Navigate to="/login" />} />
+                <Route path="/login" element={<Login />} />
+                <Route path="/cadastro" element={<Cadastro />} />
+                <Route path="/recovery" element={<Recovery />} />
             </Routes>
-          
         </BrowserRouter>
-        
-    )
-    
+    );
 }
 
-export default App
+export default App;
