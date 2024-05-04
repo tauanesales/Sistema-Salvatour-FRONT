@@ -37,7 +37,7 @@ function Button(){
 
     return(
 
-        <button onClick={handleLogin} type="submit" className="button">Entrar</button>
+        <button onClick={handleLogin} type="submit" className="button">Fazer login</button>
 
     )
 }
