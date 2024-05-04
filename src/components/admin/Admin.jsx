@@ -3,6 +3,13 @@ import dataMock from "../../utils/userDataMock";
 import { DataGrid, GridActionsCellItem } from '@mui/x-data-grid';
 import { Button } from "@mui/material";
 import DeleteFilledIcon from '@mui/icons-material/DeleteOutlined';
+
+function confirmDeleteRow(id) {
+  if (window.confirm(`Você deseja deletar o registro de id:${id}`)) {
+    console.log(id)
+    // Chamar o controller para excluir o usuario
+  }
+}
   
 const columns = [
     { field: 'id', headerName: 'ID', width: 150 },
@@ -20,7 +27,7 @@ const columns = [
               key={0}
               icon={<DeleteFilledIcon />}
               label="Delete"
-              onClick={() => {console.log(id)}} // Chamar o controller para excluir o usuario
+              onClick={() => {confirmDeleteRow(id)}}
               color="error"
             />
           ]
@@ -35,11 +42,11 @@ export default function Admin() {
     const isSelectionEmpty = () => selection.length == 0;
 
     const processRowUpdate = (newRow) => {
-        const updatedRow = { ...newRow, isNew: false };
-        setRows(rows.map((row) => (row.id === newRow.id ? updatedRow : row)));
-        console.log(newRow);
-        return updatedRow;
-      };
+      const updatedRow = { ...newRow, isNew: false };
+      setRows(rows.map((row) => (row.id === newRow.id ? updatedRow : row)));
+      console.log(newRow);
+      return updatedRow;
+    };
 
     return (
         <div className="root" style={{ display: "flex", flexDirection: "column", padding: 15 }}>
