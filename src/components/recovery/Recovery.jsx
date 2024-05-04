@@ -8,4 +8,4 @@ function Recovery(){
 
 }
 
-export default Recovery
+export default Recovery;
