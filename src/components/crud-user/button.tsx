@@ -12,12 +12,11 @@ export const Button = ({ variant, children, compact, onClick }: ButtonProps) => 
 
   const buttonStyle = {
     secondary: {
-      background: '#EB5E55',
-      color: '#333333',
-    },
-    primary: {
-      background: '#0B4687',
+      background: '#744344',
       color: '#F9F9F9',
+      fontFamily: 'PoetsenOne',
+      fontSize: '16px',
+      fontWeight: 400,
     },
   };
 

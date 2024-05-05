@@ -1,108 +1,135 @@
 import React, { useState } from 'react';
 import { Button } from './button';
-import './style-button.css';
+import './style.css';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faUserCircle, faPhone, faEdit, faTrashAlt, faKey } from '@fortawesome/free-solid-svg-icons';
 
-const initialUsers = [
-  { id: 1, name: 'João', email: 'joao@examplo.com', phone: '123456789' },
-  { id: 2, name: 'Maria', email: 'maria@examplo.com', phone: '987654321' },
-  { id: 3, name: 'José', email: 'jose@examplo.com', phone: '555444333' }
-];
+interface UserState {
+  value: string;
+  editing: boolean;
+}
 
 export const CrudUser = () => {
-  const [users, setUsers] = useState(initialUsers);
+  const [user, setUser] = useState({
+    name: { value: 'João', editing: false } as UserState,
+    email: { value: 'joao@examplo.com', editing: false } as UserState,
+    phone: { value: '123456789', editing: false } as UserState,
+    password: { value: '', editing: false } as UserState,
+  });
 
-  const handleDelete = (id) => {
-    if (window.confirm("Tem certeza que deseja excluir este usuário?")) {
-      setUsers(users.filter(user => user.id !== id));
-    }
-  };
-
-  const handleInputChange = (e, field, id) => {
-    const updatedUsers = users.map(user => {
-      if (user.id === id) {
-        return { ...user, [field]: e.target.value };
-      }
-      return user;
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>, field: string) => {
+    setUser({
+      ...user,
+      [field]: { ...user[field], value: e.target.value }
     });
-    setUsers(updatedUsers);
   };
 
-  const handleAddUser = () => {
-    const newId = users.length + 1;
-    const newUser = { id: newId, name: '', email: '', phone: '' };
-    setUsers([...users, newUser]);
+  const handleEditClick = (field: string) => {
+    setUser({
+      ...user,
+      [field]: { ...user[field], editing: true }
+    });
   };
 
-  const styleInput = {
-    display: 'flex',
-    boxShadow: 'none',
-    border: 'none',
-    fontSize: '14px',
-    fontFamily: 'sans-serif',
+  const handleSaveEdit = (field: string) => {
+    setUser({
+      ...user,
+      [field]: { ...user[field], editing: false }
+    });
   };
 
-  const styleAction: React.CSSProperties = {
-    display: 'flex',
-    textAlign: 'center',
-    padding: '24px',
-  };
-
-  const styleButtonUser = {
-    display: 'flex',
-    alignItems: 'center',
-    marginLeft: '18px',
+  const handleDeleteAccount = () => {
+    setUser({
+      name: { value: '', editing: false },
+      email: { value: '', editing: false },
+      phone: { value: '', editing: false },
+      password: { value: '', editing: false },
+    });
   };
 
   return (
-    <div className='table-container'>
-      <div style={styleButtonUser}>
-      <Button variant="primary" onClick={handleAddUser}>Lista Usuário</Button>
+    <div className='profile-container'>
+      <div className='input-container'>
+        <h1>Perfil Usuário</h1>
+        <label>Nome</label>
+        <div className="icon-input">
+          <FontAwesomeIcon icon={faUserCircle} style={{ color: '#d3d3d3' }} size='2x' className='icon' />
+          <input
+            id="name"
+            type="text"
+            value={user.name.value}
+            onChange={(e) => handleInputChange(e, 'name')}
+            disabled={!user.name.editing}
+          />
+          {!user.name.editing && (
+            <FontAwesomeIcon
+              icon={faEdit}
+              style={{ color: '#d3d3d3', cursor: 'pointer', marginLeft: '1rem' }}
+              size='2x'
+              className='icon'
+              onClick={() => handleEditClick('name')}
+            />
+          )}
+          {user.name.editing && (
+            <FontAwesomeIcon
+              icon={faEdit}
+              style={{ color: '#d3d3d3', cursor: 'pointer', marginLeft: '1rem' }}
+              size='2x'
+              className='icon'
+              onClick={() => handleSaveEdit('name')}
+            />
+          )}
+        </div>
+
+        <label>Senha</label>
+        <div className='icon-input'>
+          <FontAwesomeIcon icon={faKey} style={{ color: '#d3d3d3' }} size='2x' className='icon' />
+          <input
+            type="password"
+            value={user.password.value}
+            onChange={(e) => handleInputChange(e, 'password')}
+            disabled={!user.password.editing}
+          />
+          {!user.password.editing && (
+            <FontAwesomeIcon
+              icon={faEdit}
+              style={{ color: '#d3d3d3', cursor: 'pointer', marginLeft: '1rem' }}
+              size='2x'
+              className='icon'
+              onClick={() => handleEditClick('password')}
+            />
+          )}
+          {user.password.editing && (
+            <FontAwesomeIcon
+              icon={faEdit}
+              style={{ color: '#d3d3d3', cursor: 'pointer', marginLeft: '1rem' }}
+              size='2x'
+              className='icon'
+              onClick={() => handleSaveEdit('password')}
+            />
+          )}
+        </div>
+
+        <label>Telefone</label>
+        <div className='icon-input'>
+          <FontAwesomeIcon icon={faPhone} style={{ color: '#d3d3d3' }} size='2x' className='icon' />
+          <input
+            type="text"
+            value={user.phone.value}
+            onChange={(e) => handleInputChange(e, 'phone')}
+          />
+        </div>
       </div>
-      <table>
-        <thead>
-          <tr>
-            <th>ID</th>
-            <th>Nome</th>
-            <th>E-mail</th>
-            <th>Celular</th>
-            <th>Ações</th>
-          </tr>
-        </thead>
-        <tbody>
-          {users.map(user => (
-            <tr key={user.id}>
-              <td>{user.id}</td>
-              <td>
-                <input
-                  style={styleInput}
-                  type="text"
-                  value={user.name}
-                  onChange={(e) => handleInputChange(e, 'name', user.id)}
-                />
-              </td>
-              <td>
-                <input
-                  style={styleInput}
-                  type="text"
-                  value={user.email}
-                  onChange={(e) => handleInputChange(e, 'email', user.id)}
-                />
-              </td>
-              <td>
-                <input
-                  style={styleInput}
-                  type="text"
-                  value={user.phone}
-                  onChange={(e) => handleInputChange(e, 'phone', user.id)}
-                />
-              </td>
-              <td style={styleAction}>
-                <Button variant="secondary" compact onClick={() => handleDelete(user.id)}>Deletar</Button>
-              </td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
+
+      <div className='style-button'>
+        <Button variant="secondary">Salvar Alterações</Button>
+        <div style={{ marginLeft: '7rem' }}>
+          <Button variant="secondary" onClick={handleDeleteAccount}>
+            <FontAwesomeIcon icon={faTrashAlt} style={{ marginRight: '0.5rem' }} />
+            Deletar Conta
+          </Button>
+        </div>
+      </div>
     </div>
   );
 };
