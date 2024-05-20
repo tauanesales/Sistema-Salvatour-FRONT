@@ -6,7 +6,6 @@ export function createUser(accessToken, name, email, password) {
         const header = {
             headers: {
               'Content-type': 'application/json',
-              //Authorization: `Bearer ${accessToken}`,  // descomentar quando o token jwt estiver pronto no back
             },
           };
 

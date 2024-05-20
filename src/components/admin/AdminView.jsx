@@ -19,18 +19,16 @@ export default function Admin({
     setShowCreateUser,
     onGetAllUsers,
     onCreateUser,
-    onDeleteUser
+    onDeleteUser,
+    onUpdateUser
   }) {
     const [selection, setSelection] = useState([]);
-    const [rows, setRows] = useState(dataMock)
 
     const isSelectionEmpty = () => selection.length == 0;
 
     const processRowUpdate = (newRow) => {
-      const updatedRow = { ...newRow, isNew: false };
-      setRows(rows.map((row) => (row.id === newRow.id ? updatedRow : row)));
-      console.log(newRow);
-      return updatedRow;
+      onUpdateUser(newRow)
+      return newRow;
     };
 
     useEffect(() => {

@@ -3,6 +3,7 @@ import Admin from "./AdminView";
 import { getAllUsers } from "../../services/users/getAllUsers";
 import { createUser } from "../../services/users/createUser";
 import { deleteUser } from "../../services/users/deleteUser";
+import { patchUser } from "../../services/users/patchUser";
 
 export default function AdminController() {
     const [name, setName] = useState("")
@@ -77,6 +78,18 @@ export default function AdminController() {
             .catch((error) => console.log(error))
     }
 
+    function onUpdateUser(updatedUser) {
+        patchUser(
+            null, //colocar accesstoken aqui
+            null, // colocar id do usuario logado aqui
+            updatedUser.name,
+            updatedUser.email
+        ).then((response) => {
+            console.log(response)
+            onGetAllUsers()
+        }).catch((error) => console.log(error))
+    }
+
     return <Admin 
         users={users}
         name={name}
@@ -93,5 +106,6 @@ export default function AdminController() {
         onGetAllUsers={onGetAllUsers}
         onCreateUser={onCreateUser}
         onDeleteUser={onDeleteUser}
+        onUpdateUser={onUpdateUser}
     />
 }
