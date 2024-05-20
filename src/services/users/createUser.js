@@ -10,12 +10,6 @@ export function createUser(accessToken, name, email, password) {
             },
           };
 
-          console.log({
-            name: name,
-            email: email,
-            password: password,
-        })
-
           axios
             .post(
                 USERS_ENDPOINT,
@@ -23,6 +17,7 @@ export function createUser(accessToken, name, email, password) {
                     name: name,
                     email: email,
                     password: password,
+                    isAdmin: false
                 },
                 header
             )

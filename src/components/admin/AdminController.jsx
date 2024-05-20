@@ -11,11 +11,13 @@ export default function AdminController() {
     const [password, setPassword] = useState("")
     const [passwordHelperText, setPasswordHelperText] = useState("")
     const [showCreateUser, setShowCreateUser] = useState(false)
+    const [users, setUsers] = useState([])
 
     function onGetAllUsers() {
         getAllUsers(null)
             .then((data) => {
-                console.log(data)
+                data.forEach((user) => {user.id = user._id})
+                setUsers(data)
             })
             .catch((error) => {
                 console.log(error)
@@ -66,6 +68,7 @@ export default function AdminController() {
     }
 
     return <Admin 
+        users={users}
         name={name}
         nameHelperText={nameHelperText}
         email={email} 

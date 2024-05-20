@@ -36,6 +36,7 @@ const columns = [
 ];
 
 export default function Admin({
+    users,
     name,
     nameHelperText,
     email,
@@ -76,7 +77,7 @@ export default function Admin({
             </div>
             <div style={{ height: '100%', width: 600 }}>
                 <DataGrid 
-                    rows={dataMock} 
+                    rows={users} 
                     columns={columns} 
                     checkboxSelection
                     onRowSelectionModelChange={(newSelection) => {
