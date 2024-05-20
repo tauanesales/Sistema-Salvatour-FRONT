@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import Admin from "./AdminView";
 import { getAllUsers } from "../../services/users/getAllUsers";
 import { createUser } from "../../services/users/createUser";
+import { deleteUser } from "../../services/users/deleteUser";
 
 export default function AdminController() {
     const [name, setName] = useState("")
@@ -12,6 +13,7 @@ export default function AdminController() {
     const [passwordHelperText, setPasswordHelperText] = useState("")
     const [showCreateUser, setShowCreateUser] = useState(false)
     const [users, setUsers] = useState([])
+    const [loggedUserId, setLoggedUserId] = useState("")
 
     function onGetAllUsers() {
         getAllUsers(null)
@@ -67,6 +69,14 @@ export default function AdminController() {
             })
     }
 
+    function onDeleteUser(userIdToBeDeleted) {
+        deleteUser(null, loggedUserId, userIdToBeDeleted)
+            .then((response) => {
+                onGetAllUsers()
+            })
+            .catch((error) => console.log(error))
+    }
+
     return <Admin 
         users={users}
         name={name}
@@ -82,5 +92,6 @@ export default function AdminController() {
         setShowCreateUser={setShowCreateUser}
         onGetAllUsers={onGetAllUsers}
         onCreateUser={onCreateUser}
+        onDeleteUser={onDeleteUser}
     />
 }
