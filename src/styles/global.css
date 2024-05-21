@@ -13,30 +13,31 @@ html{
     
 }
 
-input{
-    width: 330px;
+.input{
+    width: 345px;
     height: 45px;
     padding-left: 15px;
     box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
     border-radius: 13.5px;
-    border: 2px solid var(--Chambray-300, #A0C6F0);
+    border: 2px solid var(--cor_2, #D76A00);
     background: var(--Star-Dust-50, #F6F6F6);
     font-family: 'Poetsen One', sans-serif;
     color: black;
     margin-bottom: 15px;
+    font-size: 14px;
 }
 
-input:focus {
+.input:focus {
     outline: none; 
 }
 
-.btn{
-    width: 345px;
+.button{
+    width: 340px;
     height: 45px;
     align-self: center;
-    border-radius: 13.5px;
+    border-radius: 22.5px;
     border: none;
-    background: var(--Chambray-500, #5387DE);
+    background: #744344;
     box-shadow: 0px 3.6px 3.6px 0px rgba(255, 255, 255, 0.50) inset, 0px -3.6px 3.6px 0px rgba(0, 0, 0, 0.50) inset, 0px 0px 0px 0.9px rgba(0, 0, 0, 0.25);
     color: #FFF;
     font-size: 14.4px;
@@ -44,11 +45,26 @@ input:focus {
    
 }
 
-.btn:hover{
-    background-color: var(--Chambray-500, #6593e0);
+.button:hover{
+    background-color: #744344e5;
 }
 
 
-.btn:focus{
+.button:focus{
     outline: none;
+}
+
+.button2{
+    width: 340px;
+    height: 45px;
+    align-self: center;
+    border-radius: 22.5px;
+    border: 2px solid var(--cor_3, #744344);
+    box-shadow: 0px 3.6px 3.6px 0px rgba(255, 255, 255, 0.50) inset, 0px -3.6px 3.6px 0px rgba(0, 0, 0, 0.50) inset, 0px 0px 0px 0.9px rgba(0, 0, 0, 0.25);
+    color: var(--cor_3, #744344);
+    font-size: 14.4px;
+    font-family: 'Poetsen One', sans-serif;
+    background: var(--Color, #FFF);
+    margin-top: 25px;
+
 }
