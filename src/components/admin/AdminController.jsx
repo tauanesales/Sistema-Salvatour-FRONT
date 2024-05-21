@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import Admin from "./AdminView";
 import { getAllUsers } from "../../services/users/getAllUsers";
 import { createUser } from "../../services/users/createUser";
+import { deleteUser } from "../../services/users/deleteUser";
+import { patchUser } from "../../services/users/patchUser";
 
 export default function AdminController() {
     const [name, setName] = useState("")
@@ -11,11 +13,14 @@ export default function AdminController() {
     const [password, setPassword] = useState("")
     const [passwordHelperText, setPasswordHelperText] = useState("")
     const [showCreateUser, setShowCreateUser] = useState(false)
+    const [users, setUsers] = useState([])
+    const [loggedUserId, setLoggedUserId] = useState("")
 
     function onGetAllUsers() {
         getAllUsers(null)
             .then((data) => {
-                console.log(data)
+                data.forEach((user) => {user.id = user._id})
+                setUsers(data)
             })
             .catch((error) => {
                 console.log(error)
@@ -65,7 +70,28 @@ export default function AdminController() {
             })
     }
 
+    function onDeleteUser(userIdToBeDeleted) {
+        deleteUser(null, loggedUserId, userIdToBeDeleted)
+            .then((response) => {
+                onGetAllUsers()
+            })
+            .catch((error) => console.log(error))
+    }
+
+    function onUpdateUser(updatedUser) {
+        patchUser(
+            null, //colocar accesstoken aqui
+            null, // colocar id do usuario logado aqui
+            updatedUser.name,
+            updatedUser.email
+        ).then((response) => {
+            console.log(response)
+            onGetAllUsers()
+        }).catch((error) => console.log(error))
+    }
+
     return <Admin 
+        users={users}
         name={name}
         nameHelperText={nameHelperText}
         email={email} 
@@ -79,5 +105,7 @@ export default function AdminController() {
         setShowCreateUser={setShowCreateUser}
         onGetAllUsers={onGetAllUsers}
         onCreateUser={onCreateUser}
+        onDeleteUser={onDeleteUser}
+        onUpdateUser={onUpdateUser}
     />
 }
