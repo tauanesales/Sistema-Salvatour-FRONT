@@ -5,13 +5,13 @@
   margin: 16px;
   justify-content: center; 
   height: 90vh;
-  font-family: Inter;
+  font-family: PoetsenOne;
 }
 h1 {
   display: flex;
   justify-content: center;
   margin: 30px;
-  font-family: Inter;
+  font-family: PoetsenOne;
   font-weight: 400;
   font-size: 31.5px;
 }
