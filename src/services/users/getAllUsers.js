@@ -1,5 +1,5 @@
 import axios from "axios";
-import { USERS_ENDPOINT } from "../../constants/urls";
+import { ADMIN_ENDPOINT } from "../../constants/urls";
 
 export function getAllUsers(accessToken) {
     return new Promise((resolve, reject) => {
@@ -12,7 +12,7 @@ export function getAllUsers(accessToken) {
 
           axios
             .get(
-                USERS_ENDPOINT,
+                ADMIN_ENDPOINT + 'users/',
                 header
             )
             .then((response) => {
