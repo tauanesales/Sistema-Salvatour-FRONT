@@ -1,19 +1,18 @@
 import React, {useContext} from "react";
 import { LoginContext } from "../../utils/loginContext";
+import { inputValidator, validateEmail, validatePassword } from "../../utils/validators";
 import { AlertContext } from "../../utils/alertContext";
 import { AlertTypeContext } from "../../utils/alertTypeContext";
-import { inputValidator, validateEmail, validatePassword } from "../../utils/validators";
-import { loginUser } from "../../services/users/loginUser";
-import {useNavigate } from 'react-router-dom';
+import {loginUser} from "../../services/users/loginUser"
+
 
 function Button(){
 
     const [form, setForm] = useContext(LoginContext)
     const [showAlert, setShowAlert] = useContext(AlertContext)
-    const [alertContext, setAlertType] = useContext(AlertTypeContext)
-    const navigate = useNavigate()
+    const [alertType, setAlertType] = useContext(AlertTypeContext)
 
-    function handleAlert(state, type){
+   function handleAlert(state, type) {
         setShowAlert(state)
         setAlertType(type)
     }
@@ -38,28 +37,29 @@ function Button(){
             } )
 
             alert('Login')
-            
+            console.log(form.email, form.password)
+        }else{
 
-        }else {
             if(!validateEmail(form.email) && !validatePassword(form.password)){
+                handleAlert(true, "Usuário e senha incorretos")
 
-                handleAlert(true,"Usuário e senha incorretos")
-            }
-            else{
-                let type = validateEmail(form.email)? "Senha incorreta": "Usuário incorreto";
+            } else{
+                const type = validateEmail(form.email)? "Senha incorreta" : "Usuário incorreto"
                 handleAlert(true, type)
             }
-            
+
+    
             setTimeout(() => {
                 handleAlert(false);
               }, 2000)
             
         }
-    }
+        }
+    
 
     return(
 
-        <button onClick={handleLogin} type="submit" className="button">Fazer login</button>
+        <button onClick={handleLogin} type="submit" className="button">Entrar</button>
 
     )
 }
