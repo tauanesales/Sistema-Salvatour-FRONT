@@ -7,7 +7,6 @@ import Button from "./Button.jsx"
 import Alert from "./Alert.jsx"
 import { Link } from "react-router-dom"
 import Imagem from "../../assets/image.png"
-import Imagem from "../../assets/image.png"
 import '../../styles/global.css'
 import '../../styles/login.css'
 
@@ -20,13 +19,6 @@ function Login(){
             <AlertTypeProvider>
             <AlertProvider>
             <Alert></Alert>
-            
-            <div className="imgContainer">
-
-            <img className="img" src={Imagem} alt="hotelImg" />
-
-            </div>
-
             
             <div className="imgContainer">
 

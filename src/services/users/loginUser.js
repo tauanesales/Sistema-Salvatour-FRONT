@@ -21,6 +21,7 @@ export function loginUser(accessToken, email, password){
     )
     .then((response) => {
 
+        console.log(response)
         resolve(response.data);
 
     })

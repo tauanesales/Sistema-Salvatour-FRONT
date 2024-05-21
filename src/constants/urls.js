@@ -3,4 +3,4 @@ export const BACKEND_URL = 'https://back.matc84.tauane.artadevs.tech/'
 
 export const USERS_ENDPOINT = BACKEND_URL + 'user/'
 
-export const LOGIN_ENDPOINT = BACKEND_URL + 'login/'
+export const LOGIN_ENDPOINT = BACKEND_URL + 'auth/'

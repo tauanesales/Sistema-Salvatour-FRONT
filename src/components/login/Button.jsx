@@ -28,7 +28,7 @@ function Button(){
 
             loginUser(null, form.email, form.password)
             .then((data)=>{
-                console.log(data)
+                
                 const token = data.token
                 navigate('/')
             })
@@ -37,7 +37,6 @@ function Button(){
             } )
 
             alert('Login')
-            console.log(form.email, form.password)
         }else{
 
             if(!validateEmail(form.email) && !validatePassword(form.password)){
