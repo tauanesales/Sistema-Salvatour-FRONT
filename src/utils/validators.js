@@ -22,5 +22,5 @@ function inputValidator (email, password){
 }
 
 export {
-    inputValidator
+    inputValidator, validateEmail, validatePassword
 }

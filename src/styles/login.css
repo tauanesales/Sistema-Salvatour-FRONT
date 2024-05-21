@@ -50,12 +50,29 @@
     text-decoration: none;
     font-family: 'Poetsen One', sans-serif;
     font-size: 14.4px;
-    margin-bottom: 30px;
+    margin-bottom: 20px;
     margin-right: 12px;
 
 }
-.esqueci:hover{
+
+p{  
+    text-align: center;
+    font-family: 'Poetsen One', sans-serif;
+    font-size: 14.4px;
     color: #6D6D6D;
+    
+}
+.link-cadastro{
+    text-align: center;
+    color: #754910;
+    text-decoration: none;
+    font-family: 'Poetsen One', sans-serif;
+    font-size: 14.4px;
+    
+}
+
+.link-cadastro:hover, .links:hover{
+    color: #242323;
 }
 
 .alert-style{
