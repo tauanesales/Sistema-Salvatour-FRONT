@@ -1,0 +1,17 @@
+.linksContainer{
+    display: flex;
+    flex-direction: column;
+    margin: auto;
+    
+    
+}
+
+.img{
+    margin: auto;
+    margin-bottom: 30px;
+    border-radius: 50%;
+    
+}
+.linkBtn{
+    margin: auto;
+}
