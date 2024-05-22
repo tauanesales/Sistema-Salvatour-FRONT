@@ -1,4 +1,4 @@
-import React, {useContext} from "react";
+import {useContext} from "react";
 import { LoginContext } from "../../utils/loginContext";
 import { inputValidator, validateEmail, validatePassword } from "../../utils/validators";
 import { AlertContext } from "../../utils/alertContext";
@@ -21,7 +21,7 @@ function Button(){
 
     function handleLogin(event){
 
-        event.preventDefault()
+        event.preventDefault(setForm)
 
         if(inputValidator(form.email, form.password)){
 
@@ -66,4 +66,4 @@ function Button(){
     )
 }
 
-export default Button
+export default Button;
