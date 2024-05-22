@@ -1,11 +1,13 @@
 import React, {useContext} from "react";
 import { AlertContext } from "../../utils/alertContext";
+import { AlertTypeContext } from "../../utils/alertTypeContext";
 
 function Alert(){
 
     const [showAlert, setShowAlert] = useContext(AlertContext);
+    const [alertType, setAlertType] = useContext(AlertTypeContext)
 
-    const handleAlertClose = () => {
+    function handleAlertClose() {
         setShowAlert(false);
     }
 
@@ -13,7 +15,7 @@ function Alert(){
         <div className="position-absolute end-0 p-5">
         {showAlert && (
           <div className="alert alert-danger alert-dismissible alert-style">
-            <div>Usuário ou senha incorretos</div>
+            <div>{alertType}</div>
             <button className="btn-close" onClick={handleAlertClose}></button>
           </div>
         )}

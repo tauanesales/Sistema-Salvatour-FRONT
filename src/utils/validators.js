@@ -8,11 +8,11 @@ function validateEmail (email){
 }
 function validatePassword (password) {
 
-    const regexPassword = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()\-_=+[{\]};:'",/?]).{8,}$/;
+  // const regexPassword = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()\-_=+[{\]};:'",/?]).{8,}$/;
 
-    if (regexPassword.test(password)){
+  //  if (regexPassword.test(password)){
         return true;
-    }
+    //}
     
 }
 
@@ -22,5 +22,5 @@ function inputValidator (email, password){
 }
 
 export {
-    inputValidator
+    inputValidator, validateEmail, validatePassword
 }
