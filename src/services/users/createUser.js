@@ -1,7 +1,7 @@
 import axios from "axios";
 import { USERS_ENDPOINT } from "../../constants/urls";
 
-export function createUser(accessToken, name, email, password) {
+export function createUser(name, email, password) {
     return new Promise((resolve, reject) => {
         const header = {
             headers: {

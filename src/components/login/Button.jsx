@@ -4,6 +4,7 @@ import { inputValidator, validateEmail, validatePassword } from "../../utils/val
 import { AlertContext } from "../../utils/alertContext";
 import { AlertTypeContext } from "../../utils/alertTypeContext";
 import {loginUser} from "../../services/users/loginUser"
+import { useNavigate } from "react-router-dom";
 
 
 function Button(){
@@ -11,6 +12,7 @@ function Button(){
     const [form, setForm] = useContext(LoginContext)
     const [showAlert, setShowAlert] = useContext(AlertContext)
     const [alertType, setAlertType] = useContext(AlertTypeContext)
+    const navigate = useNavigate()
 
    function handleAlert(state, type) {
         setShowAlert(state)
@@ -28,8 +30,8 @@ function Button(){
 
             loginUser(null, form.email, form.password)
             .then((data)=>{
-                
                 const token = data.token
+                localStorage.setItem("token", token)
                 navigate('/')
             })
             .catch((error) => {

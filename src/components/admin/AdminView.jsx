@@ -49,7 +49,7 @@ export default function Admin({
       {
           field: 'actions',
           type: 'actions',
-          headerName: 'Actions',
+          headerName: 'Ações',
           width: 100,
           cellClassName: 'Actions',
           getActions: ({ id }) => {  

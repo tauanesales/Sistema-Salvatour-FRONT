@@ -4,6 +4,7 @@ import { getAllUsers } from "../../services/users/getAllUsers";
 import { createUser } from "../../services/users/createUser";
 import { deleteUser } from "../../services/users/deleteUser";
 import { patchUser } from "../../services/users/patchUser";
+import { useNavigate } from "react-router-dom";
 
 export default function AdminController() {
     const [name, setName] = useState("")
@@ -15,9 +16,15 @@ export default function AdminController() {
     const [showCreateUser, setShowCreateUser] = useState(false)
     const [users, setUsers] = useState([])
     const [loggedUserId, setLoggedUserId] = useState("")
+    const navigate = useNavigate();
+    const token = localStorage.getItem("token")
+
+    if (!token) {
+        navigate("/")
+    }
 
     function onGetAllUsers() {
-        getAllUsers(null)
+        getAllUsers(token)
             .then((data) => {
                 data.forEach((user) => {user.id = user._id})
                 setUsers(data)
@@ -54,7 +61,7 @@ export default function AdminController() {
             return
         } 
 
-        createUser(null, name, email, password)
+        createUser(name, email, password)
             .then((data) => {
                 console.log(data)
                 setShowCreateUser(false)
@@ -64,6 +71,7 @@ export default function AdminController() {
                 setNameHelperText("")
                 setEmailHelperText("")
                 setPasswordHelperText("")
+                onGetAllUsers()
             })
             .catch((error) => {
                 console.log(error)
@@ -71,7 +79,7 @@ export default function AdminController() {
     }
 
     function onDeleteUser(userIdToBeDeleted) {
-        deleteUser(null, loggedUserId, userIdToBeDeleted)
+        deleteUser(token, loggedUserId, userIdToBeDeleted)
             .then((response) => {
                 onGetAllUsers()
             })
@@ -80,7 +88,7 @@ export default function AdminController() {
 
     function onUpdateUser(updatedUser) {
         patchUser(
-            null, //colocar accesstoken aqui
+            token,
             null, // colocar id do usuario logado aqui
             updatedUser.name,
             updatedUser.email

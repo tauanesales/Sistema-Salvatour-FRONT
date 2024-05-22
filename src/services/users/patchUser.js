@@ -24,8 +24,6 @@ export function patchUser(accessToken, requestingUserId, name, email, password) 
         body.email = email
       }
 
-      console.log(accessToken)
-
       axios
         .patch(
             `${USERS_ENDPOINT + requestingUserId}`, 
