@@ -10,9 +10,6 @@ function Home(){
             <div className="linksContainer">
             
             <img className="img" src={Imagem} alt="hotelImg" />
-            
-            <Link to='/login' className="linkBtn"><button className="button">Já tem uma conta? Faça login!</button></Link>
-            <Link to='/cadastro' className="linkBtn" ><button className="button2">Novo aqui? Crie uma conta!</button></Link>
 
             </div>
            

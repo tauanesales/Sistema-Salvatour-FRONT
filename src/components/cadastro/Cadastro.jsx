@@ -1,9 +1,13 @@
 import React from "react";
+import '../../styles/global.css'
 
 function Cadastro(){
 
         return(
-            <div><h1>Cadastro</h1></div>
+            <div className="container">
+                <input className="input" name="email" type="text" placeholder="email"/>
+            </div>
+            
         )
 
 }
