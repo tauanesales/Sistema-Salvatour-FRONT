@@ -1,8 +1,8 @@
 import axios from "axios";
-import { LOGIN_ENDPOINT } from "../../constants/urls";
+import { CADASTRO_ENDPOINT } from "../../constants/urls";
 
 
-export function loginUser(email, password){
+export function registerUser(name, email, password, city, state){
  return new Promise((resolve, reject) => {
     const header = {
         headers: {
@@ -12,9 +12,12 @@ export function loginUser(email, password){
 
     axios
     .post(
-        `${LOGIN_ENDPOINT}`, {
+        `${CADASTRO_ENDPOINT}`, {
+            name: name,
             email: email,
-        password: password
+            password: password,
+            city: city,
+            state: state,
         }
     
     )
