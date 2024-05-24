@@ -1,6 +1,9 @@
 import React from "react";
 import FormCadastro from "./FormCadastro";
 import SubmitCadastro from "./SubmitCadastro";
+import Alert from "../login/Alert";
+import { AlertProvider } from "../../contexts/alertContext";
+import { AlertTypeProvider } from "../../contexts/alertTypeContext";
 import { FormCadastroProvider } from "../../contexts/formCadastroContext";
 import '../../styles/global.css'
 import '../../styles/cadastro.css'
@@ -9,7 +12,11 @@ import '../../styles/cadastro.css'
 function Cadastro(){
 
         return(
+            <AlertTypeProvider>
+            <AlertProvider>
+            <Alert></Alert>
             <div className="mainContainerCadastro background">
+
                 <FormCadastroProvider>
                 
                 <FormCadastro></FormCadastro>
@@ -19,6 +26,8 @@ function Cadastro(){
                 </FormCadastroProvider>
                 
             </div>
+            </AlertProvider>
+            </AlertTypeProvider>
             
         )
 

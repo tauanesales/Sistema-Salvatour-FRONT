@@ -1,6 +1,7 @@
 import React, { useContext, useState} from "react";
 import { FormCadastroContext } from "../../contexts/formCadastroContext";
 import {Eye, EyeOff} from "lucide-react"
+import { validateEmail } from "../../utils/validators";
 
 
 function FormCadastro(){
@@ -13,15 +14,14 @@ function FormCadastro(){
     function handleChange(event){
   
         setForm({...form, [event.target.name]:event.target.value})
-        console.log(form)
-        
-    }
 
-    function handlePassword(){
+    }
+    
+    function handleShowPassword(){
         setShowPassword(!showPassword)
     }
 
-    function handlePassword2(){
+    function handleShowPassword2(){
         setShowPassword2(!showPassword2)
     }
 
@@ -29,15 +29,15 @@ function FormCadastro(){
 
         <div className="formContainer"> 
 
-                <input className="input" onChange={handleChange} name="nome" type="text" placeholder="nome completo"/>
+                <input className="input" onChange={handleChange} name="name" type="text" placeholder="nome completo"/>
                 <input className="input" onChange={handleChange} name="email" type="text" placeholder="email"/>
-                <input className="input" onChange={handleChange} name="cidade" type="text" placeholder="cidade"/>
-                <input className="input" onChange={handleChange} name="estado" type="text" placeholder="estado"/>
+                <input className="input" onChange={handleChange} name="city" type="text" placeholder="cidade"/>
+                <input className="input" onChange={handleChange} name="state" type="text" placeholder="estado"/>
                 <label className="label-password">
 
                     <input className="input-password" name="password" onChange={handleChange} type={showPassword? "text" : "password"} placeholder="senha"/>
 
-                    <button className="password-btn" onClick={handlePassword} type="button">
+                    <button className="password-btn" onClick={handleShowPassword} type="button">
                         {showPassword && <EyeOff />}
                         {!showPassword && <Eye />}
     
@@ -47,9 +47,9 @@ function FormCadastro(){
 
                     <label className="label-password">
 
-                    <input className="input-password" name="password2" onChange={handleChange} type={showPassword? "text" : "password"} placeholder="confirme a senha"/>
+                    <input className="input-password" name="password2" onChange={handleChange} type={showPassword2? "text" : "password"} placeholder="confirme a senha"/>
 
-                    <button className="password-btn" onClick={handlePassword2} type="button">
+                    <button className="password-btn" onClick={handleShowPassword2} type="button">
                         {showPassword2 && <EyeOff />}
                         {!showPassword2 && <Eye />}
     

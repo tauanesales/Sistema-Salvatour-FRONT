@@ -13,12 +13,12 @@ import '../../styles/login.css'
 function Login(){
 
     return(
-
+        <AlertTypeProvider>
+        <AlertProvider>
+        <Alert></Alert>
         <div className="mainContainer backgroundLogin">
 
-            <AlertTypeProvider>
-            <AlertProvider>
-            <Alert></Alert>
+            
 
             <div className="loginContainer">
 
@@ -42,10 +42,11 @@ function Login(){
 
 
             </div>
-            </AlertProvider>
-            </AlertTypeProvider>
+            
 
         </div>
+        </AlertProvider>
+        </AlertTypeProvider>
     )
 }
 

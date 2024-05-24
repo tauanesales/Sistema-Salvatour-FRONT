@@ -17,6 +17,10 @@ function Button(){
    function handleAlert(state, type) {
         setShowAlert(state)
         setAlertType(type)
+
+        setTimeout(() => {
+            setShowAlert(false);
+          }, 2000)
     }
 
     function handleLogin(event){
@@ -28,7 +32,7 @@ function Button(){
             localStorage.setItem('email', JSON.stringify(form.email))
             localStorage.setItem('password', JSON.stringify(form.password))
 
-            loginUser(null, form.email, form.password)
+            loginUser(form.email, form.password)
             
             .then((data)=>{
             
@@ -66,11 +70,6 @@ function Button(){
                 handleAlert(true, type)
             }
 
-    
-            setTimeout(() => {
-                handleAlert(false);
-              }, 2000)
-            
         }
         }
     
