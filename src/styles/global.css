@@ -1,5 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
 @import url('https://fonts.cdnfonts.com/css/poetsen-one');
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
 
 
 *{
@@ -11,6 +12,20 @@ html{
     font-size: 62.5%; 
     
     
+}
+
+.background{
+    background-image: linear-gradient(to right, #ecbb60, #1e5799, #96DADE);
+    
+/* background: linear-gradient(to bottom,  #1e5799 0%,#2989d8 50%,#207cca 51%,#7db9e8 100%);  */
+
+}
+
+
+.formContainer{
+    display: flex;
+    flex-direction: column;
+
 }
 
 .input{
@@ -68,4 +83,41 @@ html{
     background: var(--Color, #FFF);
     margin-top: 25px;
 
+}
+
+.label-password{
+    display: flex;
+    width: 345px;
+    height: 45px;
+    padding-left: 15px;
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+    border-radius: 13.5px;
+    border: 2px solid var(--cor_2, #D76A00);
+    border: 2px solid var(--cor_2, #D76A00);
+    background: var(--Star-Dust-50, #F6F6F6);
+    font-family: 'Poetsen One', sans-serif;
+    color: black;
+    margin-bottom: 8px;
+    margin-bottom: 8px;
+    font-size: 14.4px;
+    }
+
+.label-password:focus {
+        outline: none;
+}
+
+.input-password{
+    border:0;
+    background-color: transparent;
+    width: 290px;
+
+}
+.input-password:focus {
+    outline: none;
+}
+
+.password-btn{
+    background-color: transparent;
+    border: 0;
+    outline: 0;
 }

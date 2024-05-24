@@ -7,7 +7,6 @@ export function loginUser(accessToken, email, password){
     const header = {
         headers: {
           'Content-type': 'application/json',
-          //Authorization: `Bearer ${accessToken}`, //descomentar quando o jwt do back estiver pronto
         },
       };
 

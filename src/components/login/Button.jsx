@@ -1,8 +1,8 @@
 import {useContext} from "react";
-import { LoginContext } from "../../utils/loginContext";
+import { LoginContext } from "../../contexts/loginContext";
 import { inputValidator, validateEmail, validatePassword } from "../../utils/validators";
-import { AlertContext } from "../../utils/alertContext";
-import { AlertTypeContext } from "../../utils/alertTypeContext";
+import { AlertContext } from "../../contexts/alertContext";
+import { AlertTypeContext } from "../../contexts/alertTypeContext";
 import {loginUser} from "../../services/users/loginUser"
 import { useNavigate } from "react-router-dom";
 
@@ -29,14 +29,30 @@ function Button(){
             localStorage.setItem('password', JSON.stringify(form.password))
 
             loginUser(null, form.email, form.password)
+            
             .then((data)=>{
-                
+            
                 const token = data.token
                 localStorage.setItem('token', token)
-                navigate('/')
+
+                if(data.isAdmin){
+
+                    navigate('/admin')
+
+                }else{
+
+                    navigate('/')
+                }
+                
             })
             .catch((error) => {
-                console.log(error)
+                console.log(error.response.status)
+                let status = error.response.status
+                if (status == 404){
+                    handleAlert(true, "Senha inválida")
+                } else if(status == 400){
+                    handleAlert(true, "Usuário não encontrado")
+                }
             } )
 
     

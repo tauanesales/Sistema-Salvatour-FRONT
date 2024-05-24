@@ -1,6 +1,6 @@
 import React, {useContext} from "react";
-import { AlertContext } from "../../utils/alertContext";
-import { AlertTypeContext } from "../../utils/alertTypeContext";
+import { AlertContext } from "../../contexts/alertContext";
+import { AlertTypeContext } from "../../contexts/alertTypeContext";
 
 function Alert(){
 
