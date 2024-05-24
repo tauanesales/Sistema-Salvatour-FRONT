@@ -38,6 +38,7 @@ function Button(){
             
                 const token = data.token
                 localStorage.setItem('token', token)
+                console.log('isAdmin', data.isAdmin)
 
                 if(data.isAdmin){
 
@@ -45,7 +46,7 @@ function Button(){
 
                 }else{
 
-                    navigate('/')
+                    navigate('/home')
                 }
                 
             })

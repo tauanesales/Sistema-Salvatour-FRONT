@@ -31,7 +31,7 @@ function SubmitCadastro(){
                      registerUser(form.name, form.email, form.password, form.city, form.state)
                      .then((data)=>{
             
-                         navigate('/login')
+                         navigate('/')
                         
                      })
                      .catch((error) => {
@@ -39,7 +39,6 @@ function SubmitCadastro(){
                        
                      } )
         
-                    alert('cadastrado')
                 }
 
             } else{

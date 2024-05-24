@@ -12,7 +12,7 @@ function validatePassword (password) {
 
     if (regexPassword.test(password)){
         return true;
-     }
+}
     
 }
 
