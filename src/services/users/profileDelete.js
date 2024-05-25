@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { USER_BY_ID_ENDPOINT } from '../../constants/urls';
 
-export function deleteUser(accessToken, userId) {
+export function deleteUser(accessToken,name, password, city, state) {
   return new Promise((resolve, reject) => {
     const header = {
       headers: {
@@ -9,11 +9,16 @@ export function deleteUser(accessToken, userId) {
         Authorization: `Bearer ${accessToken}`,
       },
     };
+    const data = {
+      name,
+      password,
+      city,
+      state
+    };
 
     axios
       .delete(
-        USER_BY_ID_ENDPOINT(userId),
-        header
+        USER_BY_ID_ENDPOINT(header, data),
       )
       .then((response) => {
         resolve(response.data)

@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { Button } from './button';
-import '../../styles/global.css'
+import '../../styles/global.css';
 import './style.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faUserCircle, faPhone, faEdit, faTrashAlt, faKey } from '@fortawesome/free-solid-svg-icons';
+import { faUserCircle, faEdit, faTrashAlt, faKey } from '@fortawesome/free-solid-svg-icons';
 import { profiler } from '../../services/users/profileUser';
 import { deleteUser } from '../../services/users/profileDelete';
 
@@ -12,10 +12,19 @@ interface UserState {
   editing: boolean;
 }
 
-export const CrudUser = ({ userId, accessToken }: { userId: string; accessToken: string }) => {
-  const [user, setUser] = useState({
-    name: { value: 'João', editing: false } as UserState,
-    password: { value: '', editing: false } as UserState,
+interface User {
+  name: UserState;
+  password: UserState;
+  city: UserState;
+  state: UserState;
+}
+
+export const CrudUser = ({ accessToken }: { accessToken: string }) => {
+  const [user, setUser] = useState<User>({
+    name: { value: 'João', editing: false },
+    password: { value: '', editing: false },
+    city: { value: '', editing: false },
+    state: { value: '', editing: false },
   });
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>, field: string) => {
@@ -32,19 +41,19 @@ export const CrudUser = ({ userId, accessToken }: { userId: string; accessToken:
     });
   };
 
-
   const handleSaveEdit = () => {
     const { name, password } = user;
     profiler(name.value, password.value)
       .then((data) => {
-
-        const token = data.token
-        localStorage.setItem('token', token)
+        const token = data.token;
+        localStorage.setItem('token', token);
 
         setUser(prevUser => ({
           ...prevUser,
           name: { ...prevUser.name, editing: false },
           password: { ...prevUser.password, editing: false },
+          city: { ...prevUser.city, editing: false },
+          state: { ...prevUser.state, editing: false },
         }));
       })
       .catch((error) => {
@@ -53,13 +62,14 @@ export const CrudUser = ({ userId, accessToken }: { userId: string; accessToken:
   };
 
   const handleDeleteUser = () => {
-    deleteUser(accessToken, userId)
+    deleteUser(accessToken)
       .then((data) => {
-        const token = data.token
-        localStorage.setItem('token', token)
+        localStorage.removeItem('token');
         setUser({
           name: { value: '', editing: false },
           password: { value: '', editing: false },
+          city: { value: '', editing: false },
+          state: { value: '', editing: false },
         });
       })
       .catch((error) => {
@@ -72,16 +82,16 @@ export const CrudUser = ({ userId, accessToken }: { userId: string; accessToken:
       <div className='input-container'>
         <h1>Perfil Usuário</h1>
         <label>Nome</label>
-        <div className="icon-input">
+        <div className='icon-input'>
           <FontAwesomeIcon icon={faUserCircle} style={{ color: '#d3d3d3' }} size='2x' className='icon' />
           <input
-            id="name"
-            type="text"
+            id='name'
+            type='text'
             value={user.name.value}
             onChange={(e) => handleInputChange(e, 'name')}
             disabled={!user.name.editing}
-            className="input"
-            placeholder='name'
+            className='input'
+            placeholder='Nome'
           />
           <FontAwesomeIcon
             icon={faEdit}
@@ -90,27 +100,58 @@ export const CrudUser = ({ userId, accessToken }: { userId: string; accessToken:
             className='icon'
             onClick={() => handleEditClick('name')}
           />
-          <div className="icon-input">
-            <label>Cidade</label>
-            <input className="input" onChange={(e) => { handleInputChange }} name="city" type="text" placeholder="cidade" />
+        </div>
 
-          </div>
-          <div className="icon-input">
-            <label>Estado</label>
-            <input className="input" onChange={(e) => { handleInputChange }} name="state" type="text" placeholder="estado" />
-          </div>
+        <label>Cidade</label>
+        <div className='icon-input'>
+          <input
+            id='city'
+            type='text'
+            value={user.city.value}
+            onChange={(e) => handleInputChange(e, 'city')}
+            disabled={!user.city.editing}
+            className='input'
+            placeholder='Cidade'
+          />
+          <FontAwesomeIcon
+            icon={faEdit}
+            style={{ color: '#d3d3d3', cursor: 'pointer', marginLeft: '1rem' }}
+            size='2x'
+            className='icon'
+            onClick={() => handleEditClick('city')}
+          />
+        </div>
+
+        <label>Estado</label>
+        <div className='icon-input'>
+          <input
+            id='state'
+            type='text'
+            value={user.state.value}
+            onChange={(e) => handleInputChange(e, 'state')}
+            disabled={!user.state.editing}
+            className='input'
+            placeholder='Estado'
+          />
+          <FontAwesomeIcon
+            icon={faEdit}
+            style={{ color: '#d3d3d3', cursor: 'pointer', marginLeft: '1rem' }}
+            size='2x'
+            className='icon'
+            onClick={() => handleEditClick('state')}
+          />
         </div>
 
         <label>Senha</label>
         <div className='icon-input'>
           <FontAwesomeIcon icon={faKey} style={{ color: '#d3d3d3' }} size='2x' className='icon' />
           <input
-            type="password"
+            type='password'
             value={user.password.value}
             onChange={(e) => handleInputChange(e, 'password')}
             disabled={!user.password.editing}
-            placeholder='senha'
-            className="input"
+            placeholder='Senha'
+            className='input'
           />
           <FontAwesomeIcon
             icon={faEdit}
@@ -130,6 +171,6 @@ export const CrudUser = ({ userId, accessToken }: { userId: string; accessToken:
           Deletar Conta
         </Button>
       </div>
-    </div >
+    </div>
   );
 };
