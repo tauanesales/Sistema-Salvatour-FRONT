@@ -1,7 +1,9 @@
 import { useEffect, useState } from "react";
 import { DataGrid, GridActionsCellItem } from '@mui/x-data-grid';
-import { Button, TextField } from "@mui/material";
+import { Button, TextField, InputAdornment, IconButton, FormControl, InputLabel, OutlinedInput, FormHelperText } from "@mui/material";
+import { Visibility, VisibilityOff } from '@mui/icons-material';
 import DeleteFilledIcon from '@mui/icons-material/DeleteOutlined';
+import { useNavigate } from "react-router-dom";
 
 export default function Admin({
     users,
@@ -9,11 +11,17 @@ export default function Admin({
     nameHelperText,
     email,
     emailHelperText,
+    city,
+    cityHelperText,
+    state,
+    stateHelperText,
     password,
     passwordHelperText,
     showCreateUser,
     setName,
     setEmail,
+    setCity,
+    setState,
     setPassword,
     setShowCreateUser,
     onGetAllUsers,
@@ -23,8 +31,12 @@ export default function Admin({
     onUpdateUser
   }) {
     const [selection, setSelection] = useState([]);
-
+    const [showPassword, setShowPassword] = useState(false)
     const isSelectionEmpty = () => selection.length == 0;
+    const token = localStorage.getItem("token")
+    const isAdmin = localStorage.getItem("isAdmin")
+    let warning = false
+    const navigate = useNavigate();
 
     const processRowUpdate = (newRow) => {
       onUpdateUser(newRow)
@@ -32,6 +44,20 @@ export default function Admin({
     };
 
     useEffect(() => {
+      if (isAdmin == "false" && warning == false) {
+        warning = true
+        window.alert("Voce não é um administrador.")
+        navigate("/")
+        return
+      }
+
+      if (!token && warning == false) {
+        warning = true
+        window.alert("Voce não está autenticado.")
+        navigate("/")
+        return
+      }
+
       onGetAllUsers()
     }, [])
 
@@ -52,6 +78,8 @@ export default function Admin({
       { field: 'id', headerName: 'ID', width: 150 },
       { field: 'name', headerName: 'Nome', width: 250, editable: true },
       { field: 'email', headerName: 'E-mail', width: 150, editable: true },
+      { field: 'city', headerName: 'Cidade', width: 150, editable: true },
+      { field: 'state', headerName: 'Estado', width: 150, editable: true },
       {
           field: 'actions',
           type: 'actions',
@@ -93,7 +121,6 @@ export default function Admin({
                     processRowUpdate={processRowUpdate}
                 />
             </div>
-
             {showCreateUser && (
               <>
                 <h1 style={{ paddingTop: 15 }}>Novo usuário</h1>
@@ -102,6 +129,7 @@ export default function Admin({
                     id="name"
                     label="Nome"
                     variant="outlined"
+                    required
                     value={name}
                     helperText={nameHelperText}
                     error={nameHelperText != ""}
@@ -116,6 +144,7 @@ export default function Admin({
                     id="email"
                     label="E-mail" 
                     variant="outlined" 
+                    required
                     value={email}
                     helperText={emailHelperText}
                     error={emailHelperText != ""}
@@ -127,15 +156,65 @@ export default function Admin({
                   <br />
 
                   <TextField 
-                    id="password" 
-                    label="Senha" 
-                    variant="outlined"
-                    helperText={passwordHelperText}
-                    error={passwordHelperText != ""}
-                    value={password} 
-                    onChange={(event) => {setPassword(event.target.value)}}
+                    id="city"
+                    label="Cidade" 
+                    variant="outlined" 
+                    required
+                    value={city}
+                    helperText={cityHelperText}
+                    error={cityHelperText != ""}
+                    onChange={(event) => {setCity(event.target.value)}}
                     style={{ width: '50%' }}
                   />
+
+                  <br />
+                  <br />
+
+                  <TextField 
+                    id="state"
+                    label="Estado" 
+                    variant="outlined" 
+                    required
+                    value={state}
+                    helperText={stateHelperText}
+                    error={stateHelperText != ""}
+                    onChange={(event) => {setState(event.target.value)}}
+                    style={{ width: '50%' }}
+                  />
+
+                  <br />
+                  <br />
+
+                  <FormControl 
+                    sx={{ m: 1, width: '25ch' }} 
+                    variant="outlined"
+                    style={{ width: "50%" }}
+                    helperText={passwordHelperText}
+                    error={passwordHelperText != ""}
+                  >
+                    <InputLabel htmlFor="password">Senha</InputLabel>
+                    <OutlinedInput
+                      id="password"
+                      type='password'
+                      value={password}
+                      onChange={(event) => setPassword(event.target.value)}
+                      required
+                      endAdornment={
+                        <InputAdornment position="end">
+                          <IconButton
+                            aria-label="toggle password visibility"
+                            onClick={() => setShowPassword(!showPassword)}
+                            onMouseDown={(event) => event.preventDefault}
+                            edge="end"
+                          >
+                            {showPassword ? <VisibilityOff /> : <Visibility />}
+                          </IconButton>
+                        </InputAdornment>
+                      }
+                      label="Password"
+                    />
+                    <FormHelperText id="password">{passwordHelperText}</FormHelperText>
+                  </FormControl>
 
                   <br />
                   <br />
