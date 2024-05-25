@@ -1,9 +1,10 @@
 import {useContext} from "react";
-import { LoginContext } from "../../utils/loginContext";
+import { LoginContext } from "../../contexts/loginContext";
 import { inputValidator, validateEmail, validatePassword } from "../../utils/validators";
-import { AlertContext } from "../../utils/alertContext";
-import { AlertTypeContext } from "../../utils/alertTypeContext";
+import { AlertContext } from "../../contexts/alertContext";
+import { AlertTypeContext } from "../../contexts/alertTypeContext";
 import {loginUser} from "../../services/users/loginUser"
+import { useNavigate } from "react-router-dom";
 
 
 function Button(){
@@ -11,10 +12,15 @@ function Button(){
     const [form, setForm] = useContext(LoginContext)
     const [showAlert, setShowAlert] = useContext(AlertContext)
     const [alertType, setAlertType] = useContext(AlertTypeContext)
+    const navigate = useNavigate()
 
    function handleAlert(state, type) {
         setShowAlert(state)
         setAlertType(type)
+
+        setTimeout(() => {
+            setShowAlert(false);
+          }, 2000)
     }
 
     function handleLogin(event){
@@ -26,17 +32,35 @@ function Button(){
             localStorage.setItem('email', JSON.stringify(form.email))
             localStorage.setItem('password', JSON.stringify(form.password))
 
-            loginUser(null, form.email, form.password)
+            loginUser(form.email, form.password)
+            
             .then((data)=>{
-                
+            
                 const token = data.token
-                navigate('/')
+                localStorage.setItem('token', token)
+                console.log('isAdmin', data.isAdmin)
+
+                if(data.isAdmin){
+
+                    navigate('/admin')
+
+                }else{
+
+                    navigate('/home')
+                }
+                
             })
             .catch((error) => {
-                console.log(error)
+                console.log(error.response.status)
+                let status = error.response.status
+                if (status == 404){
+                    handleAlert(true, "Senha inválida")
+                } else if(status == 400){
+                    handleAlert(true, "Usuário não encontrado")
+                }
             } )
 
-            alert('Login')
+    
         }else{
 
             if(!validateEmail(form.email) && !validatePassword(form.password)){
@@ -47,11 +71,6 @@ function Button(){
                 handleAlert(true, type)
             }
 
-    
-            setTimeout(() => {
-                handleAlert(false);
-              }, 2000)
-            
         }
         }
     
