@@ -37,7 +37,7 @@ function Button(){
             .then((data)=>{
                 const token = data.token
                 localStorage.setItem('token', token)
-                console.log('isAdmin', data.isAdmin)
+                localStorage.setItem('isAdmin', data.isAdmin)
 
                 if(data.isAdmin){
 

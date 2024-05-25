@@ -4,7 +4,6 @@ import { getAllUsers } from "../../services/users/getAllUsers";
 import { createUser } from "../../services/users/createUser";
 import { deleteUser } from "../../services/users/deleteUser";
 import { patchUser } from "../../services/users/patchUser";
-import { useNavigate } from "react-router-dom";
 import { validateEmail, validatePassword } from "../../utils/validators";
 
 export default function AdminController() {
@@ -12,16 +11,15 @@ export default function AdminController() {
     const [nameHelperText, setNameHelperText] = useState("")
     const [email, setEmail] = useState("")
     const [emailHelperText, setEmailHelperText] = useState("")
+    const [city, setCity] = useState("")
+    const [cityHelperText, setCityHelperText] = useState("")
+    const [state, setState] = useState("")
+    const [stateHelperText, setStateHelperText] = useState("") 
     const [password, setPassword] = useState("")
     const [passwordHelperText, setPasswordHelperText] = useState("")
     const [showCreateUser, setShowCreateUser] = useState(false)
     const [users, setUsers] = useState([])
-    const navigate = useNavigate();
     const token = localStorage.getItem("token")
-
-    if (!token) {
-        navigate("/")
-    }
 
     function onGetAllUsers() {
         getAllUsers(token)
@@ -36,38 +34,60 @@ export default function AdminController() {
 
     function onCreateUser(event) {
         event.preventDefault()
+        let hasErrors = false
 
         if (!validateEmail(email)) {
             setEmailHelperText("E-mail inválido.")
+            hasErrors = true
         } else {
             setEmailHelperText("")
         }
 
         if (name == "" || name == null || name == undefined) {
             setNameHelperText("Preencha o campo nome.")
+            hasErrors = true
         } else {
             setNameHelperText("")
         }
 
+        if (city == "" || city == null || city == undefined) {
+            setCityHelperText("Preencha o campo cidade.")
+            hasErrors = true
+        } else {
+            setCityHelperText("")
+        }
+
+        if (state == "" || state == null || state == undefined) {
+            setStateHelperText("Preencha o campo estado.")
+            hasErrors = true
+        } else {
+            setStateHelperText("")
+        }
+
         if (!validatePassword(password)) {
             setPasswordHelperText("Senha inválida.")
+            hasErrors = true
         } else {
             setPasswordHelperText("")
         }
 
-        if (emailHelperText != "" || nameHelperText != "" || passwordHelperText != "") {
+        if (hasErrors) {
             return
         } 
 
-        createUser(name, email, password)
+        createUser(name, email, city, state, password)
             .then((data) => {
                 console.log(data)
                 setShowCreateUser(false)
                 setName("")
                 setEmail("")
+                setCity("")
+                setState("")
                 setPassword("")
                 setNameHelperText("")
                 setEmailHelperText("")
+                setCityHelperText("")
+                setPasswordHelperText("")
                 setPasswordHelperText("")
                 onGetAllUsers()
             })
@@ -94,7 +114,9 @@ export default function AdminController() {
             token,
             updatedUser.id,
             updatedUser.name,
-            updatedUser.email
+            updatedUser.email,
+            updatedUser.city,
+            updatedUser.state
         ).then((response) => {
             onGetAllUsers()
         }).catch((error) => console.log(error))
@@ -106,11 +128,17 @@ export default function AdminController() {
         nameHelperText={nameHelperText}
         email={email} 
         emailHelperText={emailHelperText}
+        city={city}
+        cityHelperText={cityHelperText}
+        state={state}
+        stateHelperText={stateHelperText}
         password={password}
         passwordHelperText={passwordHelperText}
         showCreateUser={showCreateUser}
         setName={setName}
         setEmail={setEmail}
+        setCity={setCity}
+        setState={setState}
         setPassword={setPassword}
         setShowCreateUser={setShowCreateUser}
         onGetAllUsers={onGetAllUsers}
