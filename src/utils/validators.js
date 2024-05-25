@@ -13,7 +13,6 @@ function validatePassword (password) {
     if (regexPassword.test(password)){
         return true;
     }
-    
 }
 
 function inputValidator (email, password){

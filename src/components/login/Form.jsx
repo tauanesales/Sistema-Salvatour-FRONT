@@ -1,5 +1,5 @@
 import React, { useContext, useState } from "react";
-import { LoginContext } from "../../utils/loginContext";
+import { LoginContext } from "../../contexts/loginContext";
 import {Eye, EyeOff} from "lucide-react"
 
 

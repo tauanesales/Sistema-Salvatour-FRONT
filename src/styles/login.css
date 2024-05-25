@@ -1,75 +1,67 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
-@import url('https://fonts.cdnfonts.com/css/poetsen-one');
 
-.container{
+.backgroundLogin{
+    background-image: url('../assets/elevador.webp');
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+.mainContainer{
     display: flex;
     flex-direction: row;
     height: 100vh;
-    width: 100vw;
+    width: 100%;
     background-color: #FFF;
     margin: auto;
-    justify-content: space-around;
-    align-items: center;
-}
-
-.imgContainer{
-    display: flex;
-    margin-top: 30px;
-    
-}
-
-.img{
-    margin: auto;
-    border-radius: 50%;
-    justify-content: space-around;
+    justify-content: flex-end;
     align-items: center;
 }
 
 .loginContainer{
     display: flex;
     flex-direction: column;
-      
-      
+    background-color: rgba(255, 255, 255, 0.614);
+    padding: 40px;
+    margin-right: 180px;
+    border-radius: 20px;
+
 }
 
-.formContainer{
-    display: flex;
-    flex-direction: column;
-    
-}
 
 .title{
-    font-family: 'Inter', sans-serif;
+    font-family: 'Poetsen One', sans-serif;
     font-weight: 400;
-    color: #000;
+    color: #2d2a2a;
     text-align: center;
-    margin-bottom: 80px;
-    font-size: 31.5px;
+    margin-top: 10px;
+    margin-bottom: 60px;
+    font-size: 40px;
 }
 
 .links{
     text-align: right;
-    color: #6D6D6D;
+    /* color: #6D6D6D; */
+    color: #2d2a2a;
     font-family: 'Poetsen One', sans-serif;
     text-decoration: none;
     font-size: 14.4px;
     margin-bottom: 20px;
-    
+
 }
 p{
     text-align: center;
-    color: #6D6D6D;
+    /* color: #6D6D6D; */
+    color: #2d2a2a;
     margin-top: 20px;
     font-family: 'Poetsen One', sans-serif;
     font-size: 14.4px;
     margin-bottom: 30px;
     margin-right: 12px;
-    
+
 
 }
 
 .link-cadastro{
- color: #754910;
+ color: #000;
  text-decoration: none;
 }
 .links:hover, .link-cadastro:hover{
@@ -80,39 +72,4 @@ p{
     font-size: 15px;
 }
 
-.label-password{
-    display: flex;
-    width: 345px;
-    height: 45px;
-    padding-left: 15px;
-    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
-    border-radius: 13.5px;
-    border: 2px solid var(--cor_2, #D76A00);
-    border: 2px solid var(--cor_2, #D76A00);
-    background: var(--Star-Dust-50, #F6F6F6);
-    font-family: 'Poetsen One', sans-serif;
-    color: black;
-    margin-bottom: 8px;
-    margin-bottom: 8px;
-    font-size: 14.4px;
-    }
-    
-.label-password:focus {
-        outline: none; 
-}
 
-.input-password{
-    border:0;
-    background-color: transparent;
-    width: 290px;
-    
-}
-.input-password:focus {
-    outline: none; 
-}
-
-.password-btn{
-    background-color: transparent;
-    border: 0;
-    outline: 0;
-}
