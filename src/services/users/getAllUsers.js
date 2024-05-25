@@ -1,18 +1,18 @@
 import axios from "axios";
-import { USERS_ENDPOINT } from "../../constants/urls";
+import { ADMIN_ENDPOINT } from "../../constants/urls";
 
 export function getAllUsers(accessToken) {
     return new Promise((resolve, reject) => {
         const header = {
             headers: {
               'Content-type': 'application/json',
-              //Authorization: `Bearer ${accessToken}`, //descomentar quando o jwt do back estiver pronto
+              Authorization: `Bearer ${accessToken}`,
             },
           };
 
           axios
             .get(
-                USERS_ENDPOINT,
+                ADMIN_ENDPOINT + 'users/',
                 header
             )
             .then((response) => {

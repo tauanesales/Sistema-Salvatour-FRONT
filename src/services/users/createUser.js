@@ -1,20 +1,13 @@
 import axios from "axios";
 import { USERS_ENDPOINT } from "../../constants/urls";
 
-export function createUser(accessToken, name, email, password) {
+export function createUser(name, email, password) {
     return new Promise((resolve, reject) => {
         const header = {
             headers: {
               'Content-type': 'application/json',
-              //Authorization: `Bearer ${accessToken}`,  // descomentar quando o token jwt estiver pronto no back
             },
           };
-
-          console.log({
-            name: name,
-            email: email,
-            password: password,
-        })
 
           axios
             .post(
@@ -23,6 +16,7 @@ export function createUser(accessToken, name, email, password) {
                     name: name,
                     email: email,
                     password: password,
+                    isAdmin: false
                 },
                 header
             )
