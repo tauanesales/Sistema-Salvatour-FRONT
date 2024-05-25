@@ -1,10 +1,9 @@
-import React, { useState, useContext } from "react";
+import React, { useState } from "react";
 import Admin from "./AdminView";
 import { getAllUsers } from "../../services/users/getAllUsers";
 import { createUser } from "../../services/users/createUser";
 import { deleteUser } from "../../services/users/deleteUser";
 import { patchUser } from "../../services/users/patchUser";
-import { useNavigate } from "react-router-dom";
 import { validateEmail, validatePassword } from "../../utils/validators";
 
 export default function AdminController() {
@@ -20,9 +19,7 @@ export default function AdminController() {
     const [passwordHelperText, setPasswordHelperText] = useState("")
     const [showCreateUser, setShowCreateUser] = useState(false)
     const [users, setUsers] = useState([])
-    const navigate = useNavigate();
     const token = localStorage.getItem("token")
-    const isAdmin = localStorage.getItem("isAdmin")
 
     function onGetAllUsers() {
         getAllUsers(token)
