@@ -1,29 +1,19 @@
 import axios from "axios";
-import { USERS_ENDPOINT } from "../../constants/urls";
+import { ADMIN_ENDPOINT } from "../../constants/urls";
 
-export function deleteUser(accessToken, requestingUserId, userIdToBeDeleted) {
+export function deleteUser(accessToken, userIdToBeDeleted) {
     return new Promise((resolve, reject) => {
-        const header = {
-            headers: {
-              'Content-type': 'application/json',
-              //Authorization: `Bearer ${accessToken}`, //descomentar quando o jwt do back estiver pronto
-            },
-          };
-
           axios
             .delete(
-                `${USERS_ENDPOINT + userIdToBeDeleted}`,
-                {
-                    id: requestingUserId
-                },
-                header
+                `${ADMIN_ENDPOINT + 'user/' + userIdToBeDeleted}`, {
+                    headers: {
+                        'Content-type': 'application/json',
+                        Authorization: `Bearer ${accessToken}`,
+                    }
+                }
             )
             .then((response) => {
-                if (response.status == 200) {
-                    resolve(response.data)
-                } else {
-                    reject(response)
-                }
+                resolve(response.data)
             })
             .catch((error) => {
                 reject(error)

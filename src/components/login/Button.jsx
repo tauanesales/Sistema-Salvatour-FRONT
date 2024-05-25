@@ -35,7 +35,6 @@ function Button(){
             loginUser(form.email, form.password)
             
             .then((data)=>{
-            
                 const token = data.token
                 localStorage.setItem('token', token)
                 console.log('isAdmin', data.isAdmin)
@@ -49,6 +48,7 @@ function Button(){
                     navigate('/home')
                 }
                 
+
             })
             .catch((error) => {
                 console.log(error.response.status)
