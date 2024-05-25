@@ -18,6 +18,7 @@ export function registerUser(name, email, password, city, state){
             password: password,
             city: city,
             state: state,
+            cityAndState: city + "/" + state
         }
     
     )
@@ -28,7 +29,6 @@ export function registerUser(name, email, password, city, state){
 
     })
     .catch(error => {
-
       reject(error);
 
     });

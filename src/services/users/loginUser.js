@@ -4,11 +4,6 @@ import { LOGIN_ENDPOINT } from "../../constants/urls";
 
 export function loginUser(email, password){
  return new Promise((resolve, reject) => {
-    const header = {
-        headers: {
-          'Content-type': 'application/json',
-        },
-      };
 
     axios
     .post(
