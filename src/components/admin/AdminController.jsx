@@ -2,6 +2,10 @@ import React, { useState } from "react";
 import Admin from "./AdminView";
 import { getAllUsers } from "../../services/users/getAllUsers";
 import { createUser } from "../../services/users/createUser";
+import { deleteUser } from "../../services/users/deleteUser";
+import { patchUser } from "../../services/users/patchUser";
+import { useNavigate } from "react-router-dom";
+import { validateEmail, validatePassword } from "../../utils/validators";
 
 export default function AdminController() {
     const [name, setName] = useState("")
@@ -11,11 +15,19 @@ export default function AdminController() {
     const [password, setPassword] = useState("")
     const [passwordHelperText, setPasswordHelperText] = useState("")
     const [showCreateUser, setShowCreateUser] = useState(false)
+    const [users, setUsers] = useState([])
+    const navigate = useNavigate();
+    const token = localStorage.getItem("token")
+
+    if (!token) {
+        navigate("/")
+    }
 
     function onGetAllUsers() {
-        getAllUsers(null)
+        getAllUsers(token)
             .then((data) => {
-                console.log(data)
+                data.forEach((user) => {user.id = user._id})
+                setUsers(data)
             })
             .catch((error) => {
                 console.log(error)
@@ -25,8 +37,8 @@ export default function AdminController() {
     function onCreateUser(event) {
         event.preventDefault()
 
-        if (email == "" || email == null || email == undefined) {
-            setEmailHelperText("Preencha o campo email.")
+        if (!validateEmail(email)) {
+            setEmailHelperText("E-mail inválido.")
         } else {
             setEmailHelperText("")
         }
@@ -37,10 +49,8 @@ export default function AdminController() {
             setNameHelperText("")
         }
 
-        if (password == "" || password == null || password == undefined) {
-            setPasswordHelperText("Preencha o campo senha.")
-        } else if (password.length < 8) {
-            setPasswordHelperText("A senha deve conter no mínimo 8 caracteres")
+        if (!validatePassword(password)) {
+            setPasswordHelperText("Senha inválida.")
         } else {
             setPasswordHelperText("")
         }
@@ -49,7 +59,7 @@ export default function AdminController() {
             return
         } 
 
-        createUser(null, name, email, password)
+        createUser(name, email, password)
             .then((data) => {
                 console.log(data)
                 setShowCreateUser(false)
@@ -59,13 +69,39 @@ export default function AdminController() {
                 setNameHelperText("")
                 setEmailHelperText("")
                 setPasswordHelperText("")
+                onGetAllUsers()
             })
             .catch((error) => {
                 console.log(error)
             })
     }
 
+    function onDeleteUser(userIdToBeDeleted) {
+        deleteUser(token, userIdToBeDeleted)
+            .then((response) => {
+                onGetAllUsers()
+            })
+            .catch((error) => console.log(error))
+    }
+
+    function onDeleteMultipleUsers(usersIdList) {
+        usersIdList.forEach((userId) => {
+            onDeleteUser(userId)})
+    }
+
+    function onUpdateUser(updatedUser) {
+        patchUser(
+            token,
+            updatedUser.id,
+            updatedUser.name,
+            updatedUser.email
+        ).then((response) => {
+            onGetAllUsers()
+        }).catch((error) => console.log(error))
+    }
+
     return <Admin 
+        users={users}
         name={name}
         nameHelperText={nameHelperText}
         email={email} 
@@ -79,5 +115,8 @@ export default function AdminController() {
         setShowCreateUser={setShowCreateUser}
         onGetAllUsers={onGetAllUsers}
         onCreateUser={onCreateUser}
+        onDeleteUser={onDeleteUser}
+        onDeleteMultipleUsers={onDeleteMultipleUsers}
+        onUpdateUser={onUpdateUser}
     />
 }
