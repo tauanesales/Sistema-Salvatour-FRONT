@@ -1,7 +1,7 @@
 import axios from "axios";
-import { USERS_ENDPOINT } from "../../constants/urls";
+import { ADMIN_ENDPOINT, USERS_ENDPOINT } from "../../constants/urls";
 
-export function patchUser(accessToken, requestingUserId, name, email, password) {
+export function patchUser(accessToken, requestingUserId, name, email, city, state) {
     return new Promise((resolve, reject) => {
       const header = {
         headers: {
@@ -16,17 +16,21 @@ export function patchUser(accessToken, requestingUserId, name, email, password) 
         body.name = name
       }
 
-      if (password != null) {
-        body.password = password
-      }
-
       if (email != null) {
         body.email = email
       }
 
+      if (city != null) {
+        body.city = city
+      }
+
+      if (state != null) {
+        body.state = state
+      }
+
       axios
         .patch(
-            `${USERS_ENDPOINT + requestingUserId}`, 
+            `${ADMIN_ENDPOINT + requestingUserId}`, 
             body,
             header
         )
