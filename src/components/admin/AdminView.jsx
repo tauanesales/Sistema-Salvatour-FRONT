@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import dataMock from "../../utils/userDataMock";
 import { DataGrid, GridActionsCellItem } from '@mui/x-data-grid';
 import { Button, TextField } from "@mui/material";
 import DeleteFilledIcon from '@mui/icons-material/DeleteOutlined';
@@ -20,6 +19,7 @@ export default function Admin({
     onGetAllUsers,
     onCreateUser,
     onDeleteUser,
+    onDeleteMultipleUsers,
     onUpdateUser
   }) {
     const [selection, setSelection] = useState([]);
@@ -42,9 +42,15 @@ export default function Admin({
       }
     }
 
+    function confirmDeleteRows() {
+      if (window.confirm(`Você deseja deletar ${selection.length} registros?`)) {
+        onDeleteMultipleUsers(selection)
+      }
+    }
+
     const columns = [
       { field: 'id', headerName: 'ID', width: 150 },
-      { field: 'name', headerName: 'Nome', width: 150, editable: true },
+      { field: 'name', headerName: 'Nome', width: 250, editable: true },
       { field: 'email', headerName: 'E-mail', width: 150, editable: true },
       {
           field: 'actions',
@@ -67,14 +73,14 @@ export default function Admin({
   ];
 
     return (
-        <div className="root" style={{ display: "flex", flexDirection: "column", padding: 15 }}>
-            <div className="button-group" style={{ display: "flex", flexDirection: "row", marginBottom: 7}}>
+        <div className="root" style={{ display: "flex", flexDirection: "column", padding: 15, width: "100%", alignItems: "center" }}>
+            <div className="button-group" style={{ display: "flex", flexDirection: "row", marginBottom: 7, width: "50%", justifyContent: "flex-end"}}>
                 <Button variant="contained" style={{ marginRight: 15 }} onClick={() => {setShowCreateUser(!showCreateUser)}}>
                   Criar usuário
                 </Button>
-                <Button variant="contained" disabled={isSelectionEmpty()} color="error">Deletar</Button>
+                <Button variant="contained" disabled={isSelectionEmpty()} color="error" onClick={() => {confirmDeleteRows()}}>Deletar</Button>
             </div>
-            <div style={{ height: '100%', width: 600 }}>
+            <div style={{ height: '100%', width: "50%", display: "flex", justifyContent: "space-between" }}>
                 <DataGrid 
                     rows={users} 
                     columns={columns} 
@@ -89,51 +95,54 @@ export default function Admin({
             </div>
 
             {showCreateUser && (
-              <form onSubmit={(event) => { onCreateUser(event) }} style={{ paddingTop: '15px' }}>
-                <TextField 
-                  id="name"
-                  label="Nome"
-                  variant="outlined"
-                  value={name}
-                  helperText={nameHelperText}
-                  error={nameHelperText != ""}
-                  onChange={(event) => {setName(event.target.value)}}
-                  style={{ width: '15%' }}
-                />
+              <>
+                <h1 style={{ paddingTop: 15 }}>Novo usuário</h1>
+                <form onSubmit={(event) => { onCreateUser(event) }} style={{ paddingTop: '15px', width: "50%", textAlign: "center" }}>
+                  <TextField 
+                    id="name"
+                    label="Nome"
+                    variant="outlined"
+                    value={name}
+                    helperText={nameHelperText}
+                    error={nameHelperText != ""}
+                    onChange={(event) => {setName(event.target.value)}}
+                    style={{ width: '50%' }}
+                  />
 
-                <br />
-                <br />
+                  <br />
+                  <br />
 
-                <TextField 
-                  id="email"
-                  label="E-mail" 
-                  variant="outlined" 
-                  value={email}
-                  helperText={emailHelperText}
-                  error={emailHelperText != ""}
-                  onChange={(event) => {setEmail(event.target.value)}}
-                  style={{ width: '15%' }}
-                />
+                  <TextField 
+                    id="email"
+                    label="E-mail" 
+                    variant="outlined" 
+                    value={email}
+                    helperText={emailHelperText}
+                    error={emailHelperText != ""}
+                    onChange={(event) => {setEmail(event.target.value)}}
+                    style={{ width: '50%' }}
+                  />
 
-                <br />
-                <br />
+                  <br />
+                  <br />
 
-                <TextField 
-                  id="password" 
-                  label="Senha" 
-                  variant="outlined"
-                  helperText={"A senha deve conter no mínimo 8 caracteres"}
-                  error={passwordHelperText != ""}
-                  value={password} 
-                  onChange={(event) => {setPassword(event.target.value)}}
-                  style={{ width: '15%' }}
-                />
+                  <TextField 
+                    id="password" 
+                    label="Senha" 
+                    variant="outlined"
+                    helperText={passwordHelperText}
+                    error={passwordHelperText != ""}
+                    value={password} 
+                    onChange={(event) => {setPassword(event.target.value)}}
+                    style={{ width: '50%' }}
+                  />
 
-                <br />
-                <br />
+                  <br />
+                  <br />
 
-                <Button type="submit" variant="contained">Enviar</Button>
-            </form>
+                  <Button style={{ width: "50%" }} type="submit" variant="contained">Enviar</Button>
+                </form>
+              </>
             )}
         </div>
     )

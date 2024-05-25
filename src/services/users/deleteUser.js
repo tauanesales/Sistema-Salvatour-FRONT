@@ -1,7 +1,7 @@
 import axios from "axios";
 import { ADMIN_ENDPOINT } from "../../constants/urls";
 
-export function deleteUser(accessToken, requestingUserId, userIdToBeDeleted) {
+export function deleteUser(accessToken, userIdToBeDeleted) {
     return new Promise((resolve, reject) => {
           axios
             .delete(
@@ -9,9 +9,6 @@ export function deleteUser(accessToken, requestingUserId, userIdToBeDeleted) {
                     headers: {
                         'Content-type': 'application/json',
                         Authorization: `Bearer ${accessToken}`,
-                    },
-                    data: {
-                        id: requestingUserId
                     }
                 }
             )

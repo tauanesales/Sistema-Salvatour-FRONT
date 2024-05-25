@@ -5,6 +5,7 @@ import { createUser } from "../../services/users/createUser";
 import { deleteUser } from "../../services/users/deleteUser";
 import { patchUser } from "../../services/users/patchUser";
 import { useNavigate } from "react-router-dom";
+import { validateEmail, validatePassword } from "../../utils/validators";
 
 export default function AdminController() {
     const [name, setName] = useState("")
@@ -15,7 +16,6 @@ export default function AdminController() {
     const [passwordHelperText, setPasswordHelperText] = useState("")
     const [showCreateUser, setShowCreateUser] = useState(false)
     const [users, setUsers] = useState([])
-    const [loggedUserId, setLoggedUserId] = useState("")
     const navigate = useNavigate();
     const token = localStorage.getItem("token")
 
@@ -37,8 +37,8 @@ export default function AdminController() {
     function onCreateUser(event) {
         event.preventDefault()
 
-        if (email == "" || email == null || email == undefined) {
-            setEmailHelperText("Preencha o campo email.")
+        if (!validateEmail(email)) {
+            setEmailHelperText("E-mail inválido.")
         } else {
             setEmailHelperText("")
         }
@@ -49,10 +49,8 @@ export default function AdminController() {
             setNameHelperText("")
         }
 
-        if (password == "" || password == null || password == undefined) {
-            setPasswordHelperText("Preencha o campo senha.")
-        } else if (password.length < 8) {
-            setPasswordHelperText("A senha deve conter no mínimo 8 caracteres")
+        if (!validatePassword(password)) {
+            setPasswordHelperText("Senha inválida.")
         } else {
             setPasswordHelperText("")
         }
@@ -79,21 +77,25 @@ export default function AdminController() {
     }
 
     function onDeleteUser(userIdToBeDeleted) {
-        deleteUser(token, loggedUserId, userIdToBeDeleted)
+        deleteUser(token, userIdToBeDeleted)
             .then((response) => {
                 onGetAllUsers()
             })
             .catch((error) => console.log(error))
     }
 
+    function onDeleteMultipleUsers(usersIdList) {
+        usersIdList.forEach((userId) => {
+            onDeleteUser(userId)})
+    }
+
     function onUpdateUser(updatedUser) {
         patchUser(
             token,
-            null, // colocar id do usuario logado aqui
+            updatedUser.id,
             updatedUser.name,
             updatedUser.email
         ).then((response) => {
-            console.log(response)
             onGetAllUsers()
         }).catch((error) => console.log(error))
     }
@@ -114,6 +116,7 @@ export default function AdminController() {
         onGetAllUsers={onGetAllUsers}
         onCreateUser={onCreateUser}
         onDeleteUser={onDeleteUser}
+        onDeleteMultipleUsers={onDeleteMultipleUsers}
         onUpdateUser={onUpdateUser}
     />
 }
