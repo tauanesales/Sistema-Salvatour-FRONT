@@ -9,9 +9,9 @@ import { Link } from "react-router-dom"
 import '../../styles/global.css'
 import '../../styles/login.css'
 
-
 function Login(){
 
+    
     return(
         <AlertTypeProvider>
         <AlertProvider>
@@ -28,6 +28,8 @@ function Login(){
                 <LoginProvider>
 
                     <Form></Form>
+                   
+                   
 
                     <Link className="links" to='/recovery'>Esqueci minha senha</Link>
 
@@ -38,6 +40,8 @@ function Login(){
                 </LoginProvider>
 
 
+
+            
 
 
 

@@ -17,7 +17,6 @@ html{
 .background{
     background-image: linear-gradient(to right, #ecbb60, #1e5799, #96DADE);
     
-/* background: linear-gradient(to bottom,  #1e5799 0%,#2989d8 50%,#207cca 51%,#7db9e8 100%);  */
 
 }
 
@@ -39,7 +38,7 @@ html{
     font-family: 'Poetsen One', sans-serif;
     color: black;
     margin-bottom: 15px;
-    font-size: 14px;
+    font-size: 14.4px;
 }
 
 .input:focus {
