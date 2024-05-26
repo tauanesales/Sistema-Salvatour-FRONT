@@ -1,30 +1,20 @@
-import axios from 'axios';
-import { USER_BY_ID_ENDPOINT } from '../../constants/urls';
+import axios from "axios";
+import { USERS_ENDPOINT } from "../../constants/urls";
 
-export function deleteUser(accessToken,name, password, city, state) {
+export function deleteUser(accessToken) {
   return new Promise((resolve, reject) => {
-    const header = {
-      headers: {
-        'Content-type': 'application/json',
-        Authorization: `Bearer ${accessToken}`,
-      },
-    };
-    const data = {
-      name,
-      password,
-      city,
-      state
+    const headers = {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${accessToken}`,
     };
 
     axios
-      .delete(
-        USER_BY_ID_ENDPOINT(header, data),
-      )
+      .delete(USERS_ENDPOINT, { headers })
       .then((response) => {
-        resolve(response.data)
+        resolve(response.data);
       })
       .catch((error) => {
-        reject(error)
-      })
-  })
+        reject(error);
+      });
+  });
 }

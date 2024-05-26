@@ -43,11 +43,8 @@ export const CrudUser = ({ accessToken, onBackToHome }: { accessToken: string, o
 
   const handleSaveEdit = () => {
     const { name, password } = user;
-    profiler(name.value, password.value)
+    profiler(accessToken, name.value, password.value)
       .then((data) => {
-        const token = data.token;
-        localStorage.setItem('token', token);
-
         setUser(prevUser => ({
           ...prevUser,
           name: { ...prevUser.name, editing: false },
@@ -89,6 +86,7 @@ export const CrudUser = ({ accessToken, onBackToHome }: { accessToken: string, o
             <input
               id='name'
               type='text'
+              value={user.name.value}
               onChange={(e) => handleInputChange(e, 'name')}
               disabled={!user.name.editing}
               className='input'
@@ -109,7 +107,7 @@ export const CrudUser = ({ accessToken, onBackToHome }: { accessToken: string, o
             <input
               id='city'
               type='text'
-              value={user.city.value}
+              value={user.city.value} // Corrigir para exibir o valor atual
               onChange={(e) => handleInputChange(e, 'city')}
               disabled={!user.city.editing}
               className='input'
@@ -130,7 +128,7 @@ export const CrudUser = ({ accessToken, onBackToHome }: { accessToken: string, o
             <input
               id='state'
               type='text'
-              value={user.state.value}
+              value={user.state.value} // Corrigir para exibir o valor atual
               onChange={(e) => handleInputChange(e, 'state')}
               disabled={!user.state.editing}
               className='input'
@@ -150,7 +148,7 @@ export const CrudUser = ({ accessToken, onBackToHome }: { accessToken: string, o
             <FontAwesomeIcon icon={faKey} style={{ color: '#d3d3d3' }} size='2x' className='icon' />
             <input
               type='password'
-              value={user.password.value}
+              value={user.password.value} // Corrigir para exibir o valor atual
               onChange={(e) => handleInputChange(e, 'password')}
               disabled={!user.password.editing}
               placeholder='Senha'
