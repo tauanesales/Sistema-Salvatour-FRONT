@@ -6,18 +6,20 @@ import Recovery from "./components/recovery/Recovery";
 import AdminController from "./components/admin/AdminController";
 import Home from "./components/home/Home";
 import { CrudUser } from "./components/crud-user/user";
+import { ProtectedRoute } from "./routing/ProtectedRoute";
 
 function App() {
   return (
     <BrowserRouter>
       <Routes>
-      <Route path="/" element={<Login/>} />
-        <Route path="/home" element={<Home />} />
+        <Route path="/" element={<ProtectedRoute children={<Home />} />} />
+        <Route path="/home" element={<ProtectedRoute children={<Home />} />} />
+        <Route path="/admin" element={<ProtectedRoute redirectPath="/" children={<AdminController />} adminOnly />} />
+        <Route path="/crudUser" element={<ProtectedRoute redirectPath="/" children={<CrudUser />} adminOnly />} />
+        <Route path="/login" element={<Login/>} />
         <Route path="/cadastro" element={<Cadastro />} />
         <Route path="/recovery" element={<Recovery />} />
-        <Route path="/admin" element={<AdminController />} />
-        <Route path="/" element={<Navigate to="/login" />} />
-        <Route path="/crudUser" element={<CrudUser />} />
+        <Route path="/*" element={<Navigate to="/home" />} />
       </Routes>
     </BrowserRouter>
   );
