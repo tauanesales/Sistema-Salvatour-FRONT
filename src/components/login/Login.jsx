@@ -33,7 +33,7 @@ function Login(){
 
                     <Button></Button>
 
-                    <p>Ainda não possui acesso?<Link className="link-cadastro" to='/cadastro'> Cadastre-se</Link></p>
+                    <p className="text-cadastro">Ainda não possui acesso?<Link className="link-cadastro" to='/cadastro'> Cadastre-se</Link></p>
 
                 </LoginProvider>
 
