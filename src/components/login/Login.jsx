@@ -9,6 +9,13 @@ import { Link } from "react-router-dom"
 import '../../styles/global.css'
 import '../../styles/login.css'
 
+/**
+ * Componente Login
+ *
+ * Este componente representa a página de login
+ * 
+ */
+
 function Login(){
 
     

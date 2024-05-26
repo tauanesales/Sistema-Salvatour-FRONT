@@ -1,4 +1,4 @@
-.cabecalho{
+ .cabecalho{
     display: flex;
     justify-content: space-between;
     font-size: 14px;
@@ -10,22 +10,11 @@
     border-bottom: 2px solid rgb(146, 143, 143);
 }
 
-.homeContainer{
-    display: flex;
-    flex-direction: column;
-    height: 100%;
-    width: 100%;
-    align-items: center;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
-    padding: 20px;
-    margin: 10px;
-    
-}
 
 .text-date, .text-ola, .text-editar{
     font-family: 'Poetsen One', 'sans-serif';
     font-size: 14px;
-    
+
 }
 
 .text-ola{
@@ -36,18 +25,12 @@
 
 .mainTitle{
     font-family: 'Poetsen One', 'sans-serif';
-    font-size: 50px;
-    margin-top: 40px;
-    margin-bottom: 60px;
+    font-size: 40px;
     color: #2d2a2a;
+    margin-top: 10px;
+    margin-bottom: 10px;
 }
 
-.subtitle{
-    font-size: 20px;
-    width: 800px;
-    text-align: center;
-    margin-bottom: 40px;
-}
 
 .elevador1{
     height: 500px;
@@ -55,36 +38,75 @@
     margin-bottom: 40px;
 }
 
-.mainText{
-    font-size: 20px;
-    text-indent: 40px;
-    margin-left: 10px;
-    margin-right: 10px;
-}
-
-.final{
-    padding-bottom: 50px;
-}
-
 .section{
     display: flex;
-    flex-direction: row;
-    justify-content: space-between;
+    flex-direction: column; 
+    align-items: center;
+    text-align: center;
+    align-self: center;
     width: 100%;
+    height: 100vh;
+    margin: auto;
 
 }
 
-.informacoes{
-    font-size: 20px;
-    width: 600px;
-    margin-top: 40px;
-    margin-left: 10px;
+
+.imagem{
+    width: 790px;
+    height: 400px;
+}
+
+.subtitle{
+    font-size: 16px;
+    margin-bottom: 20px;
+    width: 700px; 
+}
+
+.paragrafo1{
+    font-size: 16px;
+    margin-bottom: 20px;
+}
+
+.paragrafo2{
+    font-size: 18px;
+    width: 750px;
+    margin: auto;
+    margin-top: 10px;
+}
+
+.carousel-control-next-icon, .carousel-control-prev-icon{
+   background-color: #2d2a2a;
+}
+
+
+
+.grid{
+    display: grid;
+    grid-template-columns: auto auto auto;
+    grid-template-rows: auto auto;
 
 }
 
-.elevador2{
-    width: 400px;
-    margin-bottom: 80px;
-    margin-right: 10px;
+.grid-image{
+    background-repeat: no-repeat;
+    width: 320px;
+    height: 200px;
+    margin: 5px;
 }
 
+.btn-ver{
+    font-family: 'Poetsen One', 'sans-serif';
+    border-radius: 22.5px;
+    background: var(--Chambray-950, #1F294C);
+    box-shadow: 2.7px 2.7px 0px 0px rgba(0, 0, 0, 0.25);
+    text-decoration: none;
+    width: 100px;
+    height: 30px;
+    margin-top: 10px;
+}
+
+.link-ver{
+    text-decoration: none;
+    color: white;
+    display: block;
+}
