@@ -1,15 +1,17 @@
 import axios from "axios";
 import { USERS_ENDPOINT } from "../../constants/urls";
 
-export function deleteUser(accessToken) {
+export function deleteUser(accessToken, userId) {
   return new Promise((resolve, reject) => {
-    const headers = {
-      'Content-Type': 'application/json',
-      Authorization: `Bearer ${accessToken}`,
-    };
-
     axios
-      .delete(USERS_ENDPOINT, { headers })
+      .delete(
+        `${USERS_ENDPOINT + userId}`, {
+        headers: {
+          'Content-type': 'application/json',
+          Authorization: `Bearer ${accessToken}`,
+        }
+      }
+      )
       .then((response) => {
         resolve(response.data);
       })

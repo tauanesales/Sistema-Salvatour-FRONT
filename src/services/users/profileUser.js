@@ -1,23 +1,17 @@
 import axios from "axios";
 import { USERS_ENDPOINT } from "../../constants/urls";
 
-export function profiler(accessToken, name, password) {
+export function profiler(accessToken, updatedFields) {
   return new Promise((resolve, reject) => {
-    const headers = {
-      'Content-Type': 'application/json',
-      Authorization: `Bearer ${accessToken}`,
+    const config = {
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${accessToken}`,
+      }
     };
 
-    const body = {};
-    if (name != null) {
-      body.name = name;
-    }
-    if (password != null) {
-      body.password = password;
-    }
-
     axios
-      .patch(USERS_ENDPOINT, body, { headers, timeout: 20000 })
+      .patch(USERS_ENDPOINT, updatedFields, config)
       .then((response) => {
         resolve(response.data);
       })

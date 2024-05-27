@@ -1,31 +1,24 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Button } from './button';
 import '../../styles/global.css';
 import './style.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUserCircle, faEdit, faTrashAlt, faKey, faCity, faMapMarkerAlt, faArrowLeft } from '@fortawesome/free-solid-svg-icons';
-import { profiler } from '../../services/users/profileUser';
+import { handleSaveEdit, User } from './crudFunctions';
 import { deleteUser } from '../../services/users/profileDelete';
+import { useNavigate } from 'react-router-dom';
 
-interface UserState {
-  value: string;
-  editing: boolean;
-}
-
-interface User {
-  name: UserState;
-  password: UserState;
-  city: UserState;
-  state: UserState;
-}
-
-export const CrudUser = ({ accessToken, onBackToHome }: { accessToken: string, onBackToHome: () => void }) => {
+export const CrudUser = ({ onBackToHome }: { onBackToHome: () => void; }) => {
   const [user, setUser] = useState<User>({
-    name: { value: 'João', editing: false },
+    name: { value: 'João Santos', editing: false },
     password: { value: '', editing: false },
-    city: { value: '', editing: false },
-    state: { value: '', editing: false },
+    city: { value: 'Salvador', editing: false },
+    state: { value: 'Bahia', editing: false },
   });
+  const [userId, setUserId] = useState<string>('');
+  const [token, setToken] = useState<string | null>(null);
+  
+  const navigate = useNavigate();
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>, field: string) => {
     setUser({
@@ -41,32 +34,32 @@ export const CrudUser = ({ accessToken, onBackToHome }: { accessToken: string, o
     });
   };
 
-  const handleSaveEdit = () => {
-    const { name, password } = user;
-    profiler(accessToken, name.value, password.value)
-      .then((data) => {
-        setUser(prevUser => ({
-          ...prevUser,
-          name: { ...prevUser.name, editing: false },
-          password: { ...prevUser.password, editing: false },
-          city: { ...prevUser.city, editing: false },
-          state: { ...prevUser.state, editing: false },
-        }));
-      })
-      .catch((error) => {
-        console.error(error);
-      });
+  const handleSaveEditClick = () => {
+    if (token && user) {
+      handleSaveEdit(user)
+        .then(() => {
+          setUser(prevUser => {
+            const updatedUser = { ...prevUser };
+            Object.keys(updatedUser).forEach(key => {
+              updatedUser[key].editing = false;
+            });
+            return updatedUser;
+          });
+        })
+        .catch(error => {
+          console.error( error);
+        });
+    }
   };
-
-  const handleDeleteUser = () => {
-    deleteUser(accessToken)
-      .then(() => {
-        localStorage.removeItem('token');
+  const handleDeleteUser = (userId: string) => {
+    const token = localStorage.getItem("token");
+    return deleteUser(token, userId)
+      .then((response) => {
         setUser({
           name: { value: '', editing: false },
           password: { value: '', editing: false },
-          city: { value: '', editing: false },
-          state: { value: '', editing: false },
+          city: { value: '', editing: false }, 
+          state: { value: '', editing: false }, 
         });
       })
       .catch((error) => {
@@ -107,7 +100,7 @@ export const CrudUser = ({ accessToken, onBackToHome }: { accessToken: string, o
             <input
               id='city'
               type='text'
-              value={user.city.value} // Corrigir para exibir o valor atual
+              value={user.city.value}
               onChange={(e) => handleInputChange(e, 'city')}
               disabled={!user.city.editing}
               className='input'
@@ -128,7 +121,7 @@ export const CrudUser = ({ accessToken, onBackToHome }: { accessToken: string, o
             <input
               id='state'
               type='text'
-              value={user.state.value} // Corrigir para exibir o valor atual
+              value={user.state.value}
               onChange={(e) => handleInputChange(e, 'state')}
               disabled={!user.state.editing}
               className='input'
@@ -148,7 +141,7 @@ export const CrudUser = ({ accessToken, onBackToHome }: { accessToken: string, o
             <FontAwesomeIcon icon={faKey} style={{ color: '#d3d3d3' }} size='2x' className='icon' />
             <input
               type='password'
-              value={user.password.value} // Corrigir para exibir o valor atual
+              value={user.password.value}
               onChange={(e) => handleInputChange(e, 'password')}
               disabled={!user.password.editing}
               placeholder='Senha'
@@ -165,9 +158,9 @@ export const CrudUser = ({ accessToken, onBackToHome }: { accessToken: string, o
         </div>
 
         <div className='style-button'>
-          <Button onClick={handleSaveEdit}>Salvar Alterações</Button>
+          <Button onClick={() => handleSaveEditClick()}>Salvar Alterações</Button>
           <span style={{ margin: '0 34px' }}></span>
-          <Button onClick={handleDeleteUser}>
+          <Button  onClick={() => handleDeleteUser(userId)}>
             <FontAwesomeIcon icon={faTrashAlt} style={{ marginRight: '0.5rem' }} />
             Excluir Conta
           </Button>
