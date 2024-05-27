@@ -1,7 +1,7 @@
 import { Navigate } from 'react-router-dom';
 import {isTokenExpired} from '../authentication/tokenVerification.js'
 export const ProtectedRoute = ({
-    redirectPath = '/login',
+    redirectPath = '/',
     adminOnly = false,
     children,
 }) => {
