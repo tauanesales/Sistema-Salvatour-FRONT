@@ -46,7 +46,7 @@ html{
     outline: none; 
 }
 
-.button{
+.button {
     width: 340px;
     height: 45px;
     align-self: center;
@@ -58,7 +58,11 @@ html{
     font-size: 14.4px;
     font-family: 'Poetsen One', sans-serif;
     margin-bottom: 15px;
-   
+}
+
+.buttonDisabled {
+    opacity: 0.5;
+    cursor: not-allowed; 
 }
 
 .button:hover{
@@ -117,7 +121,16 @@ html{
 }
 
 .password-btn{
+    display: flex;
+    justify-content: center;
+    align-items: center;
     background-color: transparent;
     border: 0;
     outline: 0;
 }
+
+.labelVerify {
+    display: flex;
+    padding: 8px;
+    font-size: 14px;
+  }
