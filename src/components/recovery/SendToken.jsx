@@ -11,7 +11,7 @@ function SendToken() {
   const [showAlert, setShowAlert] = useState(false)
   const [alertType, setAlertType] = useState('')
   const [isError, setIsError] = useState(true)
-  const [timeLeft, setTimeLeft] = useState(300)
+  const [timeLeft, setTimeLeft] = useState(120)
   const [isButtonDisabled, setIsButtonDisabled] = useState(true)
 
   useEffect(() => {
@@ -33,7 +33,7 @@ function SendToken() {
     setAlertType(`Token reenviado para ${emailRecovery}`)
     setShowAlert(true)
     setIsError(false)
-    setTimeLeft(300)
+    setTimeLeft(120)
     setIsButtonDisabled(false)
   }
 
@@ -49,7 +49,6 @@ function SendToken() {
       await verifyToken(token)
       localStorage.setItem('tokenValid', true)
       navigate('/newPassword')
-    
     } catch (error) {
       if (error.status === 400) {
         if (error.data.message === 'Invalid token!') {
