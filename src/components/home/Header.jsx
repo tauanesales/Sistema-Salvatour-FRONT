@@ -37,12 +37,16 @@ export default function Header(){
 
     
     /**
-     * Define o status de login como false no localStorage.
-     * Isso impede que o usuário acesse as páginas Home e Places pela barra de endereços quando não estiver logado.
+     * Limpa os status de login no localStorage.
+     * Isso impede que o usuário acesse as páginas protegidas
      */
     function handleStatusLogin(){
-        localStorage.setItem('statusLogin', 'false')
-        
+        localStorage.removeItem('statusLogin')
+        localStorage.removeItem('token')
+        localStorage.removeItem('isAdmin')
+        localStorage.removeItem('tokenValid')
+        localStorage.removeItem('email')
+        localStorage.removeItem('password')
     }
 
 
