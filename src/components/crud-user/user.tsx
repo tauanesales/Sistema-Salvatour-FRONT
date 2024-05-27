@@ -8,7 +8,7 @@ import { handleSaveEdit, User } from './crudFunctions';
 import { deleteUser } from '../../services/users/profileDelete';
 import { useNavigate } from 'react-router-dom';
 
-export const CrudUser = ({ onBackToHome }: { onBackToHome: () => void; }) => {
+export const CrudUser = ({}: { onBackToHome: () => void; }) => {
   const [user, setUser] = useState<User>({
     name: { value: 'João Santos', editing: false },
     password: { value: '', editing: false },
@@ -61,6 +61,7 @@ export const CrudUser = ({ onBackToHome }: { onBackToHome: () => void; }) => {
           city: { value: '', editing: false }, 
           state: { value: '', editing: false }, 
         });
+        navigate('/');
       })
       .catch((error) => {
         console.error(error);
@@ -166,7 +167,7 @@ export const CrudUser = ({ onBackToHome }: { onBackToHome: () => void; }) => {
           </Button>
         </div>
         <div className='back-to-home-button'>
-          <Button onClick={onBackToHome}>
+          <Button onClick={() => navigate('/home')}>
             <FontAwesomeIcon icon={faArrowLeft} style={{ marginRight: '1rem' }} />
             Retornar para a Tela Inicial
           </Button>
