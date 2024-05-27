@@ -1,7 +1,7 @@
 import { Navigate } from 'react-router-dom'
 import PropTypes from 'prop-types'
 
-const ProtectedRoute = ({ element, routeName }) => {
+const PasswordResetRoute = ({ element, routeName }) => {
   const emailRecovery = localStorage.getItem('emailRecovery')
   const tokenIsValid = localStorage.getItem('tokenValid') === 'true'
 
@@ -16,9 +16,9 @@ const ProtectedRoute = ({ element, routeName }) => {
   return element
 }
 
-ProtectedRoute.propTypes = {
+PasswordResetRoute.propTypes = {
   element: PropTypes.element.isRequired,
   routeName: PropTypes.string.isRequired,
 }
 
-export default ProtectedRoute
+export default PasswordResetRoute
