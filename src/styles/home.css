@@ -23,6 +23,15 @@
     color:#2d2a2a;
 }
 
+.text-editar{
+    text-decoration: none;
+    color: #6b4821;
+}
+
+.text-editar:hover{
+    color: #ad8a61;
+}
+
 .mainTitle{
     font-family: 'Poetsen One', 'sans-serif';
     font-size: 40px;
@@ -75,9 +84,20 @@
 }
 
 .carousel-control-next-icon, .carousel-control-prev-icon{
-   background-color: #2d2a2a;
+   background-color: #2d2a2a25;
+   
+   height: 40px !important;
+   color: black !important;
 }
 
+
+.carousel-control-next-icon{
+    background-image: url(../assets/next.svg) !important;
+}
+
+.carousel-control-prev-icon{
+    background-image: url(../assets/prev.svg) !important;
+}
 
 
 .grid{
@@ -92,6 +112,7 @@
     width: 320px;
     height: 200px;
     margin: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
 }
 
 .btn-ver{

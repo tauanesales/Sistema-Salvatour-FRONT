@@ -4,8 +4,9 @@ import { Link } from "react-router-dom"
 /**
  * Componente Header
  *
- * Este componente representa o cabeçalho exibido na página Home e página Places
- * 
+ * Este componente representa o cabeçalho exibido nas páginas Home e Places.
+ * Ele mostra a data atual e fornece um menu suspenso para editar o perfil ou sair.
+ *
  */
 
 
@@ -17,7 +18,10 @@ export default function Header(){
     const [monthNames, setMonthNames] = useState(['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro','Outubro', 'Novembro', 'Dezembro'])
 
 
-    // Essa função tem como propósito coletar a data atual e exibir para o usuário
+    /**
+     * Coleta a data atual e atualiza os estados correspondentes.
+     * A data é exibida no cabeçalho para o usuário.
+     */
     function getDate(){
         const date = new Date();
         const monthIndex = date.getMonth()
@@ -31,7 +35,11 @@ export default function Header(){
         getDate()
     },[] )
 
-    // Essa função tem como propósito definir o login como false para impedir que o usuário acesse as páginas home e places pela barra de endereços quando não estiver logado
+    
+    /**
+     * Define o status de login como false no localStorage.
+     * Isso impede que o usuário acesse as páginas Home e Places pela barra de endereços quando não estiver logado.
+     */
     function handleStatusLogin(){
         localStorage.setItem('statusLogin', 'false')
         

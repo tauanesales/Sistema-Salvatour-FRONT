@@ -9,8 +9,10 @@ import { useNavigate } from "react-router-dom";
 /**
  * Componente Button
  *
- * Este componente representa o botão utilizado na página de Login para enviar os dados para o back e realizar o login
- * 
+ * Este componente representa o botão utilizado na página de Login para enviar os dados
+ * para o backend e realizar o login. Ele lida com a validação dos dados de entrada e
+ * exibe alertas apropriados em caso de erro.
+ *
  */
 
 function Button(){
@@ -20,7 +22,10 @@ function Button(){
     const [alertType, setAlertType] = useContext(AlertTypeContext)
     const navigate = useNavigate()
 
-    //Essa função é responsável por exibir um alerta caso o email ou a senha estejam incorretos
+   /**
+     * Exibe um alerta com o tipo especificado.
+     * O alerta é automaticamente ocultado após 2 segundos.
+     */
    function handleAlert(state, type) {
         setShowAlert(state)
         setAlertType(type)
@@ -30,9 +35,13 @@ function Button(){
           }, 2000)
     }
 
-    //Esta função é chamada quando o formulário de login é enviado. Ela lida com a validação dos campos de entrada, envia uma solicitação de login para a API, armazena o token de autenticação e redireciona o usuário com base na resposta da API.
+    /**
+     * Lida com a submissão do formulário de login.
+     * Valida os campos de entrada, envia uma solicitação de login para a API,
+     * armazena o token de autenticação e redireciona o usuário com base na resposta da API.
+     */
     function handleLogin(event){
-        // Impede o comportamento padrão do formulário de recarregar a página
+
         event.preventDefault(setForm)
 
         if(inputValidator(form.email, form.password)){
@@ -40,7 +49,6 @@ function Button(){
             localStorage.setItem('email', JSON.stringify(form.email))
             localStorage.setItem('password', JSON.stringify(form.password))
             
-            // Chama a função loginUser para fazer login
             loginUser(form.email, form.password)
             
             .then((data)=>{

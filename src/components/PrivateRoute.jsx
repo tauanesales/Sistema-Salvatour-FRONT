@@ -3,10 +3,13 @@ import { Navigate, Outlet, useLocation } from 'react-router-dom';
 
 /**
  * Componente PrivateRoute
- * 
- * Esse componente tem como função manter algumas rotas privadas e impedir que os usuários acessem essas rotas quando não estiverem logados, se o statusLogin for true eles conseguem acessar
+ *
+ * Este componente tem como função proteger rotas privadas, impedindo que usuários não autenticados
+ * acessem essas rotas. Se o status de login (statusLogin) for 'true', o usuário pode acessar a rota
+ * protegida. Caso contrário, ele é redirecionado para a página inicial (login).
  *
  */
+
 
 function PrivateRoute() {
   const location = useLocation();
