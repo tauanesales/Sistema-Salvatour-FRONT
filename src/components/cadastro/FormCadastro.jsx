@@ -1,8 +1,16 @@
 import React, { useContext, useState} from "react";
 import { FormCadastroContext } from "../../contexts/formCadastroContext";
 import {Eye, EyeOff} from "lucide-react"
-import { validateEmail } from "../../utils/validators";
 
+/**
+ * Componente FormCadastro
+ *
+ * Este componente representa um formulário de cadastro que coleta informações
+ * do usuário, incluindo nome, email, cidade, estado e senha. Ele utiliza o
+ * contexto `FormCadastroContext` para gerenciar o estado do formulário e inclui
+ * funcionalidade para alternar a visibilidade das senhas.
+ * 
+ */
 
 function FormCadastro(){
 
@@ -11,16 +19,26 @@ function FormCadastro(){
     const [showPassword, setShowPassword] = useState(false)
     const [showPassword2, setShowPassword2] = useState(false)
 
+    /**
+     * Manipula a mudança de valores nos campos de entrada do formulário.
+     * Atualiza o estado do formulário com o novo valor do campo alterado.
+     */
     function handleChange(event){
   
         setForm({...form, [event.target.name]:event.target.value})
 
     }
     
+    /**
+    * Alterna a visibilidade do campo de senha principal.
+    */
     function handleShowPassword(){
         setShowPassword(!showPassword)
     }
 
+    /**
+     * Alterna a visibilidade do campo de confirmação de senha.
+     */
     function handleShowPassword2(){
         setShowPassword2(!showPassword2)
     }

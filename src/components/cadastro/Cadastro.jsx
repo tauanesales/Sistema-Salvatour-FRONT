@@ -8,6 +8,12 @@ import { FormCadastroProvider } from "../../contexts/formCadastroContext";
 import '../../styles/global.css'
 import '../../styles/cadastro.css'
 
+/**
+ * Componente Cadastro
+ *
+ * Este componente representa a página de Cadastro
+ * 
+ */
 
 function Cadastro(){
 

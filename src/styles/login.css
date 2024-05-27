@@ -10,7 +10,7 @@
     flex-direction: row;
     height: 100vh;
     width: 100%;
-    background-color: #FFF;
+    background-color: #e8e2e20d;
     margin: auto;
     justify-content: flex-end;
     align-items: center;
@@ -74,7 +74,7 @@
     margin-bottom: 20px;
 
 }
-p{
+.text-cadastro{
     text-align: center;
     /* color: #6D6D6D; */
     color: #2d2a2a;
@@ -92,7 +92,7 @@ p{
  text-decoration: none;
 }
 .links:hover, .link-cadastro:hover{
-    color: #333131;
+    color:#6b4821;;
 }
 
 .alert-style{
