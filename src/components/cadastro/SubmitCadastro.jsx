@@ -48,7 +48,10 @@ function SubmitCadastro(){
                 if (handleEmail(form.email) && handlePassword(form.password, form.password2)){
                      registerUser(form.name, form.email, form.password, form.city, form.state)
                      .then((data)=>{
-            
+                        
+                        localStorage.setItem('token', data.token)
+                        localStorage.setItem('isAdmin', data.isAdmin)
+
                          navigate('/')
                         
                      })
