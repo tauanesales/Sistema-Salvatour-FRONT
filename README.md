@@ -1,8 +1,25 @@
-# React + Vite
+# Salvatour
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Descrição
 
-Currently, two official plugins are available:
+Bem-vindo ao Salvatour, o seu portal para descobrir a cidade mágica de Salvador, onde história, cultura e beleza natural se fundem em uma experiência única. Conheça um destino que promete momentos inesquecíveis, desde o seu centro histórico vibrante até as paisagens naturais deslumbrantes que encantam viajantes de todo o mundo.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+### Autores:
+- Tauane Sales 
+- Alberto Oliveira
+- Gabriel de Miranda
+- Debora 
+- Everton Oliveira
+- Guilherme Abreu
+- Joanderson Santos
+- Moises
+- Alisson Matias
+- Eva Raposo
+- Tarcisio
+
+ ### Linguagem e Tecnologias:
+- React (JavaScript)
+
+
+### Links:
+- [Aplicação em Produção](https://front.matc84.tauane.artadevs.tech/)
