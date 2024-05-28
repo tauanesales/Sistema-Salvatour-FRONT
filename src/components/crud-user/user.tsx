@@ -8,7 +8,6 @@ import { handleSaveEdit, User } from './crudFunctions';
 import { deleteUser } from '../../services/users/profileDelete';
 import { useNavigate } from 'react-router-dom';
 import { getCurrentUserInfo } from '../../services/users/getCurrentUserInfo';
-
 export const CrudUser = ({}: { onBackToHome: () => void; }) => {
 
   const [pwdConfirmation, setPwdConfirmation] = useState('');
@@ -21,6 +20,20 @@ export const CrudUser = ({}: { onBackToHome: () => void; }) => {
   const [userId, setUserId] = useState<string>('');
   
   const token = localStorage.getItem('token')
+  const [showAlert, setAlert] = useState(false)
+  const [AlertType, setAlertType] = useState('')
+  const [alertColor, setAlertColor] = useState('')
+
+  function handleAlert(type,color){
+    setAlert(true);
+    setAlertType(type);
+    setAlertColor(color)
+
+     setTimeout(() => {
+         setAlert(false);
+       }, 2000)
+
+}
   
   useEffect(() => {
     getCurrentUserInfo(token)
@@ -58,7 +71,7 @@ export const CrudUser = ({}: { onBackToHome: () => void; }) => {
   const handleSaveEditClick = () => {
 
     if (user.password.editing && pwdConfirmation != user.password.value) {
-      alert("Erro: Senha e confirmação não conferem")
+      handleAlert("Erro: Senha e confirmação não conferem", 'danger')
       return;
     }
 
@@ -78,7 +91,7 @@ export const CrudUser = ({}: { onBackToHome: () => void; }) => {
         .catch(error => {
           console.error( error);
         });
-        alert("Alteração realizada com sucesso")
+        handleAlert("Alteração realizada com sucesso", 'sucess')
     }
   };
   const handleDeleteUser = (userId: string) => {
@@ -100,6 +113,14 @@ export const CrudUser = ({}: { onBackToHome: () => void; }) => {
 
   return (
     <div className='background'>
+      <div className="position-absolute end-0 mb-5 p-5">
+        {showAlert && (
+          <div className={alertColor == 'danger'? "alert alert-danger alert-dismissible alert-style": "alert alert-success alert-dismissible alert-style"}>
+            <div>{AlertType}</div>
+          </div>
+        )}
+      </div>
+      
       <div className='profile-container'>
         <div className='input-container'>
           <h1>Perfil do Usuário</h1>
@@ -228,6 +249,7 @@ export const CrudUser = ({}: { onBackToHome: () => void; }) => {
           </Button>
         </div>
       </div>
+  
     </div>
   );
 };
