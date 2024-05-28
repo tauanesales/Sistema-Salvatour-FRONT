@@ -15,24 +15,14 @@ export type User = {
 
 const token = localStorage.getItem("token")
 
-export const handleSaveEdit = (user: User | null) => {
+export const handleSaveEdit = (user: any) => {
   if (!user) {
     return Promise.reject('O objeto de usuário é nulo');
   }
 
   const token = localStorage.getItem("token");
 
-  const updatedFields = {};
-  Object.keys(user).forEach((key) => {
-    if (user[key].editing) {
-      updatedFields[key] = user[key].value;
-    }
-  });
-
-  console.log("Token:", token);
-  console.log("Updated Fields:", updatedFields);
-
-  return profiler(token, updatedFields)
+  return profiler(token, user)
     .then((response) => {
       console.log(response);
       return response;

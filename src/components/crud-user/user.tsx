@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { Button } from './button';
 import '../../styles/global.css';
 import './style.css';
@@ -7,16 +7,37 @@ import { faUserCircle, faEdit, faTrashAlt, faKey, faCity, faMapMarkerAlt, faArro
 import { handleSaveEdit, User } from './crudFunctions';
 import { deleteUser } from '../../services/users/profileDelete';
 import { useNavigate } from 'react-router-dom';
+import { getCurrentUserInfo } from '../../services/users/getCurrentUserInfo';
 
 export const CrudUser = ({}: { onBackToHome: () => void; }) => {
+
+  const [pwdConfirmation, setPwdConfirmation] = useState('');
   const [user, setUser] = useState<User>({
-    name: { value: 'João Santos', editing: false },
+    name: { value: '', editing: false },
     password: { value: '', editing: false },
-    city: { value: 'Salvador', editing: false },
-    state: { value: 'Bahia', editing: false },
+    city: { value: '', editing: false },
+    state: { value: '', editing: false },
   });
   const [userId, setUserId] = useState<string>('');
-  const [token, setToken] = useState<string | null>(null);
+  
+  const token = localStorage.getItem('token')
+  
+  useEffect(() => {
+    getCurrentUserInfo(token)
+            
+    .then((data)=>{
+        setUser({
+                  name: {value: data.name, editing: false}, 
+                  password: {value: "", editing: false}, 
+                  city: {value: data.city, editing: false},
+                  state: {value: data.state, editing: false},
+        })
+    })
+    .catch((error) => {
+        console.log(error.response.status)
+    } )
+
+  }, [])
   
   const navigate = useNavigate();
 
@@ -35,8 +56,16 @@ export const CrudUser = ({}: { onBackToHome: () => void; }) => {
   };
 
   const handleSaveEditClick = () => {
+
+    if (user.password.editing && pwdConfirmation != user.password.value) {
+      alert("Erro: Senha e confirmação não conferem")
+      return;
+    }
+
     if (token && user) {
-      handleSaveEdit(user)
+      handleSaveEdit(user.password.editing ? 
+                        {name: user.name.value, password: user.password.value, city: user.city.value, state: user.state.value} 
+                        : {name: user.name.value, city: user.city.value, state: user.state.value})
         .then(() => {
           setUser(prevUser => {
             const updatedUser = { ...prevUser };
@@ -49,6 +78,7 @@ export const CrudUser = ({}: { onBackToHome: () => void; }) => {
         .catch(error => {
           console.error( error);
         });
+        alert("Alteração realizada com sucesso")
     }
   };
   const handleDeleteUser = (userId: string) => {
@@ -156,6 +186,31 @@ export const CrudUser = ({}: { onBackToHome: () => void; }) => {
               onClick={() => handleEditClick('password')}
             />
           </div>
+
+          {
+            user.password.editing ? <div>
+                <label>Confirmar Senha</label>
+                <div className='icon-input'>
+                  <FontAwesomeIcon icon={faKey} style={{ color: '#d3d3d3' }} size='2x' className='icon' />
+                  <input
+                    type='password'
+                    value={pwdConfirmation}
+                    onChange={(e) => setPwdConfirmation(e.target.value)}
+                    placeholder='Senha'
+                    className='input'
+                  />
+                  <FontAwesomeIcon
+                    icon={faEdit}
+                    style={{ color: '#d3d3d3', cursor: 'pointer', marginLeft: '1rem' }}
+                    size='2x'
+                    className='icon'
+                    onClick={() => handleEditClick('password')}
+                  />
+                </div>
+            </div>
+            : <div />
+          }
+          
         </div>
 
         <div className='style-button'>
