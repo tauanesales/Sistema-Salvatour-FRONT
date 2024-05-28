@@ -1,11 +1,11 @@
 import { Link } from "react-router-dom"
 import Header from "./Header"
-import Pelo from "../../assets/pelo.png"
-import Image1 from "../../assets/image1.png"
-import Image2 from "../../assets/image2.png"
-import Image3 from "../../assets/image3.png"
-import Image4 from "../../assets/image4.png"
-import Image5 from "../../assets/image5.png"
+import Pelo from "../../assets/pelo.webp"
+import Image1 from "../../assets/image1.webp"
+import Image2 from "../../assets/image2.webp"
+import Image3 from "../../assets/image3.webp"
+import Image4 from "../../assets/image4.webp"
+import Image5 from "../../assets/image5.webp"
 import '../../styles/global.css'
 import '../../styles/home.css'
 
