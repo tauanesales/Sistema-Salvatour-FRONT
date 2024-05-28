@@ -1,10 +1,11 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { FormCadastroContext } from "../../contexts/formCadastroContext";
 import { AlertContext } from "../../contexts/alertContext";
 import { AlertTypeContext } from "../../contexts/alertTypeContext";
 import { validateEmail, validatePassword } from "../../utils/validators";
 import { registerUser } from "../../services/users/registerUser";
 import { useNavigate } from "react-router-dom";
+
 
 /**
  * Componente SubmitCadastro
@@ -20,6 +21,7 @@ function SubmitCadastro(){
     const [form, setForm] = useContext(FormCadastroContext);
     const [showAlert, setShowAlert] = useContext(AlertContext)
     const [alertType, setAlertType] = useContext(AlertTypeContext)
+    const [showAlertSucess, setAlertSucess] = useState(false)
     const navigate = useNavigate()
 
 
@@ -37,6 +39,19 @@ function SubmitCadastro(){
     }
 
     /**
+     * Exibe um alerta para confirmar o cadastro.
+     * O alerta é automaticamente ocultado após 2 segundos.
+     */
+    function handleAlertSucess(){
+        setAlertSucess(true);
+
+         setTimeout(() => {
+             setAlertSucess(false);
+           }, 2000)
+
+    }
+
+    /**
      * Lida com o envio do formulário.
      * Verifica se todos os campos são preenchidos e se os dados são válidos.
      * Em caso de sucesso, registra o usuário e navega para a página principal.
@@ -51,12 +66,20 @@ function SubmitCadastro(){
                         
                         localStorage.setItem('token', data.token)
                         localStorage.setItem('isAdmin', data.isAdmin)
+                        handleAlertSucess()
+                        setTimeout(() => {
+                            navigate('/')
+                          }, 2000)
 
-                         navigate('/')
+                         
                         
                      })
                      .catch((error) => {
+                        const status = error.response.status
                          console.log(error.response.status)
+                         if (status == 500 ){
+                            handleAlert(true, 'Usuário existente')
+                         }
                        
                      } )
         
@@ -103,7 +126,17 @@ function SubmitCadastro(){
     }
 
     return(
+        <>
         <button onClick={handleSubmit} className="button mt-4">Criar conta</button>
+
+        <div className="position-absolute end-0 mb-5 p-5">
+        {showAlertSucess && (
+          <div className="alert alert-success alert-dismissible alert-style">
+            <div>Cadastro realizado com sucesso!</div>
+          </div>
+        )}
+      </div>
+      </>
     )
 }
 
