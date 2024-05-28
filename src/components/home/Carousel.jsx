@@ -1,10 +1,10 @@
 import React from "react";
-import Elevador1 from "../../assets/elevador1.png"
-import Pelo from "../../assets/pelo.png"
-import Farol from "../../assets/farol.png"
-import Monte from "../../assets/monte.png"
-import Palacio from "../../assets/palacio.png"
-import Bonfim from "../../assets/bonfim.png"
+import Elevador1 from "../../assets/elevador1.webp"
+import Pelo from "../../assets/pelo.webp"
+import Farol from "../../assets/farol.webp"
+import Monte from "../../assets/monte.webp"
+import Palacio from "../../assets/palacio.webp"
+import Bonfim from "../../assets/bonfim.webp"
 
 /**
  * Componente Carousel

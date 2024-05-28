@@ -41,7 +41,6 @@ export default function Header(){
      * Isso impede que o usuário acesse as páginas protegidas
      */
     function handleStatusLogin(){
-        localStorage.removeItem('statusLogin')
         localStorage.removeItem('token')
         localStorage.removeItem('isAdmin')
         localStorage.removeItem('tokenValid')

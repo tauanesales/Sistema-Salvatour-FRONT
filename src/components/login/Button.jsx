@@ -63,7 +63,6 @@ function Button(){
                 }else{
 
                     navigate('/home')
-                    localStorage.setItem('statusLogin', 'true')
                 }
                 
 
