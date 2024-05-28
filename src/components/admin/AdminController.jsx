@@ -5,6 +5,8 @@ import { createUser } from "../../services/users/createUser";
 import { deleteUser } from "../../services/users/deleteUser";
 import { patchUser } from "../../services/users/patchUser";
 import { validateEmail, validatePassword } from "../../utils/validators";
+import { isSameUser } from "../../authentication/tokenVerification";
+import { useNavigate } from "react-router-dom";
 
 export default function AdminController() {
     const [name, setName] = useState("")
@@ -20,6 +22,7 @@ export default function AdminController() {
     const [showCreateUser, setShowCreateUser] = useState(false)
     const [users, setUsers] = useState([])
     const token = localStorage.getItem("token")
+    const navigate = useNavigate();
 
     function onGetAllUsers() {
         getAllUsers(token)
@@ -99,7 +102,13 @@ export default function AdminController() {
     function onDeleteUser(userIdToBeDeleted) {
         deleteUser(token, userIdToBeDeleted)
             .then((response) => {
-                onGetAllUsers()
+                if (isSameUser(token, userIdToBeDeleted)) {
+                    localStorage.setItem('token', "")
+                    window.alert("Você não está autenticado.")
+                    navigate("/")
+                } else {
+                    onGetAllUsers()
+                }
             })
             .catch((error) => console.log(error))
     }

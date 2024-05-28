@@ -10,3 +10,13 @@ export function isTokenExpired(token) {
         return true;
     }
 }
+
+export function isSameUser(token, userIdDeleted) {
+    try {
+        const decoded = jwtDecode(token);
+        return decoded.id == userIdDeleted;
+    } catch (error) {
+        console.error('Token id verification error: ', error)
+        return false;
+    }
+}
