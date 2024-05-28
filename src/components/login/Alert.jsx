@@ -15,6 +15,7 @@ function Alert(){
 
     const [showAlert, setShowAlert] = useContext(AlertContext);
     const [alertType, setAlertType] = useContext(AlertTypeContext)
+    
 
     /**
      * Fecha o alerta.
