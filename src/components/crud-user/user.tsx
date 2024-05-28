@@ -10,7 +10,6 @@ import { useNavigate } from 'react-router-dom';
 import { getCurrentUserInfo } from '../../services/users/getCurrentUserInfo';
 export const CrudUser = ({}: { onBackToHome: () => void; }) => {
 
-  const [pwdConfirmation, setPwdConfirmation] = useState('');
   const [user, setUser] = useState<User>({
     name: { value: '', editing: false },
     password: { value: '', editing: false },
@@ -69,11 +68,6 @@ export const CrudUser = ({}: { onBackToHome: () => void; }) => {
   };
 
   const handleSaveEditClick = () => {
-
-    if (user.password.editing && pwdConfirmation != user.password.value) {
-      handleAlert("Erro: Senha e confirmação não conferem", 'danger')
-      return;
-    }
 
     if (token && user) {
       handleSaveEdit(user.password.editing ? 
@@ -207,31 +201,6 @@ export const CrudUser = ({}: { onBackToHome: () => void; }) => {
               onClick={() => handleEditClick('password')}
             />
           </div>
-
-          {
-            user.password.editing ? <div>
-                <label>Confirmar Senha</label>
-                <div className='icon-input'>
-                  <FontAwesomeIcon icon={faKey} style={{ color: '#d3d3d3' }} size='2x' className='icon' />
-                  <input
-                    type='password'
-                    value={pwdConfirmation}
-                    onChange={(e) => setPwdConfirmation(e.target.value)}
-                    placeholder='Senha'
-                    className='input'
-                  />
-                  <FontAwesomeIcon
-                    icon={faEdit}
-                    style={{ color: '#d3d3d3', cursor: 'pointer', marginLeft: '1rem' }}
-                    size='2x'
-                    className='icon'
-                    onClick={() => handleEditClick('password')}
-                  />
-                </div>
-            </div>
-            : <div />
-          }
-          
         </div>
 
         <div className='style-button'>
