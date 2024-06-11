@@ -11,6 +11,7 @@ import SendToken from "./components/recovery/SendToken";
 import Recovery from "./components/recovery/Recovery";
 import NewPassword from "./components/recovery/NewPassword";
 import PasswordResetRoute from "./components/recovery/PasswordResetRoute";
+import NewPlaces from "./components/admin/NewPlaces";
 
 function App() {
   return (
@@ -26,6 +27,7 @@ function App() {
         <Route path="/recoveryToken" element={<PasswordResetRoute element={<SendToken />} routeName="recoveryToken" />} />
         <Route path="/newPassword" element={<PasswordResetRoute element={<NewPassword />} routeName="newPassword" />} />
         <Route path="/*" element={<Navigate to="/home" />} />
+        <Route path="/admin/new-places" element={<NewPlaces />} />
       </Routes>
     </BrowserRouter>
   );

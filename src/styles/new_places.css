@@ -1,0 +1,80 @@
+.mainContainerPlaces{
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    width: 100%;
+    margin: auto;
+    justify-content: center;
+    align-items: center;
+    
+}
+
+.subcontainer{
+    display: flex;
+    flex-direction: column;
+    background-color: #ffffff6c;
+    height: 100vh;
+    width: 60%;
+    padding: 10px;
+    border-radius: 10px;
+    align-items: center;
+}
+
+
+
+.mainTitle, .titlePlaces, .inputTitle, .inputDesc1, .inputDesc2{
+    font-family: 'Poetsen One', sans-serif;
+}
+
+.inputTitle, .inputDesc1, .inputDesc2{
+    font-size: 1.2rem;
+    border: 2px solid var(--cor_2, #D76A00);
+}
+
+.inputTitle:focus, .inputDesc1:focus, .inputDesc2:focus {
+    outline: none; 
+}
+
+.mainTitle{
+    margin-top: 40px;
+    margin-bottom: 40px;
+    float: left;
+}
+
+.inputTitle{
+    width: 90%;
+    padding: 10px;
+    border-radius: 8px;
+    margin-bottom: 10px;
+    
+}
+
+.inputDesc1{
+    width: 90%;
+    padding: 10px;
+    border-radius: 8px;
+    margin-bottom: 10px;
+    height: 60px;
+
+}
+
+.inputDesc2{
+    width: 90%;
+    padding: 10px;
+    border-radius: 8px;
+    margin-bottom: 10px;
+    height: 200px;
+
+}
+
+.inputFile{
+    border-radius: 8px;
+    padding: 10px;
+    
+}
+
+
+.inputTitle, .inputDesc1, .inputDesc2, .inputFile{
+    margin-bottom: 20px;
+}
+
