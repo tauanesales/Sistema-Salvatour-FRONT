@@ -114,8 +114,28 @@ export default function AdminController() {
     }
 
     function onDeleteMultipleUsers(usersIdList) {
+        var isLoggedUserInList = false;
+        const deleteUsersRequest = [];
         usersIdList.forEach((userId) => {
-            onDeleteUser(userId)})
+            deleteUsersRequest.push(onDeleteUser(userId))
+            if (!isLoggedUserInList) {
+                isLoggedUserInList = isSameUser(token, userId)
+            }
+        })
+        Promise.all(deleteUsersRequest)
+            .then((response) => {
+                // TODO emit success toast
+                if (isLoggedUserInList) {
+                    localStorage.setItem('token', "")
+                    window.alert("Você não está autenticado.")
+                    navigate("/")
+                } else {
+                    onGetAllUsers()
+                }
+            })
+            .catch((error) =>
+             // TODO emit error toast
+            )
     }
 
     function onUpdateUser(updatedUser) {

@@ -3,7 +3,10 @@ import { DataGrid, GridActionsCellItem } from '@mui/x-data-grid';
 import { Button, TextField, InputAdornment, IconButton, FormControl, InputLabel, OutlinedInput, FormHelperText } from "@mui/material";
 import { Visibility, VisibilityOff } from '@mui/icons-material';
 import DeleteFilledIcon from '@mui/icons-material/DeleteOutlined';
+import ModeEditOutlineIcon from '@mui/icons-material/ModeEditOutline';
 import { useNavigate } from "react-router-dom";
+import { Modal } from "react-bootstrap";
+import Header from "../home/Header";
 
 export default function Admin({
     users,
@@ -75,19 +78,25 @@ export default function Admin({
     }
 
     const columns = [
-      { field: 'id', headerName: 'ID', width: 150 },
-      { field: 'name', headerName: 'Nome', width: 250, editable: true },
-      { field: 'email', headerName: 'E-mail', width: 150, editable: true },
-      { field: 'city', headerName: 'Cidade', width: 150, editable: true },
-      { field: 'state', headerName: 'Estado', width: 150, editable: true },
+      { field: 'id', headerName: 'ID', width: window.innerWidth/6 },
+      { field: 'name', headerName: 'Nome', width: window.innerWidth/6, editable: true },
+      { field: 'email', headerName: 'E-mail', width: window.innerWidth/6, editable: true },
+      { field: 'city', headerName: 'Cidade', width: window.innerWidth/6, editable: true },
+      { field: 'state', headerName: 'Estado', width: window.innerWidth/6, editable: true },
       {
           field: 'actions',
           type: 'actions',
           headerName: 'Ações',
-          width: 100,
+          width: 80,
           cellClassName: 'Actions',
           getActions: ({ id }) => {  
             return [
+              <GridActionsCellItem
+                key={1}
+                icon={<ModeEditOutlineIcon />}
+                label="Edit"
+                onClick={() => {confirmDeleteRow(id)}}
+              />,
               <GridActionsCellItem
                 key={0}
                 icon={<DeleteFilledIcon />}
@@ -101,14 +110,16 @@ export default function Admin({
   ];
 
     return (
+      <>
+      <Header />
         <div className="root" style={{ display: "flex", flexDirection: "column", padding: 15, width: "100%", alignItems: "center" }}>
-            <div className="button-group" style={{ display: "flex", flexDirection: "row", marginBottom: 7, width: "50%", justifyContent: "flex-end"}}>
+            <div className="button-group" style={{ display: "flex", flexDirection: "row", marginBottom: 7, width: "100%", justifyContent: "flex-end"}}>
                 <Button variant="contained" style={{ marginRight: 15 }} onClick={() => {setShowCreateUser(!showCreateUser)}}>
-                  Criar usuário
+                  Adicionar usuário
                 </Button>
                 <Button variant="contained" disabled={isSelectionEmpty()} color="error" onClick={() => {confirmDeleteRows()}}>Deletar</Button>
             </div>
-            <div style={{ height: '100%', width: "50%", display: "flex", justifyContent: "space-between" }}>
+            <div style={{ height: '100%', width: "100%", display: "flex", justifyContent: "space-between" }}>
                 <DataGrid 
                     rows={users} 
                     columns={columns} 
@@ -121,10 +132,12 @@ export default function Admin({
                     processRowUpdate={processRowUpdate}
                 />
             </div>
-            {showCreateUser && (
-              <>
-                <h1 style={{ paddingTop: 15 }}>Novo usuário</h1>
-                <form onSubmit={(event) => { onCreateUser(event) }} style={{ paddingTop: '15px', width: "50%", textAlign: "center" }}>
+            <Modal show={showCreateUser} onHide={() => setShowCreateUser(!showCreateUser)}>
+              <Modal.Header closeButton>
+                <Modal.Title>Novo usuário</Modal.Title>
+              </Modal.Header>
+              <Modal.Body>
+                <form onSubmit={(event) => { onCreateUser(event) }} style={{ paddingTop: '15px', textAlign: "center" }}>
                   <TextField 
                     id="name"
                     label="Nome"
@@ -221,8 +234,9 @@ export default function Admin({
 
                   <Button style={{ width: "50%" }} type="submit" variant="contained">Enviar</Button>
                 </form>
-              </>
-            )}
+              </Modal.Body>
+            </Modal>
         </div>
+      </>
     )
 }
