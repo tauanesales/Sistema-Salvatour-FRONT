@@ -18,7 +18,6 @@ import '../../styles/login.css'
  */
 
 function Login(){
-
     
     return(
         <AlertTypeProvider>

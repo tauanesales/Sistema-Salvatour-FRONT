@@ -13,8 +13,10 @@ import NewPassword from "./components/recovery/NewPassword";
 import PasswordResetRoute from "./components/recovery/PasswordResetRoute";
 import NewPlaces from "./components/admin/NewPlaces";
 
+
 function App() {
   return (
+    
     <BrowserRouter>
       <Routes>
         <Route path="/home" element={<ProtectedRoute children={<Home />} />} />

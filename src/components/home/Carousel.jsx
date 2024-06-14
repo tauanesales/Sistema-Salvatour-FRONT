@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Elevador1 from "../../assets/elevador1.webp"
 import Pelo from "../../assets/pelo.webp"
 import Farol from "../../assets/farol.webp"
@@ -14,6 +14,7 @@ import Bonfim from "../../assets/bonfim.webp"
  */
 
 export default function Carousel(){
+  
 
     return(
         <section className="carousel slide" id="carousel">
@@ -102,7 +103,7 @@ export default function Carousel(){
                
 
             </div>
-
+           
             <button className="carousel-control-prev" data-bs-target='#carousel' data-bs-slide='prev'>
                 <span className="carousel-control-prev-icon"></span>
             </button>

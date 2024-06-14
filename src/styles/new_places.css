@@ -22,7 +22,7 @@
 
 
 
-.mainTitle, .titlePlaces, .inputTitle, .inputDesc1, .inputDesc2{
+.placeTitle, .titlePlaces, .inputTitle, .inputDesc1, .inputDesc2{
     font-family: 'Poetsen One', sans-serif;
 }
 
@@ -35,7 +35,7 @@
     outline: none; 
 }
 
-.mainTitle{
+.placeTitle{
     margin-top: 40px;
     margin-bottom: 40px;
     float: left;
