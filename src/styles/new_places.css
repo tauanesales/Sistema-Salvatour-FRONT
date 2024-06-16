@@ -26,9 +26,15 @@
     font-family: 'Poetsen One', sans-serif;
 }
 
+.titlePlaces{
+    font-size: 2rem;
+    margin-bottom: 20px;
+}
+
 .inputTitle, .inputDesc1, .inputDesc2{
     font-size: 1.2rem;
     border: 2px solid var(--cor_2, #D76A00);
+    margin-bottom: 10px;
 }
 
 .inputTitle:focus, .inputDesc1:focus, .inputDesc2:focus {
@@ -38,43 +44,31 @@
 .placeTitle{
     margin-top: 40px;
     margin-bottom: 40px;
-    float: left;
 }
 
-.inputTitle{
+.inputTitle, .inputDesc1, .inputDesc2{
     width: 90%;
     padding: 10px;
-    border-radius: 8px;
+    border-radius: 15px;
     margin-bottom: 10px;
-    
 }
+
 
 .inputDesc1{
-    width: 90%;
-    padding: 10px;
-    border-radius: 8px;
-    margin-bottom: 10px;
     height: 60px;
-
 }
 
 .inputDesc2{
-    width: 90%;
-    padding: 10px;
-    border-radius: 8px;
-    margin-bottom: 10px;
     height: 200px;
-
 }
 
 .inputFile{
-    border-radius: 8px;
-    padding: 10px;
-    
+    border-radius: 15px;
+    padding: 10px; 
 }
 
 
 .inputTitle, .inputDesc1, .inputDesc2, .inputFile{
-    margin-bottom: 20px;
+    margin-bottom: 5vh;
 }
 

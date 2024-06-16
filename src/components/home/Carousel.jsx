@@ -1,4 +1,5 @@
-import React, { useEffect } from "react";
+import React, { useState } from "react";
+import { getAllPlaces } from "../../services/places/getAllPlaces";
 import Elevador1 from "../../assets/elevador1.webp"
 import Pelo from "../../assets/pelo.webp"
 import Farol from "../../assets/farol.webp"
@@ -14,6 +15,23 @@ import Bonfim from "../../assets/bonfim.webp"
  */
 
 export default function Carousel(){
+    const [listPlaces, setListPlaces] = useState([])
+    const token = localStorage.getItem("token")
+
+    // useEffect(() => {
+    //     setPlaces()
+    //   }, [])
+
+    // function setPlaces(){
+
+    //     getAllPlaces(token)
+    //         .then((data) => {
+    //            setListPlaces(data)
+    //         })
+    //         .catch((error) => {
+    //             console.log(error)
+    //         })
+    // }
   
 
     return(
@@ -103,6 +121,23 @@ export default function Carousel(){
                
 
             </div>
+
+            {listPlaces &&(
+                listPlaces.forEach((form) => {
+
+                <div className="carousel-item section">
+
+                <h1 className="mainTitle">
+                    {form.title}
+                </h1>
+                <p className="paragrafo1">
+                {form.desc1}
+                </p>
+                <img className="imagem" src={form.image} alt="elevador" />
+                <p className="paragrafo2">{form.desc2}</p>
+                </div>      
+                })
+            )}
            
             <button className="carousel-control-prev" data-bs-target='#carousel' data-bs-slide='prev'>
                 <span className="carousel-control-prev-icon"></span>

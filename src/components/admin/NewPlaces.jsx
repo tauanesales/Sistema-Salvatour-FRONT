@@ -1,14 +1,22 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useRef } from "react";
 import { registerPlace } from "../../services/places/registerPlace";
 import '../../styles/global.css'
 import '../../styles/new_places.css'
 
+const initialFormState = {
+    title: '',
+    desc1: '',
+    desc2: '',
+    image: ''
+};
+
 
 export default function NewPlaces(){
-    const [form, setForm] = useState([])
+    const [form, setForm] = useState(initialFormState)
     const [showAlert, setAlert] = useState(false)
     const [AlertType, setAlertType] = useState('')
     const [alertColor, setAlertColor] = useState('')
+    const fileInputRef = useRef(null);
    
     function handleAlert(type,color){
         setAlert(true);
@@ -42,6 +50,10 @@ export default function NewPlaces(){
 
         if(form.title && form.desc1 && form.desc2 && form.image){
             handleAlert('Cadastro realizado com sucesso', 'sucess')
+            setForm(initialFormState); // Redefinir o formulário
+                    if (fileInputRef.current) {
+                        fileInputRef.current.value = ''; // Redefinir o campo de entrada de arquivo
+                    }
             // registerPlace(form.title, form.desc1, form.desc2, form.image)
             //          .then((data)=>{
             //             handleAlert('Cadastro realizado com sucesso', 'sucess')
@@ -83,13 +95,13 @@ export default function NewPlaces(){
                 <input className='inputTitle' type="text" name='title' value={form.title} onChange={handleChange}/>
 
                 <h3 className='titlePlaces'>Pequena descrição</h3>
-                <textarea className= 'inputDesc1' name='desc1' onChange={handleChange}/>
+                <textarea className= 'inputDesc1' name='desc1' value={form.desc1} onChange={handleChange}/>
 
                 <h3 className='titlePlaces'>Descrição completa</h3>
-                <textarea className= 'inputDesc2' name='desc2' onChange={handleChange}/>
+                <textarea className= 'inputDesc2' name='desc2' value={form.desc2} onChange={handleChange}/>
 
                 <h3 className='titlePlaces'>Imagem do ponto turístico</h3>
-                <input className='inputFile' type="file" onChange={handleImageChange}/>
+                <input className='inputFile' type="file" ref={fileInputRef} onChange={handleImageChange}/>
 
                 <button className='button salvar' type="submit">Salvar</button>
                 </form>
