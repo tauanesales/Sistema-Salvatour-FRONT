@@ -13,10 +13,12 @@ const initialFormState = {
 
 export default function NewPlaces(){
     const [form, setForm] = useState(initialFormState)
+    const [image, setImage] = useState('')
     const [showAlert, setAlert] = useState(false)
     const [AlertType, setAlertType] = useState('')
     const [alertColor, setAlertColor] = useState('')
     const fileInputRef = useRef(null);
+  
    
     function handleAlert(type,color){
         setAlert(true);
@@ -36,19 +38,18 @@ export default function NewPlaces(){
     function handleImageChange(event) {
         const file = event.target.files[0];
         if (file) {
-          const reader = new FileReader();
-          reader.onloadend = () => {
-            setForm({ ...form, image: reader.result });
+          setImage(file)
           };
-          reader.readAsDataURL(file);
-        }
     }
 
     function handleSubmit(event){
         event.preventDefault();
         console.log(form)
 
-        if(form.title && form.desc1 && form.desc2 && form.image){
+        const formData = new FormData()
+        formData.append('image', image)
+
+        if(form.title && form.desc1 && form.desc2 && formData){
             handleAlert('Cadastro realizado com sucesso', 'sucess')
             setForm(initialFormState); // Redefinir o formulário
                     if (fileInputRef.current) {
