@@ -1,4 +1,8 @@
 import React, { useContext, useState, useRef } from "react";
+import Alert from "../login/Alert";
+import { AlertContext } from "../../contexts/alertContext";
+import { AlertTypeContext } from "../../contexts/alertTypeContext";
+import { AlertColorContext } from "../../contexts/alertColorContext";
 import { registerPlace } from "../../services/places/registerPlace";
 import '../../styles/global.css'
 import '../../styles/new_places.css'
@@ -14,22 +18,21 @@ const initialFormState = {
 export default function NewPlaces(){
     const [form, setForm] = useState(initialFormState)
     const [image, setImage] = useState('')
-    const [showAlert, setAlert] = useState(false)
-    const [AlertType, setAlertType] = useState('')
-    const [alertColor, setAlertColor] = useState('')
     const fileInputRef = useRef(null);
-  
+    const [showAlert, setShowAlert] = useContext(AlertContext)
+    const [alertType, setAlertType] = useContext(AlertTypeContext)
+    const [alertColor, setAlertColor] = useContext(AlertColorContext);
    
-    function handleAlert(type,color){
-        setAlert(true);
-        setAlertType(type);
+    function handleAlert(state, type, color=null) {
+        setShowAlert(state)
+        setAlertType(type)
         setAlertColor(color)
-    
-         setTimeout(() => {
-             setAlert(false);
-           }, 2000)
-    
-    }
+
+        setTimeout(() => {
+            setShowAlert(false);
+          }, 2000)
+        }
+
 
     function handleChange(event){
         setForm({...form, [event.target.name]:event.target.value})
@@ -50,7 +53,7 @@ export default function NewPlaces(){
         formData.append('image', image)
 
         if(form.title && form.desc1 && form.desc2 && formData){
-            handleAlert('Cadastro realizado com sucesso', 'sucess')
+            handleAlert(true, 'Cadastro realizado com sucesso', 'success')
             setForm(initialFormState); // Redefinir o formulário
                     if (fileInputRef.current) {
                         fileInputRef.current.value = ''; // Redefinir o campo de entrada de arquivo
@@ -67,7 +70,7 @@ export default function NewPlaces(){
         
 
                 }else{
-                    handleAlert('Preencha todos os campos', 'danger')    
+                    handleAlert(true, 'Preencha todos os campos', 'danger')    
                 
             }
 
@@ -77,14 +80,7 @@ export default function NewPlaces(){
 
     return(
         <>
-        <div className="position-absolute end-0 mb-5 p-5">
-            {showAlert && (
-            <div className={alertColor == 'danger'? "alert alert-danger alert-dismissible alert-style": "alert alert-success alert-dismissible alert-style"}>
-            <div>{AlertType}</div>
-         </div>
-        )}
-        </div>
-        
+        <Alert></Alert>
         <div className='background mainContainerPlaces'>
 
        

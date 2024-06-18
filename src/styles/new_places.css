@@ -55,11 +55,11 @@
 
 
 .inputDesc1{
-    height: 60px;
+    height: 30vh;
 }
 
 .inputDesc2{
-    height: 200px;
+    height: 40vh;
 }
 
 .inputFile{
@@ -70,5 +70,9 @@
 
 .inputTitle, .inputDesc1, .inputDesc2, .inputFile{
     margin-bottom: 5vh;
+}
+
+.salvar{
+    padding: 8px;
 }
 
