@@ -1,12 +1,15 @@
 import { useEffect, useState } from "react";
 import { DataGrid, GridActionsCellItem } from '@mui/x-data-grid';
-import { Button, TextField, InputAdornment, IconButton, FormControl, InputLabel, OutlinedInput, FormHelperText } from "@mui/material";
+import { Button, TextField, InputAdornment, IconButton, FormControl, InputLabel, OutlinedInput, FormHelperText, Tooltip } from "@mui/material";
 import { Visibility, VisibilityOff } from '@mui/icons-material';
 import DeleteFilledIcon from '@mui/icons-material/DeleteOutlined';
 import ModeEditOutlineIcon from '@mui/icons-material/ModeEditOutline';
 import { useNavigate } from "react-router-dom";
 import { Modal } from "react-bootstrap";
 import Header from "../home/Header";
+import EditUser from "./EditUser";
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.min.css';
 
 export default function Admin({
     users,
@@ -21,12 +24,14 @@ export default function Admin({
     password,
     passwordHelperText,
     showCreateUser,
+    showEditUser,
     setName,
     setEmail,
     setCity,
     setState,
     setPassword,
     setShowCreateUser,
+    setShowEditUser,
     onGetAllUsers,
     onCreateUser,
     onDeleteUser,
@@ -38,6 +43,7 @@ export default function Admin({
     const isSelectionEmpty = () => selection.length == 0;
     const token = localStorage.getItem("token")
     const isAdmin = localStorage.getItem("isAdmin")
+    const [selectedUser, setSelectedUser] = useState(null);
     let warning = false
     const navigate = useNavigate();
 
@@ -91,19 +97,28 @@ export default function Admin({
           cellClassName: 'Actions',
           getActions: ({ id }) => {  
             return [
-              <GridActionsCellItem
-                key={1}
-                icon={<ModeEditOutlineIcon />}
-                label="Edit"
-                onClick={() => {confirmDeleteRow(id)}}
-              />,
-              <GridActionsCellItem
-                key={0}
-                icon={<DeleteFilledIcon />}
-                label="Delete"
-                onClick={() => {confirmDeleteRow(id)}}
-                color="error"
-              />
+              <Tooltip title="Editar usuário">
+                <GridActionsCellItem
+                  key={1}
+                  icon={<ModeEditOutlineIcon />}
+                  label="Edit"
+                  onClick={() => {
+                    const user = users.find((user) => user.id == id)
+                    console.log(user)
+                    setSelectedUser(user)
+                    setShowEditUser(!showEditUser)
+                  }}
+                />
+              </Tooltip>,
+              <Tooltip title="Deletar usuário">
+                <GridActionsCellItem
+                  key={0}
+                  icon={<DeleteFilledIcon />}
+                  label="Delete"
+                  onClick={() => {confirmDeleteRow(id)}}
+                  color="error"
+                />
+              </Tooltip>
             ]
           },
         },
@@ -147,7 +162,7 @@ export default function Admin({
                     helperText={nameHelperText}
                     error={nameHelperText != ""}
                     onChange={(event) => {setName(event.target.value)}}
-                    style={{ width: '50%' }}
+                    style={{ width: '100%' }}
                   />
 
                   <br />
@@ -162,7 +177,7 @@ export default function Admin({
                     helperText={emailHelperText}
                     error={emailHelperText != ""}
                     onChange={(event) => {setEmail(event.target.value)}}
-                    style={{ width: '50%' }}
+                    style={{ width: '100%' }}
                   />
 
                   <br />
@@ -177,7 +192,7 @@ export default function Admin({
                     helperText={cityHelperText}
                     error={cityHelperText != ""}
                     onChange={(event) => {setCity(event.target.value)}}
-                    style={{ width: '50%' }}
+                    style={{ width: '100%' }}
                   />
 
                   <br />
@@ -192,16 +207,15 @@ export default function Admin({
                     helperText={stateHelperText}
                     error={stateHelperText != ""}
                     onChange={(event) => {setState(event.target.value)}}
-                    style={{ width: '50%' }}
+                    style={{ width: '100%' }}
                   />
 
                   <br />
                   <br />
 
                   <FormControl 
-                    sx={{ m: 1, width: '25ch' }} 
                     variant="outlined"
-                    style={{ width: "50%" }}
+                    style={{ width: "100%" }}
                     helperText={passwordHelperText}
                     error={passwordHelperText != ""}
                   >
@@ -232,10 +246,24 @@ export default function Admin({
                   <br />
                   <br />
 
-                  <Button style={{ width: "50%" }} type="submit" variant="contained">Enviar</Button>
+                  <Button style={{ width: "100%" }} type="submit" variant="contained">Enviar</Button>
                 </form>
               </Modal.Body>
             </Modal>
+
+            {selectedUser ? <EditUser user={selectedUser} showEditUser={showEditUser} setShowEditUser={setShowEditUser} onUpdateUser={onUpdateUser} /> : <div></div>}
+            <ToastContainer
+              position="bottom-right"
+              autoClose={5000}
+              hideProgressBar={false}
+              newestOnTop={false}
+              closeOnClick
+              rtl={false}
+              pauseOnFocusLoss
+              draggable
+              pauseOnHover={false}
+              theme="colored"
+            />
         </div>
       </>
     )
