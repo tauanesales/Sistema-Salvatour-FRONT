@@ -12,6 +12,7 @@ import Recovery from "./components/recovery/Recovery";
 import NewPassword from "./components/recovery/NewPassword";
 import PasswordResetRoute from "./components/recovery/PasswordResetRoute";
 import NewPlaces from "./components/admin/NewPlaces";
+import AdminHome from "./components/admin/AdminHome";
 
 
 function App() {
@@ -23,13 +24,14 @@ function App() {
         <Route path="/places" element={<ProtectedRoute children={<Places />} />} />
         <Route path="/" element={<Login />} />
         <Route path="/admin" element={<ProtectedRoute redirectPath="/home" children={<AdminController />} adminOnly />} />
+        <Route path="/admin/new-places" element={<ProtectedRoute redirectPath="/home" children={<NewPlaces />} adminOnly />} />
+        <Route path="/admin/home" element={<ProtectedRoute redirectPath="/home" children={<AdminHome />} adminOnly />} />
         <Route path="/crudUser" element={<ProtectedRoute children={<CrudUser />} />} />
         <Route path="/cadastro" element={<Cadastro />} />
         <Route path="/recovery" element={<Recovery />} />
         <Route path="/recoveryToken" element={<PasswordResetRoute element={<SendToken />} routeName="recoveryToken" />} />
         <Route path="/newPassword" element={<PasswordResetRoute element={<NewPassword />} routeName="newPassword" />} />
         <Route path="/*" element={<Navigate to="/home" />} />
-        <Route path="/admin/new-places" element={<NewPlaces />} />
       </Routes>
     </BrowserRouter>
   );

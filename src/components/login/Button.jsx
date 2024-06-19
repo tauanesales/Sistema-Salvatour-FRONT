@@ -58,7 +58,7 @@ function Button(){
 
                 if(data.isAdmin){
 
-                    navigate('/admin')
+                    navigate('/admin/home')
 
                 }else{
 
