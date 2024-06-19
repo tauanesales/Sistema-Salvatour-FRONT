@@ -9,9 +9,10 @@ import '../../styles/new_places.css'
 
 const initialFormState = {
     title: '',
-    desc1: '',
-    desc2: '',
-    image: ''
+    desc: '',
+    image: '',
+    endereco: '',
+    horario:''
 };
 
 
@@ -52,13 +53,13 @@ export default function NewPlaces(){
         const formData = new FormData()
         formData.append('image', image)
 
-        if(form.title && form.desc1 && form.desc2 && formData){
+        if(form.title && form.desc && form.endereco && form.horario && formData){
             handleAlert(true, 'Cadastro realizado com sucesso', 'success')
             setForm(initialFormState); // Redefinir o formulário
                     if (fileInputRef.current) {
                         fileInputRef.current.value = ''; // Redefinir o campo de entrada de arquivo
                     }
-            // registerPlace(form.title, form.desc1, form.desc2, form.image)
+            // registerPlace(form.title, form.desc, form.endereco, form.horario, formData)
             //          .then((data)=>{
             //             handleAlert('Cadastro realizado com sucesso', 'sucess')
             //          })
@@ -91,16 +92,19 @@ export default function NewPlaces(){
                 <h3 className='titlePlaces'>Título</h3>
                 <input className='inputTitle' type="text" name='title' value={form.title} onChange={handleChange}/>
 
-                <h3 className='titlePlaces'>Pequena descrição</h3>
-                <textarea className= 'inputDesc1' name='desc1' value={form.desc1} onChange={handleChange}/>
+                <h3 className='titlePlaces'>Endereço</h3>
+                <input className='inputTitle' type="text" name='endereco' value={form.endereco} onChange={handleChange}/>
 
-                <h3 className='titlePlaces'>Descrição completa</h3>
-                <textarea className= 'inputDesc2' name='desc2' value={form.desc2} onChange={handleChange}/>
+                <h3 className='titlePlaces'>Horário de funcionamento</h3>
+                <input className='inputTitle' type="text" name='endereco' value={form.horario} onChange={handleChange}/>
+
+                <h3 className='titlePlaces'>Descrição</h3>
+                <textarea className= 'inputDesc' name='desc' value={form.desc} onChange={handleChange}/>
 
                 <h3 className='titlePlaces'>Imagem do ponto turístico</h3>
                 <input className='inputFile' type="file" ref={fileInputRef} onChange={handleImageChange}/>
 
-                <button className='button salvar' type="submit">Salvar</button>
+                <button className='button cadastrar' type="submit">Cadastrar</button>
                 </form>
 
         </div>

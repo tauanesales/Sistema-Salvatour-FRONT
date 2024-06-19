@@ -2,7 +2,7 @@ import axios from "axios";
 import { NEW_PLACE_ENDPOINT } from "../../constants/urls";
 
 
-export function registerPlace(title, descricao_breve, descricao_completa, img){
+export function registerPlace(title, descricao_breve, descricao_completa, endereco, horario, img){
  return new Promise((resolve, reject) => {
     const header = {
         headers: {
@@ -16,6 +16,8 @@ export function registerPlace(title, descricao_breve, descricao_completa, img){
             title: title,
             descricao_breve: descricao_breve,
             descricao_completa: descricao_completa,
+            endereco: endereco,
+            horario: horario,
             img: img
         }
     

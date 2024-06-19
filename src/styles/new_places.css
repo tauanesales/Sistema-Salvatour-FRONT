@@ -1,7 +1,7 @@
 .mainContainerPlaces{
     display: flex;
     flex-direction: column;
-    height: 100vh;
+    height: 100%;
     width: 100%;
     margin: auto;
     justify-content: center;
@@ -13,7 +13,7 @@
     display: flex;
     flex-direction: column;
     background-color: #ffffff6c;
-    height: 100vh;
+    height: 100%;
     width: 60%;
     padding: 10px;
     border-radius: 10px;
@@ -22,7 +22,7 @@
 
 
 
-.placeTitle, .titlePlaces, .inputTitle, .inputDesc1, .inputDesc2{
+.placeTitle, .titlePlaces, .inputTitle, .inputDesc{
     font-family: 'Poetsen One', sans-serif;
 }
 
@@ -31,13 +31,13 @@
     margin-bottom: 20px;
 }
 
-.inputTitle, .inputDesc1, .inputDesc2{
+.inputTitle, .inputDesc{
     font-size: 1.2rem;
     border: 2px solid var(--cor_2, #D76A00);
     margin-bottom: 10px;
 }
 
-.inputTitle:focus, .inputDesc1:focus, .inputDesc2:focus {
+.inputTitle:focus, .inputDesc:focus{
     outline: none; 
 }
 
@@ -46,7 +46,7 @@
     margin-bottom: 40px;
 }
 
-.inputTitle, .inputDesc1, .inputDesc2{
+.inputTitle, .inputDesc{
     width: 90%;
     padding: 10px;
     border-radius: 15px;
@@ -54,12 +54,8 @@
 }
 
 
-.inputDesc1{
-    height: 30vh;
-}
-
-.inputDesc2{
-    height: 40vh;
+.inputDesc{
+    height: 100px;
 }
 
 .inputFile{
@@ -68,11 +64,11 @@
 }
 
 
-.inputTitle, .inputDesc1, .inputDesc2, .inputFile{
+.inputTitle,.inputDesc, .inputFile{
     margin-bottom: 5vh;
 }
 
-.salvar{
+.cadastrar{
     padding: 8px;
 }
 

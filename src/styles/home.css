@@ -36,8 +36,9 @@
     font-family: 'Poetsen One', 'sans-serif';
     font-size: 40px;
     color: #2d2a2a;
-    margin-top: 10px;
-    margin-bottom: 10px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+
 }
 
 
@@ -71,16 +72,11 @@
     width: 700px; 
 }
 
-.paragrafo1{
-    font-size: 16px;
-    margin-bottom: 20px;
-}
-
-.paragrafo2{
+.descricao{
     font-size: 18px;
     width: 750px;
     margin: auto;
-    margin-top: 10px;
+    margin-top: 30px;
 }
 
 .carousel-control-next-icon, .carousel-control-prev-icon{
@@ -115,16 +111,23 @@
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
 }
 
-.btn-ver{
+.btn-ver, .btn-info{
     font-family: 'Poetsen One', 'sans-serif';
     border-radius: 22.5px;
     background: var(--Chambray-950, #1F294C);
     box-shadow: 2.7px 2.7px 0px 0px rgba(0, 0, 0, 0.25);
     text-decoration: none;
-    width: 100px;
-    height: 30px;
     margin-top: 10px;
+    color: white;
+    height: 30px;
+}
 
+.btn-ver{
+    width: 100px;
+}
+
+.btn-info{
+    width: 130px;
 }
 
 .link-ver{

@@ -23,7 +23,7 @@ function Home(){
     return(
         <>
             <Header></Header>
-
+            
             <section className="section">
             <h1 className="mainTitle">
             Guia histórico de Salvador
