@@ -96,7 +96,7 @@ export default function NewPlaces(){
                 <input className='inputTitle' type="text" name='endereco' value={form.endereco} onChange={handleChange}/>
 
                 <h3 className='titlePlaces'>Horário de funcionamento</h3>
-                <input className='inputTitle' type="text" name='endereco' value={form.horario} onChange={handleChange}/>
+                <input className='inputTitle' type="text" name='horario' value={form.horario} onChange={handleChange}/>
 
                 <h3 className='titlePlaces'>Descrição</h3>
                 <textarea className= 'inputDesc' name='desc' value={form.desc} onChange={handleChange}/>
