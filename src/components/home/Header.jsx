@@ -61,7 +61,7 @@ export default function Header(){
         <div className="dropdown-center" >
         <button className="text-ola dropdown-toggle" type="button" data-bs-toggle="dropdown">Olá, seja bem vindo(a)</button>
         <ul className="dropdown-menu">
-            <li className="dropdown-item"><Link to='/crudUser' className="text-editar menu-item">Editar perfil</Link></li>
+            <li className="dropdown-item"><Link to='/updateUser' className="text-editar menu-item">Editar perfil</Link></li>
             <li className="dropdown-item"><Link to='/' className="text-editar menu-item" onClick={handleStatusLogin}>Sair</Link></li>
         </ul>
         </div>
