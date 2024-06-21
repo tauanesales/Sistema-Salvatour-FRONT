@@ -71,7 +71,7 @@ function Button(){
                 console.log(error.response.status)
                 let status = error.response.status
                 if (status == 404){
-                    handleAlert(true, "Senha inválida")
+                    handleAlert(true, "Usuário e/ou Senha inválida")
                 } else if(status == 400){
                     handleAlert(true, "Usuário não encontrado")
                 }

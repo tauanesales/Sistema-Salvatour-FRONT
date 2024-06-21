@@ -1,9 +1,15 @@
 import { useEffect, useState } from "react";
 import { DataGrid, GridActionsCellItem } from '@mui/x-data-grid';
-import { Button, TextField, InputAdornment, IconButton, FormControl, InputLabel, OutlinedInput, FormHelperText } from "@mui/material";
+import { Button, TextField, InputAdornment, IconButton, FormControl, InputLabel, OutlinedInput, FormHelperText, Tooltip } from "@mui/material";
 import { Visibility, VisibilityOff } from '@mui/icons-material';
 import DeleteFilledIcon from '@mui/icons-material/DeleteOutlined';
+import ModeEditOutlineIcon from '@mui/icons-material/ModeEditOutline';
 import { useNavigate } from "react-router-dom";
+import { Modal } from "react-bootstrap";
+import Header from "../home/Header";
+import EditUser from "./EditUser";
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.min.css';
 
 export default function Admin({
     users,
@@ -18,12 +24,14 @@ export default function Admin({
     password,
     passwordHelperText,
     showCreateUser,
+    showEditUser,
     setName,
     setEmail,
     setCity,
     setState,
     setPassword,
     setShowCreateUser,
+    setShowEditUser,
     onGetAllUsers,
     onCreateUser,
     onDeleteUser,
@@ -35,6 +43,7 @@ export default function Admin({
     const isSelectionEmpty = () => selection.length == 0;
     const token = localStorage.getItem("token")
     const isAdmin = localStorage.getItem("isAdmin")
+    const [selectedUser, setSelectedUser] = useState(null);
     let warning = false
     const navigate = useNavigate();
 
@@ -75,40 +84,57 @@ export default function Admin({
     }
 
     const columns = [
-      { field: 'id', headerName: 'ID', width: 150 },
-      { field: 'name', headerName: 'Nome', width: 250, editable: true },
-      { field: 'email', headerName: 'E-mail', width: 150, editable: true },
-      { field: 'city', headerName: 'Cidade', width: 150, editable: true },
-      { field: 'state', headerName: 'Estado', width: 150, editable: true },
+      { field: 'id', headerName: 'ID', width: window.innerWidth/6 },
+      { field: 'name', headerName: 'Nome', width: window.innerWidth/6, editable: true },
+      { field: 'email', headerName: 'E-mail', width: window.innerWidth/6, editable: true },
+      { field: 'city', headerName: 'Cidade', width: window.innerWidth/6, editable: true },
+      { field: 'state', headerName: 'Estado', width: window.innerWidth/6, editable: true },
       {
           field: 'actions',
           type: 'actions',
           headerName: 'Ações',
-          width: 100,
+          width: 80,
           cellClassName: 'Actions',
           getActions: ({ id }) => {  
             return [
-              <GridActionsCellItem
-                key={0}
-                icon={<DeleteFilledIcon />}
-                label="Delete"
-                onClick={() => {confirmDeleteRow(id)}}
-                color="error"
-              />
+              <Tooltip title="Editar usuário">
+                <GridActionsCellItem
+                  key={1}
+                  icon={<ModeEditOutlineIcon />}
+                  label="Edit"
+                  onClick={() => {
+                    const user = users.find((user) => user.id == id)
+                    console.log(user)
+                    setSelectedUser(user)
+                    setShowEditUser(!showEditUser)
+                  }}
+                />
+              </Tooltip>,
+              <Tooltip title="Deletar usuário">
+                <GridActionsCellItem
+                  key={0}
+                  icon={<DeleteFilledIcon />}
+                  label="Delete"
+                  onClick={() => {confirmDeleteRow(id)}}
+                  color="error"
+                />
+              </Tooltip>
             ]
           },
         },
   ];
 
     return (
+      <>
+      <Header />
         <div className="root" style={{ display: "flex", flexDirection: "column", padding: 15, width: "100%", alignItems: "center" }}>
-            <div className="button-group" style={{ display: "flex", flexDirection: "row", marginBottom: 7, width: "50%", justifyContent: "flex-end"}}>
+            <div className="button-group" style={{ display: "flex", flexDirection: "row", marginBottom: 7, width: "100%", justifyContent: "flex-end"}}>
                 <Button variant="contained" style={{ marginRight: 15 }} onClick={() => {setShowCreateUser(!showCreateUser)}}>
-                  Criar usuário
+                  Adicionar usuário
                 </Button>
                 <Button variant="contained" disabled={isSelectionEmpty()} color="error" onClick={() => {confirmDeleteRows()}}>Deletar</Button>
             </div>
-            <div style={{ height: '100%', width: "50%", display: "flex", justifyContent: "space-between" }}>
+            <div style={{ height: '100%', width: "100%", display: "flex", justifyContent: "space-between" }}>
                 <DataGrid 
                     rows={users} 
                     columns={columns} 
@@ -121,10 +147,12 @@ export default function Admin({
                     processRowUpdate={processRowUpdate}
                 />
             </div>
-            {showCreateUser && (
-              <>
-                <h1 style={{ paddingTop: 15 }}>Novo usuário</h1>
-                <form onSubmit={(event) => { onCreateUser(event) }} style={{ paddingTop: '15px', width: "50%", textAlign: "center" }}>
+            <Modal show={showCreateUser} onHide={() => setShowCreateUser(!showCreateUser)}>
+              <Modal.Header closeButton>
+                <Modal.Title>Novo usuário</Modal.Title>
+              </Modal.Header>
+              <Modal.Body>
+                <form onSubmit={(event) => { onCreateUser(event) }} style={{ paddingTop: '15px', textAlign: "center" }}>
                   <TextField 
                     id="name"
                     label="Nome"
@@ -134,7 +162,7 @@ export default function Admin({
                     helperText={nameHelperText}
                     error={nameHelperText != ""}
                     onChange={(event) => {setName(event.target.value)}}
-                    style={{ width: '50%' }}
+                    style={{ width: '100%' }}
                   />
 
                   <br />
@@ -149,7 +177,7 @@ export default function Admin({
                     helperText={emailHelperText}
                     error={emailHelperText != ""}
                     onChange={(event) => {setEmail(event.target.value)}}
-                    style={{ width: '50%' }}
+                    style={{ width: '100%' }}
                   />
 
                   <br />
@@ -164,7 +192,7 @@ export default function Admin({
                     helperText={cityHelperText}
                     error={cityHelperText != ""}
                     onChange={(event) => {setCity(event.target.value)}}
-                    style={{ width: '50%' }}
+                    style={{ width: '100%' }}
                   />
 
                   <br />
@@ -179,16 +207,15 @@ export default function Admin({
                     helperText={stateHelperText}
                     error={stateHelperText != ""}
                     onChange={(event) => {setState(event.target.value)}}
-                    style={{ width: '50%' }}
+                    style={{ width: '100%' }}
                   />
 
                   <br />
                   <br />
 
                   <FormControl 
-                    sx={{ m: 1, width: '25ch' }} 
                     variant="outlined"
-                    style={{ width: "50%" }}
+                    style={{ width: "100%" }}
                     helperText={passwordHelperText}
                     error={passwordHelperText != ""}
                   >
@@ -219,10 +246,25 @@ export default function Admin({
                   <br />
                   <br />
 
-                  <Button style={{ width: "50%" }} type="submit" variant="contained">Enviar</Button>
+                  <Button style={{ width: "100%" }} type="submit" variant="contained">Enviar</Button>
                 </form>
-              </>
-            )}
+              </Modal.Body>
+            </Modal>
+
+            {selectedUser ? <EditUser user={selectedUser} showEditUser={showEditUser} setShowEditUser={setShowEditUser} onUpdateUser={onUpdateUser} /> : <div></div>}
+            <ToastContainer
+              position="bottom-right"
+              autoClose={5000}
+              hideProgressBar={false}
+              newestOnTop={false}
+              closeOnClick
+              rtl={false}
+              pauseOnFocusLoss
+              draggable
+              pauseOnHover={false}
+              theme="colored"
+            />
         </div>
+      </>
     )
 }
