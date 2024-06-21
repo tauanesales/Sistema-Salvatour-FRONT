@@ -7,6 +7,7 @@ import { patchUser } from "../../services/users/patchUser";
 import { validateEmail, validatePassword } from "../../utils/validators";
 import { isSameUser } from "../../authentication/tokenVerification";
 import { useNavigate } from "react-router-dom";
+import { showErrorToast, showSuccessToast } from "../../utils/toasts";
 
 export default function AdminController() {
     const [name, setName] = useState("")
@@ -20,6 +21,7 @@ export default function AdminController() {
     const [password, setPassword] = useState("")
     const [passwordHelperText, setPasswordHelperText] = useState("")
     const [showCreateUser, setShowCreateUser] = useState(false)
+    const [showEditUser, setShowEditUser] = useState(false)
     const [users, setUsers] = useState([])
     const token = localStorage.getItem("token")
     const navigate = useNavigate();
@@ -31,7 +33,7 @@ export default function AdminController() {
                 setUsers(data)
             })
             .catch((error) => {
-                console.log(error)
+                showErrorToast("Erro ao carregar os usuários")
             })
     }
 
@@ -80,7 +82,7 @@ export default function AdminController() {
 
         createUser(name, email, city, state, password)
             .then((data) => {
-                console.log(data)
+                showSuccessToast("Usuário criado com sucesso")
                 setShowCreateUser(false)
                 setName("")
                 setEmail("")
@@ -95,13 +97,14 @@ export default function AdminController() {
                 onGetAllUsers()
             })
             .catch((error) => {
-                console.log(error)
+                showErrorToast("Erro ao criar usuário")
             })
     }
 
     function onDeleteUser(userIdToBeDeleted) {
         deleteUser(token, userIdToBeDeleted)
             .then((response) => {
+                showSuccessToast("Usuário deletado com sucesso")
                 if (isSameUser(token, userIdToBeDeleted)) {
                     localStorage.setItem('token', "")
                     window.alert("Você não está autenticado.")
@@ -110,12 +113,31 @@ export default function AdminController() {
                     onGetAllUsers()
                 }
             })
-            .catch((error) => console.log(error))
+            .catch((error) => showErrorToast("Erro ao deletar usuário"))
     }
 
     function onDeleteMultipleUsers(usersIdList) {
+        var isLoggedUserInList = false;
+        const deleteUsersRequest = [];
         usersIdList.forEach((userId) => {
-            onDeleteUser(userId)})
+            deleteUsersRequest.push(onDeleteUser(userId))
+            if (!isLoggedUserInList) {
+                isLoggedUserInList = isSameUser(token, userId)
+            }
+        })
+        Promise.all(deleteUsersRequest)
+            .then((response) => {
+                if (isLoggedUserInList) {
+                    localStorage.setItem('token', "")
+                    window.alert("Você não está autenticado.")
+                    navigate("/")
+                } else {
+                    onGetAllUsers()
+                }
+            })
+            .catch((error) => {
+                console.log(error)
+            })
     }
 
     function onUpdateUser(updatedUser) {
@@ -127,8 +149,10 @@ export default function AdminController() {
             updatedUser.city,
             updatedUser.state
         ).then((response) => {
+            showSuccessToast("Usuário atualizado com sucesso")
             onGetAllUsers()
-        }).catch((error) => console.log(error))
+            setShowEditUser(false)
+        }).catch((error) => showErrorToast("Erro ao atualizar usuário"))
     }
 
     return <Admin 
@@ -144,12 +168,14 @@ export default function AdminController() {
         password={password}
         passwordHelperText={passwordHelperText}
         showCreateUser={showCreateUser}
+        showEditUser={showEditUser}
         setName={setName}
         setEmail={setEmail}
         setCity={setCity}
         setState={setState}
         setPassword={setPassword}
         setShowCreateUser={setShowCreateUser}
+        setShowEditUser={setShowEditUser}
         onGetAllUsers={onGetAllUsers}
         onCreateUser={onCreateUser}
         onDeleteUser={onDeleteUser}
