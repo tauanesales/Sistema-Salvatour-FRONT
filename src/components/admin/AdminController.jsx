@@ -97,7 +97,11 @@ export default function AdminController() {
                 onGetAllUsers()
             })
             .catch((error) => {
-                showErrorToast("Erro ao criar usuário")
+                if (error.response.status >= 400 || error.response.status <= 499) {
+                    showErrorToast(error.response.data.error)
+                } else {
+                    showErrorToast("Erro ao criar usuário")
+                }
             })
     }
 
