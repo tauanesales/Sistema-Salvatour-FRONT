@@ -23,6 +23,7 @@ export default function NewPlaces(){
     const [showAlert, setShowAlert] = useContext(AlertContext)
     const [alertType, setAlertType] = useContext(AlertTypeContext)
     const [alertColor, setAlertColor] = useContext(AlertColorContext);
+    const token = localStorage.getItem("token")
    
     function handleAlert(state, type, color=null) {
         setShowAlert(state)
@@ -54,20 +55,22 @@ export default function NewPlaces(){
         formData.append('image', image)
 
         if(form.title && form.desc && form.endereco && form.horario && formData){
-            handleAlert(true, 'Cadastro realizado com sucesso', 'success')
-            setForm(initialFormState); // Redefinir o formulário
-                    if (fileInputRef.current) {
-                        fileInputRef.current.value = ''; // Redefinir o campo de entrada de arquivo
-                    }
-            // registerPlace(form.title, form.desc, form.endereco, form.horario, formData)
-            //          .then((data)=>{
-            //             handleAlert('Cadastro realizado com sucesso', 'sucess')
-            //          })
-            //          .catch((error) => {
+            
+             registerPlace(form.title, form.endereco,  form.horario, form.desc, formData, token, 'teste')
+                      .then((data)=>{
+
+                        handleAlert(true, 'Cadastro realizado com sucesso', 'success')
+                        setForm(initialFormState); // Redefinir o formulário
+                                if (fileInputRef.current) {
+                                    fileInputRef.current.value = ''; // Redefinir o campo de entrada de arquivo
+                                }
+                      })
+                      .catch((error) => {
+                        handleAlert(true, 'Erro', 'danger')  
                 
-            //              console.log(error.response.status)
+                          console.log(error.response.status)
                          
-            //          } )
+                      } )
         
 
                 }else{

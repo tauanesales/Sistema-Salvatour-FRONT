@@ -15,4 +15,6 @@ export const VERIFY_TOKEN_ENDPOINT = BACKEND_URL + 'auth/verify-token/'
 
 export const MODIFY_PASSWORD_ENDPOINT = BACKEND_URL + 'auth/modify-password/'
 
-export const NEW_PLACE_ENDPOINT = BACKEND_URL
+export const NEW_PLACE_ENDPOINT = BACKEND_URL + 'touristAttraction/create/'
+
+export const ALL_PLACES_ENDPOINT = BACKEND_URL + 'touristAttraction/all/'

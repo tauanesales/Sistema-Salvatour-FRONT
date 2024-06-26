@@ -1,5 +1,5 @@
 import axios from "axios";
-import { ADMIN_ENDPOINT } from "../../constants/urls";
+import { ALL_PLACES_ENDPOINT } from "../../constants/urls";
 
 export function getAllPlaces(accessToken) {
     return new Promise((resolve, reject) => {
@@ -12,12 +12,12 @@ export function getAllPlaces(accessToken) {
 
           axios
             .get(
-                ADMIN_ENDPOINT,
+                ALL_PLACES_ENDPOINT,
                 header
             )
             .then((response) => {
                 if (response.status == 200) {
-                    console.log(response.data)
+                    // console.log(response.data)
                     resolve(response.data)
                 } else {
                     reject(response)
