@@ -18,11 +18,11 @@ import '../../styles/login.css'
  */
 
 function Login(){
-
     
     return(
-        <AlertTypeProvider>
-        <AlertProvider>
+        // <AlertTypeProvider>
+        // <AlertProvider>
+        <>
         <Alert></Alert>
         <div className="mainContainer backgroundLogin">
 
@@ -47,8 +47,9 @@ function Login(){
             
 
         </div>
-        </AlertProvider>
-        </AlertTypeProvider>
+        </>
+        // </AlertProvider>
+        // </AlertTypeProvider>
     )
 }
 
