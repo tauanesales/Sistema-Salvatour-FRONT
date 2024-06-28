@@ -18,8 +18,7 @@ import '../../styles/cadastro.css'
 function Cadastro(){
 
         return(
-            <AlertTypeProvider>
-            <AlertProvider>
+            <>
             <Alert></Alert>
             <div className="mainContainerCadastro background">
 
@@ -32,8 +31,7 @@ function Cadastro(){
                 </FormCadastroProvider>
                 
             </div>
-            </AlertProvider>
-            </AlertTypeProvider>
+            </>
             
         )
 
