@@ -2,11 +2,11 @@ import axios from "axios";
 import { NEW_PLACE_ENDPOINT } from "../../constants/urls";
 
 
-export function registerPlace(name, address, openingHours, description, image, accessToken, typeOfAttraction=null){
+export function registerPlace(name, address, openingHours, description, image, accessToken){
  return new Promise((resolve, reject) => {
     const header = {
         headers: {
-          'Content-type': 'application/json',
+          'Content-type': 'multipart/form-data',
           Authorization: `Bearer ${accessToken}`,
         },
       };
@@ -18,8 +18,7 @@ export function registerPlace(name, address, openingHours, description, image, a
             address: address,
             openingHours: openingHours,
             description: description,
-            image: image,
-            typeOfAttraction: typeOfAttraction
+            image: image
         }, header
     
     )

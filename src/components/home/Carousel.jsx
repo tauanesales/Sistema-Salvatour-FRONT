@@ -1,11 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { getAllPlaces } from "../../services/places/getAllPlaces";
 import Elevador1 from "../../assets/elevador1.webp"
-import Pelo from "../../assets/pelo.webp"
-import Farol from "../../assets/farol.webp"
-import Monte from "../../assets/monte.webp"
-import Palacio from "../../assets/palacio.webp"
-import Bonfim from "../../assets/bonfim.webp"
 
 /**
  * Componente Carousel
@@ -36,6 +31,7 @@ export default function Carousel(){
   
 
     return(
+
         <section className="carousel slide" id="carousel">
             
         <div className="carousel-inner">
@@ -83,60 +79,6 @@ export default function Carousel(){
 
             </div>
 
-            <div className="carousel-item section">
-
-                <h1 className="mainTitle">
-                    Pelourinho
-                </h1>
-                <img className="imagem" src={Pelo} alt="elevador" />
-                <p className="descricao">Encanta com sua energia única e sua riqueza cultural inigualável. Suas ruas de paralelepípedos e casarões coloridos respiram a herança da colonização portuguesa. É um centro vibrante de música, dança e gastronomia, onde capoeira e samba ecoam pelas vielas. Símbolo da resistência negra e da luta pela liberdade.</p>
-               
-
-            </div>
-
-            <div className="carousel-item section">
-
-                <h1 className="mainTitle">
-                    Farol da Barra
-                </h1>
-                <img className="imagem" src={Farol} alt="elevador" />
-                <p className="descricao">Refúgio de tranquilidade e vivacidade, cada pôr do sol é uma celebração da vida e da natureza. É um cenário de beleza natural deslumbrante, onde o oceano encontra a história. Suas águas calmas convidam ao mergulho e à contemplação, enquanto suas areias douradas guardam memórias ancestrais e modernas. Ponto de encontro de moradores e turistas.</p>
-               
-
-            </div>
-
-            <div className="carousel-item section">
-
-                <h1 className="mainTitle">
-                    Palácio Rio Branco
-                </h1>
-                <img className="imagem" src={Palacio} alt="elevador" />
-                <p className="descricao">Situado na Praça Tomé de Sousa, é um ícone da arquitetura e da história brasileira. Sua fachada imponente e seus salões luxuosos guardam memórias de eventos políticos e culturais que moldaram a história da Bahia e do Brasil. Hoje, além de ser um importante ponto turístico, o Palácio Rio Branco abriga exposições e eventos culturais, preservando e celebrando o rico legado histórico da região.</p>
-               
-
-            </div>
-
-            <div className="carousel-item section">
-
-                <h1 className="mainTitle">
-                    Monte Serrat
-                </h1>
-                <img className="imagem" src={Monte} alt="elevador" />
-                <p className="descricao">Uma das mais antigas e bem preservadas fortificações do Brasil. Com sua arquitetura colonial e imponente estrutura de pedra, Hoje, é um ponto turístico popular, onde visitantes podem explorar a história militar do país enquanto apreciam o cenário natural ao redor. Monte Serrat é um local que une beleza, história e cultura, refletindo a rica herança baiana.</p>
-               
-
-            </div>
-
-            <div className="carousel-item section">
-
-                <h1 className="mainTitle">
-                    Bonfim
-                </h1>
-                <img className="imagem" src={Bonfim} alt="elevador" />
-                <p className="descricao">Um dos mais importantes símbolos de fé e devoção no Brasil. Famosa pela tradicional Lavagem do Bonfim e pelas fitinhas coloridas que enfeitam seu gradil, simbolizando pedidos e agradecimentos. A arquitetura imponente e a atmosfera espiritual do local atraem milhares todos os anos. Misturando elementos do catolicismo e das religiões afro-brasileiras.</p>
-               
-
-            </div>
 
             {listPlaces && listPlaces.map((place, index) => (
                     <div key={index} className="carousel-item section">

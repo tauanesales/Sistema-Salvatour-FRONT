@@ -51,12 +51,9 @@ export default function NewPlaces(){
         event.preventDefault();
         console.log(form)
 
-        const formData = new FormData()
-        formData.append('image', image)
-
-        if(form.title && form.desc && form.endereco && form.horario && formData){
+        if(form.title && form.desc && form.endereco && form.horario && image){
             
-             registerPlace(form.title, form.endereco,  form.horario, form.desc, formData, token, 'teste')
+             registerPlace(form.title, form.endereco,  form.horario, form.desc, image, token)
                       .then((data)=>{
 
                         handleAlert(true, 'Cadastro realizado com sucesso', 'success')
@@ -66,7 +63,7 @@ export default function NewPlaces(){
                                 }
                       })
                       .catch((error) => {
-                        handleAlert(true, 'Erro', 'danger')  
+                        handleAlert(true, 'Algum erro ocorreu durante o cadastro, tente novamente', 'danger')  
                 
                           console.log(error.response.status)
                          
