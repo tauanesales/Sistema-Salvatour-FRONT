@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react"
 import { Link } from "react-router-dom"
+import { useNavigate } from "react-router-dom";
+import { useLocation } from 'react-router-dom';
 
 /**
  * Componente Header
@@ -11,30 +13,11 @@ import { Link } from "react-router-dom"
 
 
 export default function Header(){
+    const navigate = useNavigate();
+    const location = useLocation();
 
-    const [today, setToday] = useState('')
-    const [currentYear, setCurrentYear] = useState('')
-    const [month, setMonth] = useState('')
-    const [monthNames, setMonthNames] = useState(['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro','Outubro', 'Novembro', 'Dezembro'])
-
-
-    /**
-     * Coleta a data atual e atualiza os estados correspondentes.
-     * A data é exibida no cabeçalho para o usuário.
-     */
-    function getDate(){
-        const date = new Date();
-        const monthIndex = date.getMonth()
-        setToday(date.getDate())
-        setCurrentYear(date.getFullYear())
-        setMonth(monthNames[monthIndex])
-    
-    }
-
-    useEffect(() => {
-        getDate()
-    },[] )
-
+    const isAdmin = localStorage.getItem("isAdmin") == "true";
+    const isPaginaInicial = location.pathname == (isAdmin ? "/admin/home" : "/home");
     
     /**
      * Limpa os status de login no localStorage.
@@ -48,16 +31,21 @@ export default function Header(){
         localStorage.removeItem('password')
     }
 
+    function goHome() {
+        navigate(isAdmin ? "/admin/home" : "/home")
+    }
+
+    function goBack() {
+        navigate(-1);
+    }
 
     return(
 
 
         <header className="cabecalho">
-        <div className="date">
-        <p className="text-date">{today} de {month} de {currentYear}</p>
         
-        </div>
-
+        {isPaginaInicial ? <div/> : <button className="text-ola" type="button" onClick={goBack}>{"< Voltar"}</button>}
+        
         <div className="dropdown-center" >
         <button className="text-ola dropdown-toggle" type="button" data-bs-toggle="dropdown">Olá, seja bem vindo(a)</button>
         <ul className="dropdown-menu">

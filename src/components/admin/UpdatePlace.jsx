@@ -7,6 +7,7 @@ import { updatePlace } from "../../services/places/updatePlace";
 import '../../styles/global.css'
 import '../../styles/new_places.css'
 import { useNavigate } from "react-router-dom";
+import Header from "../home/Header"
 
 export default function UpdatePlace(){
     const navigate = useNavigate();
@@ -90,9 +91,8 @@ export default function UpdatePlace(){
     return(
         <>
         <Alert></Alert>
+        <Header />
         <div className='background mainContainerPlaces'>
-
-       
 
                 <form className='subcontainer' onSubmit={handleSubmit}>
                 <h1 className='placeTitle'>Atualização de ponto turístico</h1>
