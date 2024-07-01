@@ -4,6 +4,7 @@ import { AlertContext } from "../../contexts/alertContext";
 import { AlertTypeContext } from "../../contexts/alertTypeContext";
 import { AlertColorContext } from "../../contexts/alertColorContext";
 import { registerPlace } from "../../services/places/registerPlace";
+import Header from "../home/Header"
 import '../../styles/global.css'
 import '../../styles/new_places.css'
 
@@ -82,6 +83,7 @@ export default function NewPlaces(){
     return(
         <>
         <Alert></Alert>
+        <Header />
         <div className='background mainContainerPlaces'>
 
        
