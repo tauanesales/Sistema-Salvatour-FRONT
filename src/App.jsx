@@ -23,7 +23,7 @@ function App() {
       <Routes>
         <Route path="/home" element={<ProtectedRoute children={<Home />} />} />
         <Route path="/places" element={<ProtectedRoute children={<Places />} />} />
-        <Route path="/" element={<Login />} />
+        <Route path="/" element={<Places />} />
         <Route path="/admin" element={<ProtectedRoute redirectPath="/home" children={<AdminController />} adminOnly />} />
         <Route path="/admin/new-places" element={<ProtectedRoute redirectPath="/home" children={<NewPlaces />} adminOnly />} />
         <Route path="/admin/update-place" element={<ProtectedRoute redirectPath="/home" children={<UpdatePlace />} adminOnly />} />

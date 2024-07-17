@@ -61,25 +61,27 @@ export default function Carousel(){
                     <div key={index} className={"carousel-item section" + (index == 0 ? " active" : "")}>
                         <h1 className="mainTitle">{place.name}</h1>
                         <img className="imagem" src={place.image} alt={place.name} />
-                        <p className="descricao">{place.description}</p>
-                        <button className="btn-info" data-bs-toggle="modal" data-bs-target={`#modal${index}`}>Mais informações</button>
-                        {isAdmin && <div><button className="btn-info" data-bs-toggle="modal" onClick={() => editPlace(place)}>Editar informações</button></div>}
-                        {isAdmin && <div><button className="btn-remove" data-bs-toggle="modal" onClick={() => removePlace(place._id)}>Remover atração</button></div>}
-                        <div className="modal" id={`modal${index}`} tabIndex="-1">
-                            <div className="modal-dialog">
-                                <div className="modal-content">
-                                    <div className="modal-header">
-                                        <h3 className="modal-title">Endereço e horário de funcionamento</h3>
-                                        <button className="btn-close" data-bs-dismiss="modal"></button>
-                                    </div>
-                                    <div className="modal-body text-start">
-                                        <h4><strong>Endereço:</strong>{place.address}</h4>
-                                        <br></br>
-                                        <h4><strong>Horário de funcionamento:</strong>{place.openingHours}</h4>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                        <p className="descricao" style={{whiteSpace: 'pre-line', textAlign: 'justify', textJustify: 'inter-word'}}>{place.description}</p>
+                        {
+                        //<button className="btn-info" data-bs-toggle="modal" data-bs-target={`#modal${index}`}>Mais informações</button>
+                        //{isAdmin && <div><button className="btn-info" data-bs-toggle="modal" onClick={() => editPlace(place)}>Editar informações</button></div>}
+                        //{isAdmin && <div><button className="btn-remove" data-bs-toggle="modal" onClick={() => removePlace(place._id)}>Remover atração</button></div>}
+                        //<div className="modal" id={`modal${index}`} tabIndex="-1">
+                        //    <div className="modal-dialog">
+                        //        <div className="modal-content">
+                        //            <div className="modal-header">
+                        //                <h3 className="modal-title">Endereço e horário de funcionamento</h3>
+                        //                <button className="btn-close" data-bs-dismiss="modal"></button>
+                        //            </div>
+                        //            <div className="modal-body text-start">
+                        //                <h4><strong>Endereço:</strong>{place.address}</h4>
+                        //                <br></br>
+                        //                <h4><strong>Horário de funcionamento:</strong>{place.openingHours}</h4>
+                        //            </div>
+                        //        </div>
+                        //    </div>
+                        //</div>
+                        }
                     </div>
                 ))}
            
