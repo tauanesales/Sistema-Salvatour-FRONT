@@ -30,6 +30,7 @@ function App() {
         <Route path="/admin/home" element={<ProtectedRoute redirectPath="/home" children={<AdminHome />} adminOnly />} />
         <Route path="/updateUser" element={<ProtectedRoute children={<CrudUser />} />} />
         <Route path="/cadastro" element={<Cadastro />} />
+        <Route path="/login" element={<Login />} />
         <Route path="/recovery" element={<Recovery />} />
         <Route path="/recoveryToken" element={<PasswordResetRoute element={<SendToken />} routeName="recoveryToken" />} />
         <Route path="/newPassword" element={<PasswordResetRoute element={<NewPassword />} routeName="newPassword" />} />
