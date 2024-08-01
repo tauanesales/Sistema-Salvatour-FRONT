@@ -18,7 +18,7 @@ const initialFormState = {
 };
 
 
-export default function NewPlaces(){
+export default function RegisterNews(){
     const navigate = useNavigate();
 
     const [form, setForm] = useState(initialFormState)
@@ -93,7 +93,7 @@ export default function NewPlaces(){
        
 
                 <form className='subcontainer' onSubmit={handleSubmit}>
-                <h1 className='placeTitle'>Cadastro de pontos turísticos</h1>
+                <h1 className='placeTitle'>Cadastro de notícias</h1>
 
                 <h3 className='titlePlaces'>Título</h3>
                 <input className='inputTitle' type="text" name='title' value={form.title} onChange={handleChange}/>
@@ -107,7 +107,7 @@ export default function NewPlaces(){
                 <h3 className='titlePlaces'>Descrição</h3>
                 <textarea className= 'inputDesc' name='desc' value={form.desc} onChange={handleChange}/>
 
-                <h3 className='titlePlaces'>Imagem do ponto turístico</h3>
+                <h3 className='titlePlaces'>Imagem da notícia</h3>
                 {image && <img className="imagem" src={URL.createObjectURL(image)} alt={form.title} />}
                 <input className='inputFile' type="file" ref={fileInputRef} onChange={handleImageChange}/>
 

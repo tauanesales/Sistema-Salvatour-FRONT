@@ -11,7 +11,7 @@ import SendToken from "./components/recovery/SendToken";
 import Recovery from "./components/recovery/Recovery";
 import NewPassword from "./components/recovery/NewPassword";
 import PasswordResetRoute from "./components/recovery/PasswordResetRoute";
-import NewPlaces from "./components/admin/NewPlaces";
+import RegisterNews from "./components/admin/RegisterNews";
 import UpdatePlace from "./components/admin/UpdatePlace";
 import AdminHome from "./components/admin/AdminHome";
 
@@ -25,7 +25,7 @@ function App() {
         <Route path="/places" element={<ProtectedRoute children={<Places />} />} />
         <Route path="/" element={<Places />} />
         <Route path="/admin" element={<ProtectedRoute redirectPath="/home" children={<AdminController />} adminOnly />} />
-        <Route path="/admin/new-places" element={<ProtectedRoute redirectPath="/home" children={<NewPlaces />} adminOnly />} />
+        <Route path="/admin/new-places" element={<ProtectedRoute redirectPath="/home" children={<RegisterNews />} adminOnly />} />
         <Route path="/admin/update-place" element={<ProtectedRoute redirectPath="/home" children={<UpdatePlace />} adminOnly />} />
         <Route path="/admin/home" element={<ProtectedRoute redirectPath="/home" children={<AdminHome />} adminOnly />} />
         <Route path="/updateUser" element={<ProtectedRoute children={<CrudUser />} />} />
