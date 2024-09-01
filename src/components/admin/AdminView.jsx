@@ -10,6 +10,7 @@ import Header from "../home/Header";
 import EditUser from "./EditUser";
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.min.css';
+import "../../styles/global.css";
 
 export default function Admin({
     users,

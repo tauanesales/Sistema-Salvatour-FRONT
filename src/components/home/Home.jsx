@@ -16,10 +16,7 @@ import '../../styles/home.css'
  * 
  */
 
-function Home(){
-
-    
-
+function Home() {
     return(
         <>
             <Header></Header>
